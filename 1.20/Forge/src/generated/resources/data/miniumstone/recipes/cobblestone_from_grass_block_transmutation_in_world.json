@@ -1,0 +1,6 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": "minecraft:grass_block",
+  "result": "minecraft:cobblestone",
+  "reversible": true
+}

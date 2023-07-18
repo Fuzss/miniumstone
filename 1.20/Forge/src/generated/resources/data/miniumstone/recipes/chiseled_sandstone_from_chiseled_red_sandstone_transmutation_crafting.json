@@ -1,0 +1,9 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "ingredient": {
+    "item": "minecraft:chiseled_red_sandstone"
+  },
+  "ingredient_count": 1,
+  "result": "minecraft:chiseled_sandstone",
+  "result_count": 1
+}

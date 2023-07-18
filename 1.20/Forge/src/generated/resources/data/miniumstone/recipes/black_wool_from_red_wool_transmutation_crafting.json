@@ -1,0 +1,9 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "ingredient": {
+    "item": "minecraft:red_wool"
+  },
+  "ingredient_count": 1,
+  "result": "minecraft:black_wool",
+  "result_count": 1
+}

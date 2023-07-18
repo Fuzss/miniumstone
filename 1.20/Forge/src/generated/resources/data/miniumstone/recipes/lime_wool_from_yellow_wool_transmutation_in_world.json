@@ -1,0 +1,6 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": "minecraft:yellow_wool",
+  "result": "minecraft:lime_wool",
+  "reversible": true
+}

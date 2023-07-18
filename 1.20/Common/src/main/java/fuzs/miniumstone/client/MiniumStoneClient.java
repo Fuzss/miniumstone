@@ -1,12 +1,14 @@
 package fuzs.miniumstone.client;
 
 import fuzs.miniumstone.client.handler.StoneChargeHandler;
+import fuzs.miniumstone.client.handler.StoneShapeHandler;
 import fuzs.miniumstone.init.ModRegistry;
 import fuzs.miniumstone.world.item.MiniumStoneItem;
 import fuzs.puzzleslib.api.client.core.v1.ClientModConstructor;
 import fuzs.puzzleslib.api.client.core.v1.context.ItemDecorationContext;
 import fuzs.puzzleslib.api.client.core.v1.context.KeyMappingsContext;
 import fuzs.puzzleslib.api.client.event.v1.ClientTickEvents;
+import fuzs.puzzleslib.api.client.event.v1.RenderLevelEvents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -22,6 +24,8 @@ public class MiniumStoneClient implements ClientModConstructor {
 
     private static void registerHandlers() {
         ClientTickEvents.START.register(StoneChargeHandler::onClientTick$Start);
+        ClientTickEvents.END.register(StoneShapeHandler::onClientTick$End);
+        RenderLevelEvents.AFTER_TRANSLUCENT.register(StoneShapeHandler::onRenderLevelAfterTranslucent);
     }
 
     @Override

@@ -16,6 +16,7 @@ public class ModLanguageProvider extends AbstractLanguageProvider {
     protected void addTranslations() {
         this.add(ModRegistry.MINIUM_SHARD_ITEM.get(), "Minium Shard");
         this.add(ModRegistry.MINIUM_STONE_ITEM.get(), "Minium Stone");
+        this.addAdditional(ModRegistry.MINIUM_STONE_ITEM.get(), "description", "Press [%s] to open crafting grid");
         this.add("key.categories." + MiniumStone.MOD_ID, MiniumStone.MOD_NAME);
         this.add(StoneChargeHandler.CHARGE_MINIUM_STONE_KEY_MAPPING, "Charge Minium Stone");
         this.add(StoneChargeHandler.OPEN_CRAFTING_GRID_KEY_MAPPING, "Open Crafting Grid");
