@@ -5,11 +5,16 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
-public class MiniumStoneItem extends Item {
+public class MiniumStoneItem extends Item implements SpecialRecipePickerItem {
     public static final String KEY_CHARGE = "Charge";
 
     public MiniumStoneItem(Properties properties) {
         super(properties);
+    }
+
+    @Override
+    public boolean isBarVisible(ItemStack stack) {
+        return true;
     }
 
     public static int getCharge(ItemStack stack) {
@@ -36,5 +41,15 @@ public class MiniumStoneItem extends Item {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean ignoreTagWhenMoving() {
+        return true;
+    }
+
+    @Override
+    public boolean supportsMultipleCraftingOperations() {
+        return true;
     }
 }

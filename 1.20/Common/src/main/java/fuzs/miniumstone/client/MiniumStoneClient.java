@@ -36,11 +36,8 @@ public class MiniumStoneClient implements ClientModConstructor {
             int startX = itemPosX + 2;
             int startY = itemPosY + 13;
             guiGraphics.pose().pushPose();
-            if (!stack.isBarVisible()) {
-                guiGraphics.fill(RenderType.guiOverlay(), startX, startY, startX + 13, startY + 2, 0xFF000000);
-            }
             for (int i = 0; i < charge; i++) {
-                guiGraphics.fill(RenderType.guiOverlay(), startX + 1 + 3 * i, startY + (!stack.isBarVisible() ? 0 : 1), startX + 1 + 3 * i + 2, startY + 2, ChatFormatting.AQUA.getColor() | 0xFF000000);
+                guiGraphics.fill(RenderType.guiOverlay(), startX + 1 + 3 * i, startY + 1, startX + 1 + 3 * i + 2, startY + 2, ChatFormatting.AQUA.getColor() | 0xFF000000);
             }
             guiGraphics.pose().popPose();
             return true;
