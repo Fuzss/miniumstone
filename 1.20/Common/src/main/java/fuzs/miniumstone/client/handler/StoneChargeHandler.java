@@ -12,6 +12,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
 public class StoneChargeHandler {
     public static final KeyMapping CHARGE_MINIUM_STONE_KEY_MAPPING = new KeyMapping("key.chargeMiniumStone", InputConstants.KEY_V, "key.categories." + MiniumStone.MOD_ID);
@@ -26,32 +27,39 @@ public class StoneChargeHandler {
 
     private static void handleModKeybinds(Player player) {
         while (CHARGE_MINIUM_STONE_KEY_MAPPING.consumeClick()) {
-            for (InteractionHand interactionHand : InteractionHand.values()) {
+            InteractionHand interactionHand = getMiniumStoneHand(player);
+            if (interactionHand != null) {
                 ItemStack itemInHand = player.getItemInHand(interactionHand);
-                if (itemInHand.is(ModRegistry.MINIUM_STONE_ITEM.get())) {
-                    if (player.isShiftKeyDown()) {
-                        if (MiniumStoneItem.decreaseCharge(itemInHand)) {
-                            chargeStone(player, interactionHand, false);
-                            break;
-                        }
-                    } else {
-                        if (MiniumStoneItem.increaseCharge(itemInHand)) {
-                            chargeStone(player, interactionHand, true);
-                            break;
-                        }
+                if (player.isShiftKeyDown()) {
+                    if (MiniumStoneItem.decreaseCharge(itemInHand)) {
+                        chargeStone(player, interactionHand, false);
+                        break;
+                    }
+                } else {
+                    if (MiniumStoneItem.increaseCharge(itemInHand)) {
+                        chargeStone(player, interactionHand, true);
+                        break;
                     }
                 }
             }
         }
         while (OPEN_CRAFTING_GRID_KEY_MAPPING.consumeClick()) {
-            for (InteractionHand interactionHand : InteractionHand.values()) {
-                ItemStack itemInHand = player.getItemInHand(interactionHand);
-                if (itemInHand.is(ModRegistry.MINIUM_STONE_ITEM.get())) {
-                    MiniumStone.NETWORK.sendToServer(new ServerboundOpenCraftingGridMessage(player.getInventory().selected, interactionHand));
-                    break;
-                }
+            InteractionHand interactionHand = getMiniumStoneHand(player);
+            if (interactionHand != null) {
+                MiniumStone.NETWORK.sendToServer(new ServerboundOpenCraftingGridMessage(player.getInventory().selected, interactionHand));
             }
         }
+    }
+
+    @Nullable
+    public static InteractionHand getMiniumStoneHand(Player player) {
+        for (InteractionHand interactionHand : InteractionHand.values()) {
+            ItemStack itemInHand = player.getItemInHand(interactionHand);
+            if (itemInHand.is(ModRegistry.MINIUM_STONE_ITEM.get())) {
+                return interactionHand;
+            }
+        }
+        return null;
     }
 
     private static void chargeStone(Player player, InteractionHand interactionHand, boolean increaseCharge) {

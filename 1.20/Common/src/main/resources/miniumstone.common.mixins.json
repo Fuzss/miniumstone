@@ -10,6 +10,7 @@
     "StackedContentsMixin"
   ],
   "client": [
+    "client.accessor.LevelRendererAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

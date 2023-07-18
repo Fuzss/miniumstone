@@ -36,7 +36,7 @@ public class MiniumStoneClient implements ClientModConstructor {
     @Override
     public void onRegisterItemDecorations(ItemDecorationContext context) {
         context.registerItemDecorator((GuiGraphics guiGraphics, Font font, ItemStack stack, int itemPosX, int itemPosY) -> {
-            int charge = MiniumStoneItem.getCharge(stack);
+            int charge = MiniumStoneItem.getCharge(stack) + 1;
             int startX = itemPosX + 2;
             int startY = itemPosY + 13;
             guiGraphics.pose().pushPose();

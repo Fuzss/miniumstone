@@ -36,7 +36,7 @@ public class MiniumStoneItem extends Item implements SpecialRecipePickerItem {
         if (tag != null && tag.contains(KEY_CHARGE)) {
             return tag.getByte(KEY_CHARGE);
         }
-        return 1;
+        return 0;
     }
 
     public static boolean increaseCharge(ItemStack stack) {
@@ -48,7 +48,7 @@ public class MiniumStoneItem extends Item implements SpecialRecipePickerItem {
     }
 
     private static boolean setCharge(ItemStack stack, int charge) {
-        charge = Mth.clamp(charge, 1, 4);
+        charge = Mth.clamp(charge, 0, 3);
         CompoundTag tag = stack.getOrCreateTag();
         if (charge != tag.getByte(KEY_CHARGE)) {
             tag.putByte(KEY_CHARGE, (byte) charge);
