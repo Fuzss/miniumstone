@@ -10,3 +10,10 @@ plugins {
 
 apply from: 'https://raw.githubusercontent.com/Fuzss/modresources/main/gradle/main.gradle'
 apply from: 'https://raw.githubusercontent.com/Fuzss/modresources/main/gradle/tasks.gradle'
+
+subprojects {
+    tasks.withType(Jar).configureEach {
+        from rootProject.file("../LICENSE-TEXTURES.md")
+        from rootProject.file("../LICENSE-SOUNDS.md")
+    }
+}

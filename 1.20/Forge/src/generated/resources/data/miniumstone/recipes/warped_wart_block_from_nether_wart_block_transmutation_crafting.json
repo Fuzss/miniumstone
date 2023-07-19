@@ -1,0 +1,9 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "ingredient": {
+    "item": "minecraft:nether_wart_block"
+  },
+  "ingredient_count": 1,
+  "result": "minecraft:warped_wart_block",
+  "result_count": 1
+}

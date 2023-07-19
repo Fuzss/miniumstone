@@ -1,0 +1,6 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": "minecraft:jungle_planks",
+  "result": "minecraft:acacia_planks",
+  "reversible": true
+}

@@ -1,14 +1,18 @@
 package fuzs.miniumstone.client;
 
-import fuzs.miniumstone.client.handler.StoneChargeHandler;
-import fuzs.miniumstone.client.handler.StoneShapeHandler;
+import fuzs.miniumstone.client.handler.MiniumStoneKeyHandler;
+import fuzs.miniumstone.client.handler.StoneTransmuteHandler;
+import fuzs.miniumstone.client.handler.TransmutationResultGuiHandler;
+import fuzs.miniumstone.client.handler.TransmutateShapeRenderingHandler;
 import fuzs.miniumstone.init.ModRegistry;
 import fuzs.miniumstone.world.item.MiniumStoneItem;
 import fuzs.puzzleslib.api.client.core.v1.ClientModConstructor;
 import fuzs.puzzleslib.api.client.core.v1.context.ItemDecorationContext;
 import fuzs.puzzleslib.api.client.core.v1.context.KeyMappingsContext;
 import fuzs.puzzleslib.api.client.event.v1.ClientTickEvents;
+import fuzs.puzzleslib.api.client.event.v1.RenderGuiCallback;
 import fuzs.puzzleslib.api.client.event.v1.RenderLevelEvents;
+import fuzs.puzzleslib.api.event.v1.entity.player.PlayerInteractEvents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -23,14 +27,17 @@ public class MiniumStoneClient implements ClientModConstructor {
     }
 
     private static void registerHandlers() {
-        ClientTickEvents.START.register(StoneChargeHandler::onClientTick$Start);
-        ClientTickEvents.END.register(StoneShapeHandler::onClientTick$End);
-        RenderLevelEvents.AFTER_TRANSLUCENT.register(StoneShapeHandler::onRenderLevelAfterTranslucent);
+        ClientTickEvents.START.register(MiniumStoneKeyHandler::onClientTick$Start);
+        ClientTickEvents.END.register(TransmutateShapeRenderingHandler::onClientTick$End);
+        RenderLevelEvents.AFTER_ENTITIES.register(TransmutateShapeRenderingHandler::onRenderLevelAfterTranslucent);
+        RenderGuiCallback.EVENT.register(TransmutationResultGuiHandler::onRenderGui);
+        ClientTickEvents.END.register(TransmutationResultGuiHandler::onClientTick$End);
+        PlayerInteractEvents.USE_BLOCK.register(StoneTransmuteHandler::onUseBlock);
     }
 
     @Override
     public void onRegisterKeyMappings(KeyMappingsContext context) {
-        context.registerKeyMapping(StoneChargeHandler.CHARGE_MINIUM_STONE_KEY_MAPPING, StoneChargeHandler.OPEN_CRAFTING_GRID_KEY_MAPPING);
+        context.registerKeyMapping(MiniumStoneKeyHandler.CHARGE_MINIUM_STONE_KEY_MAPPING, MiniumStoneKeyHandler.OPEN_CRAFTING_GRID_KEY_MAPPING);
     }
 
     @Override

@@ -1,0 +1,6 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": "minecraft:oxeye_daisy",
+  "result": "minecraft:cornflower",
+  "reversible": true
+}
