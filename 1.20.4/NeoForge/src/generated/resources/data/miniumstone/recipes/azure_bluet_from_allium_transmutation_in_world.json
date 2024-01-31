@@ -1,0 +1,6 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": "minecraft:allium",
+  "result": "minecraft:azure_bluet",
+  "reversible": true
+}

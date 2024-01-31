@@ -1,0 +1,6 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": "minecraft:gray_carpet",
+  "result": "minecraft:light_gray_carpet",
+  "reversible": true
+}

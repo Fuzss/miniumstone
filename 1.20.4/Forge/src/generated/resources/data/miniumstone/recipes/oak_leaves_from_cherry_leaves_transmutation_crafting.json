@@ -1,0 +1,9 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "ingredient": {
+    "item": "minecraft:cherry_leaves"
+  },
+  "ingredient_count": 1,
+  "result": "minecraft:oak_leaves",
+  "result_count": 1
+}

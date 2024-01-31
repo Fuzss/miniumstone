@@ -1,0 +1,6 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": "minecraft:orange_concrete",
+  "result": "minecraft:magenta_concrete",
+  "reversible": true
+}

@@ -1,0 +1,9 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "ingredient": {
+    "item": "minecraft:gravel"
+  },
+  "ingredient_count": 1,
+  "result": "minecraft:sandstone",
+  "result_count": 1
+}

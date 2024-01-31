@@ -1,0 +1,6 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": "minecraft:azure_bluet",
+  "result": "minecraft:red_tulip",
+  "reversible": true
+}

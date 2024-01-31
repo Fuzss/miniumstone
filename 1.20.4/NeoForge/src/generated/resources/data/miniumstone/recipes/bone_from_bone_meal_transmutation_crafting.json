@@ -1,0 +1,9 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "ingredient": {
+    "item": "minecraft:bone_meal"
+  },
+  "ingredient_count": 3,
+  "result": "minecraft:bone",
+  "result_count": 1
+}

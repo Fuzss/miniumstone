@@ -1,0 +1,6 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": "minecraft:light_blue_concrete_powder",
+  "result": "minecraft:yellow_concrete_powder",
+  "reversible": true
+}

@@ -1,0 +1,9 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "ingredient": {
+    "item": "minecraft:netherrack"
+  },
+  "ingredient_count": 1,
+  "result": "minecraft:cobblestone",
+  "result_count": 1
+}

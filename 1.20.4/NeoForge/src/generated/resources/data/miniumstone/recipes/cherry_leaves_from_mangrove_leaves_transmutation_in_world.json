@@ -1,0 +1,6 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": "minecraft:mangrove_leaves",
+  "result": "minecraft:cherry_leaves",
+  "reversible": true
+}

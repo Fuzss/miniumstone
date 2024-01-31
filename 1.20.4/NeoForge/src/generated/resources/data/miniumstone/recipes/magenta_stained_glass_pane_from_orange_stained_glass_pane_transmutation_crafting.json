@@ -1,0 +1,9 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "ingredient": {
+    "item": "minecraft:orange_stained_glass_pane"
+  },
+  "ingredient_count": 1,
+  "result": "minecraft:magenta_stained_glass_pane",
+  "result_count": 1
+}

@@ -1,0 +1,6 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": "minecraft:cherry_log",
+  "result": "minecraft:oak_log",
+  "reversible": true
+}

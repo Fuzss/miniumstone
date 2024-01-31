@@ -1,0 +1,9 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "ingredient": {
+    "item": "minecraft:dead_bush"
+  },
+  "ingredient_count": 1,
+  "result": "minecraft:grass",
+  "result_count": 1
+}

@@ -1,0 +1,9 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "ingredient": {
+    "item": "minecraft:brown_mushroom_block"
+  },
+  "ingredient_count": 1,
+  "result": "minecraft:red_mushroom_block",
+  "result_count": 1
+}

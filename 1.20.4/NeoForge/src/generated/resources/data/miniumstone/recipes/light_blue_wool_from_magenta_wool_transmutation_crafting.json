@@ -1,0 +1,9 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "ingredient": {
+    "item": "minecraft:magenta_wool"
+  },
+  "ingredient_count": 1,
+  "result": "minecraft:light_blue_wool",
+  "result_count": 1
+}

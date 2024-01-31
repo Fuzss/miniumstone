@@ -1,0 +1,9 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "ingredient": {
+    "item": "minecraft:blaze_powder"
+  },
+  "ingredient_count": 2,
+  "result": "minecraft:blaze_rod",
+  "result_count": 1
+}

@@ -1,0 +1,6 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": "minecraft:dirt",
+  "result": "minecraft:stone",
+  "reversible": true
+}

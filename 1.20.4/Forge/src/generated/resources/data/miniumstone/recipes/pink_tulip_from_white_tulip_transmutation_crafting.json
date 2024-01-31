@@ -1,0 +1,9 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "ingredient": {
+    "item": "minecraft:white_tulip"
+  },
+  "ingredient_count": 1,
+  "result": "minecraft:pink_tulip",
+  "result_count": 1
+}

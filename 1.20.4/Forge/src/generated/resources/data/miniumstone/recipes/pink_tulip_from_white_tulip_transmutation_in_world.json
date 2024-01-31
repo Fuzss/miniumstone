@@ -1,0 +1,6 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": "minecraft:white_tulip",
+  "result": "minecraft:pink_tulip",
+  "reversible": true
+}

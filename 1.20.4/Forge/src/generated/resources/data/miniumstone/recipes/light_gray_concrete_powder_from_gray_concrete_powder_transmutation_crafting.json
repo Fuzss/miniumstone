@@ -1,0 +1,9 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "ingredient": {
+    "item": "minecraft:gray_concrete_powder"
+  },
+  "ingredient_count": 1,
+  "result": "minecraft:light_gray_concrete_powder",
+  "result_count": 1
+}
