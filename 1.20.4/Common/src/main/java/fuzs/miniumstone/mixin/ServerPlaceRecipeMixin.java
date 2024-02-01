@@ -8,12 +8,12 @@ import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(ServerPlaceRecipe.class)
 abstract class ServerPlaceRecipeMixin<C extends Container> {
@@ -42,7 +42,7 @@ abstract class ServerPlaceRecipeMixin<C extends Container> {
     }
 
     @ModifyVariable(method = "handleRecipeClicked", at = @At("STORE"), ordinal = 0)
-    protected ItemStack handleRecipeClicked$1(ItemStack itemStack, Recipe<C> recipe, boolean placeAll) {
+    protected ItemStack handleRecipeClicked$1(ItemStack itemStack, RecipeHolder<? extends Recipe<C>> recipe, boolean placeAll) {
         // this checks if any item in the crafting grid is already at max stack size, the check will be skipped for the current item by returning an empty item
         return itemStack.getItem() instanceof SpecialRecipePickerItem item && item.supportsMultipleCraftingOperations() ? ItemStack.EMPTY : itemStack;
     }

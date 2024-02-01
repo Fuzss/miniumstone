@@ -1,9 +1,0 @@
-{
-  "type": "miniumstone:transmutation_crafting",
-  "ingredient": {
-    "item": "minecraft:cyan_wool"
-  },
-  "ingredient_count": 1,
-  "result": "minecraft:purple_wool",
-  "result_count": 1
-}

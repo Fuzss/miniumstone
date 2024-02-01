@@ -1,6 +1,0 @@
-{
-  "type": "miniumstone:transmutation_in_world",
-  "ingredient": "minecraft:red_mushroom",
-  "result": "minecraft:brown_mushroom",
-  "reversible": true
-}

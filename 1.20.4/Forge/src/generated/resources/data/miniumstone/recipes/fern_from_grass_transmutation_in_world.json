@@ -1,6 +1,0 @@
-{
-  "type": "miniumstone:transmutation_in_world",
-  "ingredient": "minecraft:grass",
-  "result": "minecraft:fern",
-  "reversible": true
-}

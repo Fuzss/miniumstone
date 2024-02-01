@@ -1,9 +1,0 @@
-{
-  "type": "miniumstone:transmutation_crafting",
-  "ingredient": {
-    "item": "minecraft:yellow_terracotta"
-  },
-  "ingredient_count": 1,
-  "result": "minecraft:lime_terracotta",
-  "result_count": 1
-}

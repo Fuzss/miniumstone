@@ -1,6 +1,0 @@
-{
-  "type": "miniumstone:transmutation_in_world",
-  "ingredient": "minecraft:yellow_stained_glass_pane",
-  "result": "minecraft:lime_stained_glass_pane",
-  "reversible": true
-}

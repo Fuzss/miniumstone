@@ -1,9 +1,0 @@
-{
-  "type": "miniumstone:transmutation_crafting",
-  "ingredient": {
-    "item": "minecraft:fern"
-  },
-  "ingredient_count": 1,
-  "result": "minecraft:dead_bush",
-  "result_count": 1
-}

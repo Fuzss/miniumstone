@@ -1,9 +1,0 @@
-{
-  "type": "miniumstone:transmutation_crafting",
-  "ingredient": {
-    "item": "minecraft:cut_red_sandstone"
-  },
-  "ingredient_count": 1,
-  "result": "minecraft:cut_sandstone",
-  "result_count": 1
-}

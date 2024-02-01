@@ -1,9 +1,0 @@
-{
-  "type": "miniumstone:transmutation_crafting",
-  "ingredient": {
-    "item": "minecraft:cherry_planks"
-  },
-  "ingredient_count": 1,
-  "result": "minecraft:bamboo_planks",
-  "result_count": 1
-}

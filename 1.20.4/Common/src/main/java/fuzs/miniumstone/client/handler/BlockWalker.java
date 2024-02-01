@@ -6,6 +6,7 @@ import fuzs.miniumstone.world.item.crafting.TransmutationInWorldRecipe;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -41,9 +42,9 @@ public class BlockWalker {
     private final int maxDepth;
     private int blockTicks;
     @Nullable
-    private TransmutationInWorldRecipe recipe;
+    private RecipeHolder<TransmutationInWorldRecipe> recipe;
     @Nullable
-    private TransmutationInWorldRecipe reversedRecipe;
+    private RecipeHolder<TransmutationInWorldRecipe> reversedRecipe;
     @Nullable
     private List<BlockPos> blocks;
     @Nullable
@@ -118,12 +119,12 @@ public class BlockWalker {
 
     private boolean findRecipes(RecipeManager recipeManager) {
         AtomicBoolean result = new AtomicBoolean();
-        List<TransmutationInWorldRecipe> recipes = recipeManager.getAllRecipesFor(ModRegistry.TRANSMUTATION_IN_WORLD_RECIPE_TYPE.get());
-        recipes.stream().filter(t -> t.ingredient() == this.blockState.getBlock()).findFirst().ifPresent(recipe -> {
+        List<RecipeHolder<TransmutationInWorldRecipe>> recipes = recipeManager.getAllRecipesFor(ModRegistry.TRANSMUTATION_IN_WORLD_RECIPE_TYPE.value());
+        recipes.stream().filter(recipe -> recipe.value().getBlockIngredient() == this.blockState.getBlock()).findFirst().ifPresent(recipe -> {
             this.recipe = recipe;
             result.set(true);
         });
-        recipes.stream().filter(t -> t.reversible() && t.result() == this.blockState.getBlock()).findFirst().ifPresent(recipe -> {
+        recipes.stream().filter(recipe -> recipe.value().isReversible() && recipe.value().getBlockResult() == this.blockState.getBlock()).findFirst().ifPresent(recipe -> {
             this.reversedRecipe = recipe;
             result.set(true);
         });
@@ -155,11 +156,11 @@ public class BlockWalker {
 
     @Nullable
     public Block getResult(boolean reverse) {
-        return reverse && this.reversedRecipe != null ? this.reversedRecipe.ingredient() : !reverse && this.recipe != null ? this.recipe.result() : null;
+        return reverse && this.reversedRecipe != null ? this.reversedRecipe.value().getBlockIngredient() : !reverse && this.recipe != null ? this.recipe.value().getBlockResult() : null;
     }
 
     @Nullable
-    public TransmutationInWorldRecipe getRecipe(boolean reverse) {
+    public RecipeHolder<TransmutationInWorldRecipe> getRecipe(boolean reverse) {
         return reverse ? this.reversedRecipe : this.recipe;
     }
 }

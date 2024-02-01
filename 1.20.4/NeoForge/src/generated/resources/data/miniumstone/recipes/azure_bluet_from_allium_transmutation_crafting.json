@@ -1,9 +1,0 @@
-{
-  "type": "miniumstone:transmutation_crafting",
-  "ingredient": {
-    "item": "minecraft:allium"
-  },
-  "ingredient_count": 1,
-  "result": "minecraft:azure_bluet",
-  "result_count": 1
-}

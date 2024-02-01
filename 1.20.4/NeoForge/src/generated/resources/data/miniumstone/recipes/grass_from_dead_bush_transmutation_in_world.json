@@ -1,6 +1,0 @@
-{
-  "type": "miniumstone:transmutation_in_world",
-  "ingredient": "minecraft:dead_bush",
-  "result": "minecraft:grass",
-  "reversible": true
-}

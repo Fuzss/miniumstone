@@ -1,6 +1,0 @@
-{
-  "type": "miniumstone:transmutation_in_world",
-  "ingredient": "minecraft:cyan_concrete",
-  "result": "minecraft:purple_concrete",
-  "reversible": true
-}

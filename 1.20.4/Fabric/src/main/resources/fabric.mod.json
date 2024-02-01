@@ -9,7 +9,7 @@
   "authors": [
     "${modAuthor}"
   ],
-  
+
   "contact": {
     "homepage": "${modPageUrl}",
     "issues": "${modIssueUrl}",
@@ -27,11 +27,15 @@
     ],
     "client": [
       "${clientEntryPoint}"
+    ],
+    "jei_mod_plugin": [
+      "${modGroup}.integration.jei.MiniumStoneJeiPlugin"
     ]
   },
 
   "mixins": [
-    "${modId}.common.mixins.json"
+    "${modId}.common.mixins.json",
+    "${modId}.fabric.mixins.json"
   ],
 
   "depends": {
@@ -40,5 +44,9 @@
     "puzzleslib": ">=${minPuzzlesVersion}",
     "minecraft": "${minecraftVersion}",
     "java": ">=17"
+  },
+
+  "recommends": {
+    "jei": "*"
   }
 }

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "miniumstone:crimson_fungus_from_warped_fungus_transmutation_crafting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_warped_fungus": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:warped_fungus"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_warped_fungus"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "miniumstone:crimson_fungus_from_warped_fungus_transmutation_crafting"
+    ]
+  }
+}

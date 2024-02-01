@@ -1,9 +1,0 @@
-{
-  "type": "miniumstone:transmutation_crafting",
-  "ingredient": {
-    "item": "minecraft:magenta_stained_glass"
-  },
-  "ingredient_count": 1,
-  "result": "minecraft:light_blue_stained_glass",
-  "result_count": 1
-}

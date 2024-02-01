@@ -1,9 +1,0 @@
-{
-  "type": "miniumstone:transmutation_crafting",
-  "ingredient": {
-    "item": "minecraft:magenta_concrete"
-  },
-  "ingredient_count": 1,
-  "result": "minecraft:light_blue_concrete",
-  "result_count": 1
-}

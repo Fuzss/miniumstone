@@ -2,16 +2,17 @@ package fuzs.miniumstone.client;
 
 import fuzs.miniumstone.client.handler.MiniumStoneKeyHandler;
 import fuzs.miniumstone.client.handler.StoneTransmuteHandler;
-import fuzs.miniumstone.client.handler.TransmutationResultGuiHandler;
 import fuzs.miniumstone.client.handler.TransmutateShapeRenderingHandler;
+import fuzs.miniumstone.client.handler.TransmutationResultGuiHandler;
 import fuzs.miniumstone.init.ModRegistry;
 import fuzs.miniumstone.world.item.MiniumStoneItem;
 import fuzs.puzzleslib.api.client.core.v1.ClientModConstructor;
 import fuzs.puzzleslib.api.client.core.v1.context.ItemDecorationContext;
 import fuzs.puzzleslib.api.client.core.v1.context.KeyMappingsContext;
 import fuzs.puzzleslib.api.client.event.v1.ClientTickEvents;
-import fuzs.puzzleslib.api.client.event.v1.RenderGuiCallback;
-import fuzs.puzzleslib.api.client.event.v1.RenderLevelEvents;
+import fuzs.puzzleslib.api.client.event.v1.renderer.RenderGuiCallback;
+import fuzs.puzzleslib.api.client.event.v1.renderer.RenderLevelEvents;
+import fuzs.puzzleslib.api.client.key.v1.KeyActivationContext;
 import fuzs.puzzleslib.api.event.v1.entity.player.PlayerInteractEvents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.Font;
@@ -37,7 +38,8 @@ public class MiniumStoneClient implements ClientModConstructor {
 
     @Override
     public void onRegisterKeyMappings(KeyMappingsContext context) {
-        context.registerKeyMapping(MiniumStoneKeyHandler.CHARGE_MINIUM_STONE_KEY_MAPPING, MiniumStoneKeyHandler.OPEN_CRAFTING_GRID_KEY_MAPPING);
+        context.registerKeyMapping(MiniumStoneKeyHandler.CHARGE_MINIUM_STONE_KEY_MAPPING, KeyActivationContext.GAME);
+        context.registerKeyMapping(MiniumStoneKeyHandler.OPEN_CRAFTING_GRID_KEY_MAPPING, KeyActivationContext.GAME);
     }
 
     @Override
@@ -52,6 +54,6 @@ public class MiniumStoneClient implements ClientModConstructor {
             }
             guiGraphics.pose().popPose();
             return true;
-        }, ModRegistry.MINIUM_STONE_ITEM.get());
+        }, ModRegistry.MINIUM_STONE_ITEM.value());
     }
 }

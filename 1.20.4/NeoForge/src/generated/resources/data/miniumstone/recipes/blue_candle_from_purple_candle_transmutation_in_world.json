@@ -1,6 +1,0 @@
-{
-  "type": "miniumstone:transmutation_in_world",
-  "ingredient": "minecraft:purple_candle",
-  "result": "minecraft:blue_candle",
-  "reversible": true
-}

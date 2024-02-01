@@ -1,0 +1,14 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "value": {
+    "category": "misc",
+    "ingredients": [
+      {
+        "item": "minecraft:brown_mushroom_block"
+      }
+    ],
+    "result": {
+      "item": "minecraft:red_mushroom_block"
+    }
+  }
+}

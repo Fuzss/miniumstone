@@ -1,0 +1,14 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "value": {
+    "category": "misc",
+    "ingredients": [
+      {
+        "item": "minecraft:black_wool"
+      }
+    ],
+    "result": {
+      "item": "minecraft:white_wool"
+    }
+  }
+}

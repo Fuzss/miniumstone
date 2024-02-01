@@ -1,9 +1,0 @@
-{
-  "type": "miniumstone:transmutation_crafting",
-  "ingredient": {
-    "item": "minecraft:dirt"
-  },
-  "ingredient_count": 1,
-  "result": "minecraft:stone",
-  "result_count": 1
-}

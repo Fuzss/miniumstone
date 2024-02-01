@@ -1,9 +1,0 @@
-{
-  "type": "miniumstone:transmutation_crafting",
-  "ingredient": {
-    "item": "minecraft:lime_wool"
-  },
-  "ingredient_count": 1,
-  "result": "minecraft:pink_wool",
-  "result_count": 1
-}

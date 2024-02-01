@@ -1,9 +1,0 @@
-{
-  "type": "miniumstone:transmutation_crafting",
-  "ingredient": {
-    "item": "minecraft:purple_carpet"
-  },
-  "ingredient_count": 1,
-  "result": "minecraft:blue_carpet",
-  "result_count": 1
-}

@@ -1,6 +1,0 @@
-{
-  "type": "miniumstone:transmutation_in_world",
-  "ingredient": "minecraft:fern",
-  "result": "minecraft:dead_bush",
-  "reversible": true
-}

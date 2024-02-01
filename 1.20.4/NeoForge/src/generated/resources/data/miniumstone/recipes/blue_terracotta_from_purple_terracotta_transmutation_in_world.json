@@ -1,6 +1,0 @@
-{
-  "type": "miniumstone:transmutation_in_world",
-  "ingredient": "minecraft:purple_terracotta",
-  "result": "minecraft:blue_terracotta",
-  "reversible": true
-}

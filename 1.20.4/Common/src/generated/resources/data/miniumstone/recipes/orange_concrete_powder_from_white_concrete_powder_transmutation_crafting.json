@@ -1,0 +1,14 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "value": {
+    "category": "misc",
+    "ingredients": [
+      {
+        "item": "minecraft:white_concrete_powder"
+      }
+    ],
+    "result": {
+      "item": "minecraft:orange_concrete_powder"
+    }
+  }
+}

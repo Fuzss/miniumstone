@@ -22,7 +22,7 @@ public record ServerboundChargeStoneMessage(int carriedItem, InteractionHand int
             public void handle(ServerboundChargeStoneMessage message, MinecraftServer server, ServerGamePacketListenerImpl handler, ServerPlayer player, ServerLevel level) {
                 handler.handleSetCarriedItem(new ServerboundSetCarriedItemPacket(message.carriedItem));
                 ItemStack itemInHand = player.getItemInHand(message.interactionHand);
-                if (itemInHand.is(ModRegistry.MINIUM_STONE_ITEM.get())) {
+                if (itemInHand.is(ModRegistry.MINIUM_STONE_ITEM.value())) {
                     if (message.increaseCharge) {
                         MiniumStoneItem.increaseCharge(itemInHand);
                     } else {

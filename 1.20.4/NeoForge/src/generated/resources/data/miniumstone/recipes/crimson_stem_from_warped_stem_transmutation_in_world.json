@@ -1,6 +1,0 @@
-{
-  "type": "miniumstone:transmutation_in_world",
-  "ingredient": "minecraft:warped_stem",
-  "result": "minecraft:crimson_stem",
-  "reversible": true
-}

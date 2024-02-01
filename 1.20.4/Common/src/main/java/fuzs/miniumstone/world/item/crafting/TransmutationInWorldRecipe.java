@@ -1,80 +1,97 @@
 package fuzs.miniumstone.world.item.crafting;
 
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fuzs.miniumstone.init.ModRegistry;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
+import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.Container;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.SingleItemRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 
-public record TransmutationInWorldRecipe(ResourceLocation id, Block ingredient, Block result, boolean reversible) implements Recipe<Container> {
+public final class TransmutationInWorldRecipe extends SingleItemRecipe {
+    private boolean reversible;
+
+    public TransmutationInWorldRecipe(String group, Block ingredient, Block result, boolean reversible) {
+        this(group, Ingredient.of(ingredient), new ItemStack(result));
+        this.reversible = reversible;
+    }
+
+    public TransmutationInWorldRecipe(String group, Ingredient ingredient, ItemStack result) {
+        super(ModRegistry.TRANSMUTATION_IN_WORLD_RECIPE_TYPE.value(),
+                ModRegistry.TRANSMUTATION_IN_WORLD_RECIPE_SERIALIZER.value(),
+                group,
+                ingredient,
+                result
+        );
+    }
 
     @Override
     public boolean matches(Container container, Level level) {
-        return container.getItem(0).is(this.ingredient.asItem());
+        return this.ingredient.test(container.getItem(0));
     }
 
     @Override
-    public ItemStack assemble(Container container, RegistryAccess registryAccess) {
-        return this.getResultItem(registryAccess);
+    public boolean showNotification() {
+        return false;
     }
 
     @Override
-    public boolean canCraftInDimensions(int width, int height) {
-        return true;
+    public ItemStack getToastSymbol() {
+        return new ItemStack(ModRegistry.MINIUM_STONE_ITEM.value());
     }
 
-    @Override
-    public ItemStack getResultItem(RegistryAccess registryAccess) {
-        return new ItemStack(this.result);
+    public Block getBlockIngredient() {
+        return ((BlockItem) this.ingredient.getItems()[0].getItem()).getBlock();
     }
 
-    @Override
-    public ResourceLocation getId() {
-        return this.id;
+    public Block getBlockResult() {
+        return ((BlockItem) this.result.getItem()).getBlock();
     }
 
-    @Override
-    public RecipeSerializer<?> getSerializer() {
-        return ModRegistry.TRANSMUTATION_IN_WORLD_RECIPE_SERIALIZER.get();
+    public boolean isReversible() {
+        return this.reversible;
     }
 
-    @Override
-    public RecipeType<?> getType() {
-        return ModRegistry.TRANSMUTATION_IN_WORLD_RECIPE_TYPE.get();
-    }
+    public static class Serializer extends SingleItemRecipe.Serializer<TransmutationInWorldRecipe> {
+        public static final Codec<TransmutationInWorldRecipe> CODEC = RecordCodecBuilder.create(instance -> {
+            return instance.group(ExtraCodecs.strictOptionalField(Codec.STRING, "group", "")
+                            .forGetter(SingleItemRecipe::getGroup),
+                    BuiltInRegistries.BLOCK.byNameCodec()
+                            .fieldOf("ingredient")
+                            .forGetter(TransmutationInWorldRecipe::getBlockIngredient),
+                    BuiltInRegistries.BLOCK.byNameCodec()
+                            .fieldOf("result")
+                            .forGetter(TransmutationInWorldRecipe::getBlockResult),
+                    Codec.BOOL.fieldOf("reversible").forGetter(TransmutationInWorldRecipe::isReversible)
+            ).apply(instance, TransmutationInWorldRecipe::new);
+        });
 
-    public static class Serializer implements RecipeSerializer<TransmutationInWorldRecipe> {
-
-        @Override
-        public TransmutationInWorldRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
-            Block ingredient = BuiltInRegistries.BLOCK.get(new ResourceLocation(GsonHelper.getAsString(json, "ingredient")));
-            Block result = BuiltInRegistries.BLOCK.get(new ResourceLocation(GsonHelper.getAsString(json, "result")));
-            boolean reversible = GsonHelper.getAsBoolean(json, "reversible");
-            return new TransmutationInWorldRecipe(recipeId, ingredient, result, reversible);
+        public Serializer() {
+            super(TransmutationInWorldRecipe::new);
         }
 
         @Override
-        public TransmutationInWorldRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
-            Block ingredient = buffer.readById(BuiltInRegistries.BLOCK);
-            Block result = buffer.readById(BuiltInRegistries.BLOCK);
-            boolean reversible = buffer.readBoolean();
-            return new TransmutationInWorldRecipe(recipeId, ingredient, result, reversible);
+        public Codec<TransmutationInWorldRecipe> codec() {
+            return CODEC;
+        }
+
+        @Override
+        public TransmutationInWorldRecipe fromNetwork(FriendlyByteBuf buffer) {
+            TransmutationInWorldRecipe recipe = super.fromNetwork(buffer);
+            recipe.reversible = buffer.readBoolean();
+            return recipe;
         }
 
         @Override
         public void toNetwork(FriendlyByteBuf buffer, TransmutationInWorldRecipe recipe) {
-            buffer.writeId(BuiltInRegistries.BLOCK, recipe.ingredient());
-            buffer.writeId(BuiltInRegistries.BLOCK, recipe.result);
-            buffer.writeBoolean(recipe.reversible());
+            super.toNetwork(buffer, recipe);
+            buffer.writeBoolean(recipe.reversible);
         }
     }
 }

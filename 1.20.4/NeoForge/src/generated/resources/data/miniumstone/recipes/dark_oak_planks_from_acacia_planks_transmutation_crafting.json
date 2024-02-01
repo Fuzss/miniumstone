@@ -1,9 +1,0 @@
-{
-  "type": "miniumstone:transmutation_crafting",
-  "ingredient": {
-    "item": "minecraft:acacia_planks"
-  },
-  "ingredient_count": 1,
-  "result": "minecraft:dark_oak_planks",
-  "result_count": 1
-}

@@ -9,13 +9,19 @@ import fuzs.miniumstone.util.MiniumStoneHelper;
 import fuzs.miniumstone.world.item.MiniumStoneItem;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 public class MiniumStoneKeyHandler {
-    public static final KeyMapping CHARGE_MINIUM_STONE_KEY_MAPPING = new KeyMapping("key.chargeMiniumStone", InputConstants.KEY_V, "key.categories." + MiniumStone.MOD_ID);
-    public static final KeyMapping OPEN_CRAFTING_GRID_KEY_MAPPING = new KeyMapping("key.openCraftingGrid", InputConstants.KEY_G, "key.categories." + MiniumStone.MOD_ID);
+    public static final String MINIUM_STONE_KEY_CATEGORY = "key.categories." + MiniumStone.MOD_ID;
+    public static final KeyMapping CHARGE_MINIUM_STONE_KEY_MAPPING = new KeyMapping("key.chargeMiniumStone", InputConstants.KEY_V,
+            MINIUM_STONE_KEY_CATEGORY
+    );
+    public static final KeyMapping OPEN_CRAFTING_GRID_KEY_MAPPING = new KeyMapping("key.openCraftingGrid", InputConstants.KEY_G,
+            MINIUM_STONE_KEY_CATEGORY
+    );
 
     public static void onClientTick$Start(Minecraft minecraft) {
         Player player = minecraft.player;
@@ -51,7 +57,10 @@ public class MiniumStoneKeyHandler {
     }
 
     private static void chargeStone(Player player, InteractionHand interactionHand, boolean increaseCharge) {
-        player.playSound(increaseCharge ? ModRegistry.ITEM_MINIUM_STONE_CHARGE_SOUND_EVENT.get() : ModRegistry.ITEM_MINIUM_STONE_UNCHARGE_SOUND_EVENT.get(), 0.8F, 0.8F + player.getRandom().nextFloat() * 0.4F);
+        SoundEvent soundEvent = increaseCharge ?
+                ModRegistry.ITEM_MINIUM_STONE_CHARGE_SOUND_EVENT.value() :
+                ModRegistry.ITEM_MINIUM_STONE_UNCHARGE_SOUND_EVENT.value();
+        player.playSound(soundEvent, 0.8F, 0.8F + player.getRandom().nextFloat() * 0.4F);
         MiniumStone.NETWORK.sendToServer(new ServerboundChargeStoneMessage(player.getInventory().selected, interactionHand, increaseCharge));
     }
 }

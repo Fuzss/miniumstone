@@ -1,6 +1,0 @@
-{
-  "type": "miniumstone:transmutation_in_world",
-  "ingredient": "minecraft:mangrove_planks",
-  "result": "minecraft:cherry_planks",
-  "reversible": true
-}

@@ -1,6 +1,0 @@
-{
-  "type": "miniumstone:transmutation_in_world",
-  "ingredient": "minecraft:lime_concrete_powder",
-  "result": "minecraft:pink_concrete_powder",
-  "reversible": true
-}

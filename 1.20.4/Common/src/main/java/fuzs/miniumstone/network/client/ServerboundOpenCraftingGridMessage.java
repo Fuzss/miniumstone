@@ -27,7 +27,7 @@ public record ServerboundOpenCraftingGridMessage(int carriedItem, InteractionHan
             public void handle(ServerboundOpenCraftingGridMessage message, MinecraftServer server, ServerGamePacketListenerImpl handler, ServerPlayer player, ServerLevel level) {
                 handler.handleSetCarriedItem(new ServerboundSetCarriedItemPacket(message.carriedItem));
                 ItemStack itemInHand = player.getItemInHand(message.interactionHand);
-                if (itemInHand.is(ModRegistry.MINIUM_STONE_ITEM.get())) {
+                if (itemInHand.is(ModRegistry.MINIUM_STONE_ITEM.value())) {
                     player.openMenu(new SimpleMenuProvider((i, inventory, player1) -> {
                         return new CraftingMenu(i, inventory, ContainerLevelAccess.create(level, player1.blockPosition())) {
 

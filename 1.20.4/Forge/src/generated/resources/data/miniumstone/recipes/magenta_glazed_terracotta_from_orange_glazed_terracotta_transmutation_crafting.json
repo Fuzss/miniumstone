@@ -1,9 +1,0 @@
-{
-  "type": "miniumstone:transmutation_crafting",
-  "ingredient": {
-    "item": "minecraft:orange_glazed_terracotta"
-  },
-  "ingredient_count": 1,
-  "result": "minecraft:magenta_glazed_terracotta",
-  "result_count": 1
-}

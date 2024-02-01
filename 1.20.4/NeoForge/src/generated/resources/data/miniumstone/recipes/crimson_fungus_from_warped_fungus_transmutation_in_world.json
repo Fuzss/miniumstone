@@ -1,6 +1,0 @@
-{
-  "type": "miniumstone:transmutation_in_world",
-  "ingredient": "minecraft:warped_fungus",
-  "result": "minecraft:crimson_fungus",
-  "reversible": true
-}

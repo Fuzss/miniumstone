@@ -1,6 +1,0 @@
-{
-  "type": "miniumstone:transmutation_in_world",
-  "ingredient": "minecraft:black_stained_glass",
-  "result": "minecraft:white_stained_glass",
-  "reversible": true
-}

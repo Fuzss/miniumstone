@@ -1,9 +1,0 @@
-{
-  "type": "miniumstone:transmutation_crafting",
-  "ingredient": {
-    "item": "minecraft:diamond"
-  },
-  "ingredient_count": 1,
-  "result": "minecraft:gold_ingot",
-  "result_count": 4
-}

@@ -1,9 +1,0 @@
-{
-  "type": "miniumstone:transmutation_crafting",
-  "ingredient": {
-    "item": "minecraft:oak_log"
-  },
-  "ingredient_count": 1,
-  "result": "minecraft:birch_log",
-  "result_count": 1
-}

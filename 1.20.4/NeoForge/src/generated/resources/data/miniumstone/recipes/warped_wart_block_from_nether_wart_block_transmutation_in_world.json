@@ -1,6 +1,0 @@
-{
-  "type": "miniumstone:transmutation_in_world",
-  "ingredient": "minecraft:nether_wart_block",
-  "result": "minecraft:warped_wart_block",
-  "reversible": true
-}

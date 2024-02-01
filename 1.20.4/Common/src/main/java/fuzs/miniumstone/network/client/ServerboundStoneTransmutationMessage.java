@@ -14,11 +14,14 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.Block;
 
 import java.util.List;
 
-public record ServerboundStoneTransmutationMessage(int selectedItem, InteractionHand interactionHand, BlockPos pos, List<BlockPos> blocks, boolean reverse, ResourceLocation recipe) implements ServerboundMessage<ServerboundStoneTransmutationMessage> {
+public record ServerboundStoneTransmutationMessage(int selectedItem, InteractionHand interactionHand, BlockPos pos,
+                                                   List<BlockPos> blocks, boolean reverse,
+                                                   ResourceLocation recipe) implements ServerboundMessage<ServerboundStoneTransmutationMessage> {
 
     @Override
     public ServerMessageListener<ServerboundStoneTransmutationMessage> getHandler() {
@@ -28,12 +31,22 @@ public record ServerboundStoneTransmutationMessage(int selectedItem, Interaction
             public void handle(ServerboundStoneTransmutationMessage message, MinecraftServer server, ServerGamePacketListenerImpl handler, ServerPlayer player, ServerLevel level) {
                 handler.handleSetCarriedItem(new ServerboundSetCarriedItemPacket(message.selectedItem));
                 ItemStack itemInHand = player.getItemInHand(message.interactionHand);
-                if (itemInHand.is(ModRegistry.MINIUM_STONE_ITEM.get())) {
-                    TransmutationInWorldRecipe recipe = level.getRecipeManager().byKey(message.recipe).map(TransmutationInWorldRecipe.class::cast).orElse(null);
+                if (itemInHand.is(ModRegistry.MINIUM_STONE_ITEM.value())) {
+                    TransmutationInWorldRecipe recipe = level.getRecipeManager()
+                            .byKey(message.recipe)
+                            .map(RecipeHolder::value)
+                            .map(TransmutationInWorldRecipe.class::cast)
+                            .orElse(null);
                     if (recipe != null) {
-                        Block ingredient = message.reverse ? recipe.result() : recipe.ingredient();
-                        Block result = message.reverse ? recipe.ingredient() : recipe.result();
-                        MiniumStoneHelper.transmuteBlocks(message.pos, message.blocks, level, ingredient, result, itemInHand);
+                        Block ingredient = message.reverse ? recipe.getBlockResult() : recipe.getBlockIngredient();
+                        Block result = message.reverse ? recipe.getBlockIngredient() : recipe.getBlockResult();
+                        MiniumStoneHelper.transmuteBlocks(message.pos,
+                                message.blocks,
+                                level,
+                                ingredient,
+                                result,
+                                itemInHand
+                        );
                         itemInHand.hurtAndBreak(1, player, player1 -> {
                             player1.broadcastBreakEvent(message.interactionHand);
                         });

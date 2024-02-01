@@ -1,9 +1,0 @@
-{
-  "type": "miniumstone:transmutation_crafting",
-  "ingredient": {
-    "item": "minecraft:grass"
-  },
-  "ingredient_count": 1,
-  "result": "minecraft:fern",
-  "result_count": 1
-}

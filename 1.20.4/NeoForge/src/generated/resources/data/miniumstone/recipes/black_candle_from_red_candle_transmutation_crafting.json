@@ -1,9 +1,0 @@
-{
-  "type": "miniumstone:transmutation_crafting",
-  "ingredient": {
-    "item": "minecraft:red_candle"
-  },
-  "ingredient_count": 1,
-  "result": "minecraft:black_candle",
-  "result_count": 1
-}

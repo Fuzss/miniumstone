@@ -1,9 +1,0 @@
-{
-  "type": "miniumstone:transmutation_crafting",
-  "ingredient": {
-    "item": "minecraft:dark_oak_log"
-  },
-  "ingredient_count": 1,
-  "result": "minecraft:mangrove_log",
-  "result_count": 1
-}

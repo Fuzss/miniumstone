@@ -28,7 +28,11 @@ public class MiniumStone implements ModConstructor {
     public static final String MOD_NAME = "Minium Stone";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
 
-    public static final NetworkHandlerV3 NETWORK = NetworkHandlerV3.builder(MOD_ID).registerServerbound(ServerboundChargeStoneMessage.class).registerServerbound(ServerboundOpenCraftingGridMessage.class).registerServerbound(ServerboundStoneTransmutationMessage.class).registerClientbound(ClientboundTransmutationParticleMessage.class);
+    public static final NetworkHandlerV3 NETWORK = NetworkHandlerV3.builder(MOD_ID)
+            .registerServerbound(ServerboundChargeStoneMessage.class)
+            .registerServerbound(ServerboundOpenCraftingGridMessage.class)
+            .registerServerbound(ServerboundStoneTransmutationMessage.class)
+            .registerClientbound(ClientboundTransmutationParticleMessage.class);
     public static final ConfigHolder CONFIG = ConfigHolder.builder(MOD_ID).common(CommonConfig.class);
 
     @Override
@@ -40,7 +44,10 @@ public class MiniumStone implements ModConstructor {
     private static void registerHandlers() {
         LootTableLoadEvents.MODIFY.register((LootDataManager lootManager, ResourceLocation identifier, Consumer<LootPool> addPool, IntPredicate removePool) -> {
             if (CONFIG.get(CommonConfig.class).miniumShardDropMonsters.contains(identifier)) {
-                addPool.accept(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootTableReference.lootTableReference(ModRegistry.MINIUM_SHARD_INJECT_LOOT_TABLE)).build());
+                addPool.accept(LootPool.lootPool()
+                        .setRolls(ConstantValue.exactly(1.0F))
+                        .add(LootTableReference.lootTableReference(ModRegistry.MINIUM_SHARD_INJECT_LOOT_TABLE))
+                        .build());
             }
         });
     }
@@ -48,10 +55,10 @@ public class MiniumStone implements ModConstructor {
     @Override
     public void onBuildCreativeModeTabContents(BuildCreativeModeTabContentsContext context) {
         context.registerBuildListener(CreativeModeTabs.TOOLS_AND_UTILITIES, (itemDisplayParameters, output) -> {
-            output.accept(ModRegistry.MINIUM_STONE_ITEM.get());
+            output.accept(ModRegistry.MINIUM_STONE_ITEM.value());
         });
         context.registerBuildListener(CreativeModeTabs.INGREDIENTS, (itemDisplayParameters, output) -> {
-            output.accept(ModRegistry.MINIUM_SHARD_ITEM.get());
+            output.accept(ModRegistry.MINIUM_SHARD_ITEM.value());
         });
     }
 

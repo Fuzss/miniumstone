@@ -1,6 +1,0 @@
-{
-  "type": "miniumstone:transmutation_in_world",
-  "ingredient": "minecraft:spruce_planks",
-  "result": "minecraft:jungle_planks",
-  "reversible": true
-}

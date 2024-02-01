@@ -1,9 +1,0 @@
-{
-  "type": "miniumstone:transmutation_crafting",
-  "ingredient": {
-    "item": "minecraft:spruce_planks"
-  },
-  "ingredient_count": 1,
-  "result": "minecraft:jungle_planks",
-  "result_count": 1
-}

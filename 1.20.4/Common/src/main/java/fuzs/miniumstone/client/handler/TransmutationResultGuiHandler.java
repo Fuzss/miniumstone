@@ -10,7 +10,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 
 public class TransmutationResultGuiHandler {
-    private static final ResourceLocation WIDGETS_LOCATION = new ResourceLocation("textures/gui/widgets.png");
+    protected static final ResourceLocation HOTBAR_OFFHAND_LEFT_SPRITE = new ResourceLocation("hud/hotbar_offhand_left");
+    protected static final ResourceLocation HOTBAR_OFFHAND_RIGHT_SPRITE = new ResourceLocation(
+            "hud/hotbar_offhand_right");
 
     private static int blockPopTime;
 
@@ -30,20 +32,39 @@ public class TransmutationResultGuiHandler {
                     itemStack.setPopTime(blockPopTime);
                     HumanoidArm humanoidArm = minecraft.player.getMainArm().getOpposite();
                     if (humanoidArm == HumanoidArm.LEFT) {
-                        guiGraphics.blit(WIDGETS_LOCATION, screenWidth / 2 - 91 - 29 * 2, screenHeight - 23, 24, 22, 29, 24);
-                        renderItemWithPopTime(minecraft.player, guiGraphics, tickDelta, itemStack, screenWidth / 2 - 91 - 29 * 2 + 3, screenHeight - 23 + 4);
+                        guiGraphics.blitSprite(HOTBAR_OFFHAND_LEFT_SPRITE,
+                                screenWidth / 2 - 91 - 29 * 2,
+                                screenHeight - 23,
+                                29,
+                                24
+                        );
+                        renderItemWithPopTime(minecraft.player,
+                                guiGraphics,
+                                tickDelta,
+                                itemStack,
+                                screenWidth / 2 - 91 - 29 * 2 + 3,
+                                screenHeight - 23 + 4
+                        );
                     } else {
-                        guiGraphics.blit(WIDGETS_LOCATION, screenWidth / 2 + 91 + 29, screenHeight - 23, 53, 22, 29, 24);
-                        renderItemWithPopTime(minecraft.player, guiGraphics, tickDelta, itemStack, screenWidth / 2 + 91 + 29 + 10, screenHeight - 23 + 4);
+                        guiGraphics.blitSprite(HOTBAR_OFFHAND_RIGHT_SPRITE,
+                                screenWidth / 2 + 91 + 29,
+                                screenHeight - 23,
+                                29,
+                                24
+                        );
+                        renderItemWithPopTime(minecraft.player,
+                                guiGraphics,
+                                tickDelta,
+                                itemStack,
+                                screenWidth / 2 + 91 + 29 + 10,
+                                screenHeight - 23 + 4
+                        );
                     }
-                    guiGraphics.pose().popPose();;
+                    guiGraphics.pose().popPose();
+                    ;
                 }
             }
         }
-    }
-
-    public static void setBlockPopTime(int blockPopTime) {
-        TransmutationResultGuiHandler.blockPopTime = blockPopTime;
     }
 
     private static void renderItemWithPopTime(Player player, GuiGraphics guiGraphics, float tickDelta, ItemStack itemStack, int posX, int posY) {
@@ -53,9 +74,9 @@ public class TransmutationResultGuiHandler {
         if (popTime > 0.0F) {
             float h = 1.0F + popTime / 5.0F;
             guiGraphics.pose().pushPose();
-            guiGraphics.pose().translate((float)(posX + 8), (float)(posY + 12), 0.0F);
+            guiGraphics.pose().translate((float) (posX + 8), (float) (posY + 12), 0.0F);
             guiGraphics.pose().scale(1.0F / h, (h + 1.0F) / 2.0F, 1.0F);
-            guiGraphics.pose().translate((float)(-(posX + 8)), (float)(-(posY + 12)), 0.0F);
+            guiGraphics.pose().translate((float) (-(posX + 8)), (float) (-(posY + 12)), 0.0F);
         }
 
         guiGraphics.renderItem(player, itemStack, posX, posY, 0);
@@ -63,5 +84,9 @@ public class TransmutationResultGuiHandler {
         if (popTime > 0.0F) {
             guiGraphics.pose().popPose();
         }
+    }
+
+    public static void setBlockPopTime(int blockPopTime) {
+        TransmutationResultGuiHandler.blockPopTime = blockPopTime;
     }
 }

@@ -1,0 +1,23 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "value": {
+    "category": "misc",
+    "ingredients": [
+      {
+        "item": "minecraft:gravel"
+      },
+      {
+        "item": "minecraft:gravel"
+      },
+      {
+        "item": "minecraft:gravel"
+      },
+      {
+        "item": "minecraft:gravel"
+      }
+    ],
+    "result": {
+      "item": "minecraft:flint"
+    }
+  }
+}

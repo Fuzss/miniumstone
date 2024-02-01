@@ -1,6 +1,0 @@
-{
-  "type": "miniumstone:transmutation_in_world",
-  "ingredient": "minecraft:orange_carpet",
-  "result": "minecraft:magenta_carpet",
-  "reversible": true
-}

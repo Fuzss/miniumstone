@@ -1,0 +1,14 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "value": {
+    "category": "misc",
+    "ingredients": [
+      {
+        "item": "minecraft:azure_bluet"
+      }
+    ],
+    "result": {
+      "item": "minecraft:red_tulip"
+    }
+  }
+}

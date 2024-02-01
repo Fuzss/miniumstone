@@ -1,9 +1,0 @@
-{
-  "type": "miniumstone:transmutation_crafting",
-  "ingredient": {
-    "item": "minecraft:nether_bricks"
-  },
-  "ingredient_count": 1,
-  "result": "minecraft:red_nether_bricks",
-  "result_count": 1
-}

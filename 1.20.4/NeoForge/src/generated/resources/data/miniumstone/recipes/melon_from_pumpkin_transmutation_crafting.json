@@ -1,9 +1,0 @@
-{
-  "type": "miniumstone:transmutation_crafting",
-  "ingredient": {
-    "item": "minecraft:pumpkin"
-  },
-  "ingredient_count": 1,
-  "result": "minecraft:melon",
-  "result_count": 1
-}

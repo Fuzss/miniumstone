@@ -1,9 +1,0 @@
-{
-  "type": "miniumstone:transmutation_crafting",
-  "ingredient": {
-    "item": "minecraft:acacia_log"
-  },
-  "ingredient_count": 1,
-  "result": "minecraft:dark_oak_log",
-  "result_count": 1
-}
