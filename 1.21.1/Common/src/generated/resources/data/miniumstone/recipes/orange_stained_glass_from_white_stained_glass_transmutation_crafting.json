@@ -1,0 +1,14 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "value": {
+    "category": "misc",
+    "ingredients": [
+      {
+        "item": "minecraft:white_stained_glass"
+      }
+    ],
+    "result": {
+      "item": "minecraft:orange_stained_glass"
+    }
+  }
+}

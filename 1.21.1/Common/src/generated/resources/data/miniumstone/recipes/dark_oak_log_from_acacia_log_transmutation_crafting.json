@@ -1,0 +1,14 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "value": {
+    "category": "misc",
+    "ingredients": [
+      {
+        "item": "minecraft:acacia_log"
+      }
+    ],
+    "result": {
+      "item": "minecraft:dark_oak_log"
+    }
+  }
+}

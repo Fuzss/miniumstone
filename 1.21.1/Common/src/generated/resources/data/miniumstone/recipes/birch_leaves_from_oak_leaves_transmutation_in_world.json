@@ -1,0 +1,6 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": "minecraft:oak_leaves",
+  "result": "minecraft:birch_leaves",
+  "reversible": true
+}

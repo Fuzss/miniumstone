@@ -1,0 +1,6 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": "minecraft:cherry_planks",
+  "result": "minecraft:bamboo_planks",
+  "reversible": true
+}

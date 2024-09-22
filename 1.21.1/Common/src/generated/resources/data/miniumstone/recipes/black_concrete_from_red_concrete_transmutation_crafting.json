@@ -1,0 +1,14 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "value": {
+    "category": "misc",
+    "ingredients": [
+      {
+        "item": "minecraft:red_concrete"
+      }
+    ],
+    "result": {
+      "item": "minecraft:black_concrete"
+    }
+  }
+}

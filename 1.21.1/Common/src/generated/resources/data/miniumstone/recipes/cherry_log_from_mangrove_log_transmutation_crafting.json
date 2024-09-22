@@ -1,0 +1,14 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "value": {
+    "category": "misc",
+    "ingredients": [
+      {
+        "item": "minecraft:mangrove_log"
+      }
+    ],
+    "result": {
+      "item": "minecraft:cherry_log"
+    }
+  }
+}

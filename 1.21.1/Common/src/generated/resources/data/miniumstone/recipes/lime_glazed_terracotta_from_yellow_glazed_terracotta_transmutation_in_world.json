@@ -1,0 +1,6 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": "minecraft:yellow_glazed_terracotta",
+  "result": "minecraft:lime_glazed_terracotta",
+  "reversible": true
+}

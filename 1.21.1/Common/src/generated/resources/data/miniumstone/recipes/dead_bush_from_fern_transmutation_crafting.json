@@ -1,0 +1,14 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "value": {
+    "category": "misc",
+    "ingredients": [
+      {
+        "item": "minecraft:fern"
+      }
+    ],
+    "result": {
+      "item": "minecraft:dead_bush"
+    }
+  }
+}

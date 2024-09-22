@@ -1,0 +1,14 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "value": {
+    "category": "misc",
+    "ingredients": [
+      {
+        "item": "minecraft:blue_carpet"
+      }
+    ],
+    "result": {
+      "item": "minecraft:brown_carpet"
+    }
+  }
+}

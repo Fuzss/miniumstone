@@ -1,0 +1,14 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "value": {
+    "category": "misc",
+    "ingredients": [
+      {
+        "item": "minecraft:green_candle"
+      }
+    ],
+    "result": {
+      "item": "minecraft:red_candle"
+    }
+  }
+}

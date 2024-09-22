@@ -1,0 +1,6 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": "minecraft:cornflower",
+  "result": "minecraft:lily_of_the_valley",
+  "reversible": true
+}
