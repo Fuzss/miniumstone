@@ -1,6 +1,0 @@
-{
-  "type": "miniumstone:transmutation_in_world",
-  "ingredient": "minecraft:acacia_leaves",
-  "result": "minecraft:dark_oak_leaves",
-  "reversible": true
-}

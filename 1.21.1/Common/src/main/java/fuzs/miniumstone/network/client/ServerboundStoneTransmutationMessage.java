@@ -3,6 +3,7 @@ package fuzs.miniumstone.network.client;
 import fuzs.miniumstone.init.ModRegistry;
 import fuzs.miniumstone.util.MiniumStoneHelper;
 import fuzs.miniumstone.world.item.crafting.TransmutationInWorldRecipe;
+import fuzs.puzzleslib.api.item.v2.ItemHelper;
 import fuzs.puzzleslib.api.network.v3.ServerMessageListener;
 import fuzs.puzzleslib.api.network.v3.ServerboundMessage;
 import net.minecraft.core.BlockPos;
@@ -19,8 +20,11 @@ import net.minecraft.world.level.block.Block;
 
 import java.util.List;
 
-public record ServerboundStoneTransmutationMessage(int selectedItem, InteractionHand interactionHand, BlockPos pos,
-                                                   List<BlockPos> blocks, boolean reverse,
+public record ServerboundStoneTransmutationMessage(int selectedItem,
+                                                   InteractionHand interactionHand,
+                                                   BlockPos pos,
+                                                   List<BlockPos> blocks,
+                                                   boolean reverse,
                                                    ResourceLocation recipe) implements ServerboundMessage<ServerboundStoneTransmutationMessage> {
 
     @Override
@@ -32,24 +36,15 @@ public record ServerboundStoneTransmutationMessage(int selectedItem, Interaction
                 handler.handleSetCarriedItem(new ServerboundSetCarriedItemPacket(message.selectedItem));
                 ItemStack itemInHand = player.getItemInHand(message.interactionHand);
                 if (itemInHand.is(ModRegistry.MINIUM_STONE_ITEM.value())) {
-                    TransmutationInWorldRecipe recipe = level.getRecipeManager()
-                            .byKey(message.recipe)
-                            .map(RecipeHolder::value)
-                            .map(TransmutationInWorldRecipe.class::cast)
-                            .orElse(null);
+                    TransmutationInWorldRecipe recipe = level.getRecipeManager().byKey(message.recipe).map(
+                            RecipeHolder::value).map(TransmutationInWorldRecipe.class::cast).orElse(null);
                     if (recipe != null) {
                         Block ingredient = message.reverse ? recipe.getBlockResult() : recipe.getBlockIngredient();
                         Block result = message.reverse ? recipe.getBlockIngredient() : recipe.getBlockResult();
-                        MiniumStoneHelper.transmuteBlocks(message.pos,
-                                message.blocks,
-                                level,
-                                ingredient,
-                                result,
+                        MiniumStoneHelper.transmuteBlocks(message.pos, message.blocks, level, ingredient, result,
                                 itemInHand
                         );
-                        itemInHand.hurtAndBreak(1, player, player1 -> {
-                            player1.broadcastBreakEvent(message.interactionHand);
-                        });
+                        ItemHelper.hurtAndBreak(itemInHand, 1, player, message.interactionHand);
                     }
                 }
             }

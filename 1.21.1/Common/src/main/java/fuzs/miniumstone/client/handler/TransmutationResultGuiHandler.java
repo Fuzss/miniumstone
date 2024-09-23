@@ -1,6 +1,8 @@
 package fuzs.miniumstone.client.handler;
 
 import fuzs.miniumstone.util.MiniumStoneHelper;
+import fuzs.puzzleslib.api.core.v1.utility.ResourceLocationHelper;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
@@ -10,17 +12,18 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 
 public class TransmutationResultGuiHandler {
-    protected static final ResourceLocation HOTBAR_OFFHAND_LEFT_SPRITE = new ResourceLocation("hud/hotbar_offhand_left");
-    protected static final ResourceLocation HOTBAR_OFFHAND_RIGHT_SPRITE = new ResourceLocation(
+    protected static final ResourceLocation HOTBAR_OFFHAND_LEFT_SPRITE = ResourceLocationHelper.withDefaultNamespace(
+            "hud/hotbar_offhand_left");
+    protected static final ResourceLocation HOTBAR_OFFHAND_RIGHT_SPRITE = ResourceLocationHelper.withDefaultNamespace(
             "hud/hotbar_offhand_right");
 
     private static int blockPopTime;
 
-    public static void onClientTick$End(Minecraft minecraft) {
+    public static void onEndClientTick(Minecraft minecraft) {
         if (blockPopTime > 0) blockPopTime--;
     }
 
-    public static void onRenderGui(Minecraft minecraft, GuiGraphics guiGraphics, float tickDelta, int screenWidth, int screenHeight) {
+    public static void onRenderGui(Minecraft minecraft, GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
         if (MiniumStoneHelper.getMiniumStoneHand(minecraft.player) != null) {
             BlockWalker blockWalker = TransmutateShapeRenderingHandler.getBlockWalker();
             if (blockWalker != null) {
@@ -31,33 +34,22 @@ public class TransmutationResultGuiHandler {
                     ItemStack itemStack = new ItemStack(block);
                     itemStack.setPopTime(blockPopTime);
                     HumanoidArm humanoidArm = minecraft.player.getMainArm().getOpposite();
+                    float partialTick = deltaTracker.getGameTimeDeltaPartialTick(false);
+                    int screenWidth = guiGraphics.guiWidth();
+                    int screenHeight = guiGraphics.guiHeight();
                     if (humanoidArm == HumanoidArm.LEFT) {
-                        guiGraphics.blitSprite(HOTBAR_OFFHAND_LEFT_SPRITE,
-                                screenWidth / 2 - 91 - 29 * 2,
-                                screenHeight - 23,
-                                29,
-                                24
+                        guiGraphics.blitSprite(HOTBAR_OFFHAND_LEFT_SPRITE, screenWidth / 2 - 91 - 29 * 2,
+                                screenHeight - 23, 29, 24
                         );
-                        renderItemWithPopTime(minecraft.player,
-                                guiGraphics,
-                                tickDelta,
-                                itemStack,
-                                screenWidth / 2 - 91 - 29 * 2 + 3,
-                                screenHeight - 23 + 4
+                        renderItemWithPopTime(minecraft.player, guiGraphics, partialTick, itemStack,
+                                screenWidth / 2 - 91 - 29 * 2 + 3, screenHeight - 23 + 4
                         );
                     } else {
-                        guiGraphics.blitSprite(HOTBAR_OFFHAND_RIGHT_SPRITE,
-                                screenWidth / 2 + 91 + 29,
-                                screenHeight - 23,
-                                29,
-                                24
+                        guiGraphics.blitSprite(HOTBAR_OFFHAND_RIGHT_SPRITE, screenWidth / 2 + 91 + 29,
+                                screenHeight - 23, 29, 24
                         );
-                        renderItemWithPopTime(minecraft.player,
-                                guiGraphics,
-                                tickDelta,
-                                itemStack,
-                                screenWidth / 2 + 91 + 29 + 10,
-                                screenHeight - 23 + 4
+                        renderItemWithPopTime(minecraft.player, guiGraphics, partialTick, itemStack,
+                                screenWidth / 2 + 91 + 29 + 10, screenHeight - 23 + 4
                         );
                     }
                     guiGraphics.pose().popPose();

@@ -2,30 +2,30 @@ package fuzs.miniumstone.neoforge.client;
 
 import fuzs.miniumstone.MiniumStone;
 import fuzs.miniumstone.client.MiniumStoneClient;
-import fuzs.miniumstone.init.ModRegistry;
+import fuzs.miniumstone.data.client.ModLanguageProvider;
+import fuzs.miniumstone.data.client.ModModelProvider;
+import fuzs.miniumstone.neoforge.data.client.ModSoundDefinitionProvider;
 import fuzs.puzzleslib.api.client.core.v1.ClientModConstructor;
-import net.minecraft.client.RecipeBookCategories;
+import fuzs.puzzleslib.neoforge.api.data.v2.core.DataProviderHelper;
 import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.lifecycle.FMLConstructModEvent;
-import net.neoforged.neoforge.client.event.RegisterRecipeBookCategoriesEvent;
 
-import java.util.Locale;
-
-@Mod.EventBusSubscriber(modid = MiniumStone.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@Mod(value = MiniumStone.MOD_ID, dist = Dist.CLIENT)
 public class MiniumStoneNeoForgeClient {
 
-    @SubscribeEvent
-    public static void onConstructMod(final FMLConstructModEvent evt) {
+    public MiniumStoneNeoForgeClient() {
         ClientModConstructor.construct(MiniumStone.MOD_ID, MiniumStoneClient::new);
+        DataProviderHelper.registerDataProviders(MiniumStone.MOD_ID, ModLanguageProvider::new, ModModelProvider::new,
+                ModSoundDefinitionProvider::new
+        );
     }
 
-    @SubscribeEvent
-    public static void onRegisterRecipeBookCategories(final RegisterRecipeBookCategoriesEvent evt) {
-        evt.registerRecipeCategoryFinder(ModRegistry.TRANSMUTATION_IN_WORLD_RECIPE_TYPE.value(), $ -> {
-            String internalName = MiniumStone.id("transmutation").toDebugFileName().toUpperCase(Locale.ROOT);
-            return RecipeBookCategories.create(internalName);
-        });
-    }
+//    private static void registerLoadingHandlers(IEventBus eventBus) {
+//        eventBus.addListener((final RegisterRecipeBookCategoriesEvent evt) -> {
+//            evt.registerRecipeCategoryFinder(ModRegistry.TRANSMUTATION_IN_WORLD_RECIPE_TYPE.value(), $ -> {
+//                String internalName = MiniumStone.id("transmutation").toDebugFileName().toUpperCase(Locale.ROOT);
+//                return RecipeBookCategories.create(internalName);
+//            });
+//        });
+//    }
 }

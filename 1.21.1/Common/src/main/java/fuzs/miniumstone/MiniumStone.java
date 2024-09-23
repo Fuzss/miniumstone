@@ -9,13 +9,13 @@ import fuzs.miniumstone.network.client.ServerboundStoneTransmutationMessage;
 import fuzs.puzzleslib.api.config.v3.ConfigHolder;
 import fuzs.puzzleslib.api.core.v1.ModConstructor;
 import fuzs.puzzleslib.api.core.v1.context.BuildCreativeModeTabContentsContext;
+import fuzs.puzzleslib.api.core.v1.utility.ResourceLocationHelper;
 import fuzs.puzzleslib.api.event.v1.server.LootTableLoadEvents;
-import fuzs.puzzleslib.api.network.v3.NetworkHandlerV3;
+import fuzs.puzzleslib.api.network.v3.NetworkHandler;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.level.storage.loot.LootDataManager;
 import net.minecraft.world.level.storage.loot.LootPool;
-import net.minecraft.world.level.storage.loot.entries.LootTableReference;
+import net.minecraft.world.level.storage.loot.entries.NestedLootTable;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +28,7 @@ public class MiniumStone implements ModConstructor {
     public static final String MOD_NAME = "Minium Stone";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
 
-    public static final NetworkHandlerV3 NETWORK = NetworkHandlerV3.builder(MOD_ID)
+    public static final NetworkHandler NETWORK = NetworkHandler.builder(MOD_ID)
             .registerServerbound(ServerboundChargeStoneMessage.class)
             .registerServerbound(ServerboundOpenCraftingGridMessage.class)
             .registerServerbound(ServerboundStoneTransmutationMessage.class)
@@ -38,18 +38,19 @@ public class MiniumStone implements ModConstructor {
     @Override
     public void onConstructMod() {
         ModRegistry.touch();
-        registerHandlers();
+        registerEventHandlers();
     }
 
-    private static void registerHandlers() {
-        LootTableLoadEvents.MODIFY.register((LootDataManager lootManager, ResourceLocation identifier, Consumer<LootPool> addPool, IntPredicate removePool) -> {
-            if (CONFIG.get(CommonConfig.class).miniumShardDropMonsters.contains(identifier)) {
-                addPool.accept(LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1.0F))
-                        .add(LootTableReference.lootTableReference(ModRegistry.MINIUM_SHARD_INJECT_LOOT_TABLE))
-                        .build());
-            }
-        });
+    private static void registerEventHandlers() {
+        LootTableLoadEvents.MODIFY.register(
+                (ResourceLocation resourceLocation, Consumer<LootPool> addLootPool, IntPredicate removeLootPool) -> {
+                    if (CONFIG.get(CommonConfig.class).miniumShardDropMonsters.contains(resourceLocation)) {
+                        addLootPool.accept(LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1.0F))
+                                .add(NestedLootTable.lootTableReference(ModRegistry.MINIUM_SHARD_INJECT_LOOT_TABLE))
+                                .build());
+                    }
+                });
     }
 
     @Override
@@ -63,6 +64,6 @@ public class MiniumStone implements ModConstructor {
     }
 
     public static ResourceLocation id(String path) {
-        return new ResourceLocation(MOD_ID, path);
+        return ResourceLocationHelper.fromNamespaceAndPath(MOD_ID, path);
     }
 }

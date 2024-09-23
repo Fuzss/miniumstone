@@ -28,7 +28,7 @@ public class ModLanguageProvider extends AbstractLanguageProvider {
         builder.add(MiniumStoneItem.SelectionMode.LINE.getComponent(), "Line");
         builder.add(ModRegistry.MINIUM_STONE_ITEM.value(), "charge", "Press %s to charge");
         builder.add(ModRegistry.MINIUM_STONE_ITEM.value(), "crafting", "Press %s to open crafting grid");
-        builder.add(MiniumStoneKeyHandler.MINIUM_STONE_KEY_CATEGORY, MiniumStone.MOD_NAME);
+        builder.addKeyCategory(MiniumStone.MOD_ID, MiniumStone.MOD_NAME);
         builder.add(MiniumStoneKeyHandler.CHARGE_MINIUM_STONE_KEY_MAPPING, "Charge Minium Stone");
         builder.add(MiniumStoneKeyHandler.OPEN_CRAFTING_GRID_KEY_MAPPING, "Open Crafting Grid");
         builder.add(ModRegistry.ITEM_MINIUM_STONE_CHARGE_SOUND_EVENT.value(), "Minium Stone charges");

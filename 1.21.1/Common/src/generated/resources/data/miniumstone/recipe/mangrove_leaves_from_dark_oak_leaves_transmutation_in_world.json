@@ -1,0 +1,11 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": {
+    "item": "minecraft:dark_oak_leaves"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:mangrove_leaves"
+  },
+  "reversible": true
+}

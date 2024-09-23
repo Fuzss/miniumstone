@@ -1,0 +1,11 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": {
+    "item": "minecraft:light_blue_wool"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:yellow_wool"
+  },
+  "reversible": true
+}

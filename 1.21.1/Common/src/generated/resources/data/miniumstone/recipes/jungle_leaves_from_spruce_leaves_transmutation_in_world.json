@@ -1,6 +1,0 @@
-{
-  "type": "miniumstone:transmutation_in_world",
-  "ingredient": "minecraft:spruce_leaves",
-  "result": "minecraft:jungle_leaves",
-  "reversible": true
-}

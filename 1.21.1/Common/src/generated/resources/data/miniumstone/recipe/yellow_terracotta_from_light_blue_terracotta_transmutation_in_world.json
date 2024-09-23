@@ -1,0 +1,11 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": {
+    "item": "minecraft:light_blue_terracotta"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:yellow_terracotta"
+  },
+  "reversible": true
+}

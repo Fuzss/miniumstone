@@ -1,6 +1,0 @@
-{
-  "type": "miniumstone:transmutation_in_world",
-  "ingredient": "minecraft:jungle_leaves",
-  "result": "minecraft:acacia_leaves",
-  "reversible": true
-}

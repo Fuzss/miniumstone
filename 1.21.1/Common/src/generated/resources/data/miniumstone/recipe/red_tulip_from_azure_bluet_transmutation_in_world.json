@@ -1,0 +1,11 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": {
+    "item": "minecraft:azure_bluet"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:red_tulip"
+  },
+  "reversible": true
+}

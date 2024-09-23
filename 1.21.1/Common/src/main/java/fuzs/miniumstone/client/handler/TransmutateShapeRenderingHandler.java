@@ -7,6 +7,7 @@ import fuzs.miniumstone.mixin.client.accessor.LevelRendererAccessor;
 import fuzs.miniumstone.util.MiniumStoneHelper;
 import fuzs.miniumstone.world.item.MiniumStoneItem;
 import net.minecraft.client.Camera;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.GameRenderer;
@@ -28,7 +29,7 @@ public class TransmutateShapeRenderingHandler {
     @Nullable
     private static BlockWalker blockWalker;
 
-    public static void onRenderLevelAfterTranslucent(LevelRenderer levelRenderer, Camera camera, GameRenderer gameRenderer, float tickDelta, PoseStack poseStack, Matrix4f projectionMatrix, Frustum frustum, ClientLevel level) {
+    public static void onRenderLevelAfterEntities(LevelRenderer levelRenderer, Camera camera, GameRenderer gameRenderer, DeltaTracker deltaTracker, PoseStack poseStack, Matrix4f projectionMatrix, Frustum frustum, ClientLevel level) {
 
         if (camera.getEntity() instanceof Player player) {
 
@@ -45,7 +46,9 @@ public class TransmutateShapeRenderingHandler {
                     BlockWalker blockWalker = TransmutateShapeRenderingHandler.blockWalker;
                     if (blockWalker == null || !blockWalker.stillValid(charge, selectionMode, hitResult, level)) {
 
-                        TransmutateShapeRenderingHandler.blockWalker = blockWalker = BlockWalker.fromHitResult(charge, selectionMode, (BlockHitResult) hitResult, level);
+                        TransmutateShapeRenderingHandler.blockWalker = blockWalker = BlockWalker.fromHitResult(charge,
+                                selectionMode, (BlockHitResult) hitResult, level
+                        );
                     }
 
                     MultiBufferSource.BufferSource bufferSource = minecraft.renderBuffers().bufferSource();
@@ -63,14 +66,18 @@ public class TransmutateShapeRenderingHandler {
     private static void renderLines(Vec3 cameraPosition, MultiBufferSource.BufferSource bufferSource, PoseStack poseStack, VoxelShape voxelShape) {
 
         VertexConsumer buffer = bufferSource.getBuffer(ModRenderType.LINES_SEE_THROUGH);
-        LevelRendererAccessor.miniumstone$callRenderShape(poseStack, buffer, voxelShape, -cameraPosition.x, -cameraPosition.y, -cameraPosition.z, 1.0F, 1.0F, 1.0F, 0.65F);
+        LevelRendererAccessor.miniumstone$callRenderShape(poseStack, buffer, voxelShape, -cameraPosition.x,
+                -cameraPosition.y, -cameraPosition.z, 1.0F, 1.0F, 1.0F, 0.65F
+        );
         bufferSource.endBatch(ModRenderType.LINES_SEE_THROUGH);
         buffer = bufferSource.getBuffer(RenderType.LINES);
-        LevelRendererAccessor.miniumstone$callRenderShape(poseStack, buffer, voxelShape, -cameraPosition.x, -cameraPosition.y, -cameraPosition.z, 1.0F, 1.0F, 1.0F, 1.0F);
+        LevelRendererAccessor.miniumstone$callRenderShape(poseStack, buffer, voxelShape, -cameraPosition.x,
+                -cameraPosition.y, -cameraPosition.z, 1.0F, 1.0F, 1.0F, 1.0F
+        );
         bufferSource.endBatch(RenderType.LINES);
     }
 
-    public static void onClientTick$End(Minecraft minecraft) {
+    public static void onEndClientTick(Minecraft minecraft) {
         if (blockWalker != null) blockWalker.testAllBlocks(minecraft.hitResult, minecraft.level);
     }
 

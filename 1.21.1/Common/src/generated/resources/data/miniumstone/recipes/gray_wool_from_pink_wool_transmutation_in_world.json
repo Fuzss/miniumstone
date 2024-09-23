@@ -1,6 +1,0 @@
-{
-  "type": "miniumstone:transmutation_in_world",
-  "ingredient": "minecraft:pink_wool",
-  "result": "minecraft:gray_wool",
-  "reversible": true
-}

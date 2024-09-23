@@ -1,6 +1,0 @@
-{
-  "type": "miniumstone:transmutation_in_world",
-  "ingredient": "minecraft:oak_planks",
-  "result": "minecraft:birch_planks",
-  "reversible": true
-}

@@ -1,6 +1,0 @@
-{
-  "type": "miniumstone:transmutation_in_world",
-  "ingredient": "minecraft:poppy",
-  "result": "minecraft:dandelion",
-  "reversible": true
-}
