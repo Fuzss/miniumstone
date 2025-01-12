@@ -1,0 +1,11 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": {
+    "item": "minecraft:white_candle"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:orange_candle"
+  },
+  "reversible": true
+}

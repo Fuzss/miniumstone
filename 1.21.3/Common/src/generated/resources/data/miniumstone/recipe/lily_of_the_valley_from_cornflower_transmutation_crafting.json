@@ -1,0 +1,13 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:cornflower"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:lily_of_the_valley"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": {
+    "item": "minecraft:lily_of_the_valley"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:poppy"
+  },
+  "reversible": true
+}

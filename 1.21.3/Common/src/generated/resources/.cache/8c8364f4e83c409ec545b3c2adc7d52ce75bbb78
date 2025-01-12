@@ -1,0 +1,4 @@
+// 1.21.1	2024-09-23T22:15:27.298988	Tags for minecraft:item mod id vanilla
+3da0f94bca0762abf42263b3c13cfad706319eb0 data/minecraft/tags/item/enchantable/durability.json
+3da0f94bca0762abf42263b3c13cfad706319eb0 data/miniumstone/tags/item/recipes_do_not_consume.json
+3da0f94bca0762abf42263b3c13cfad706319eb0 data/miniumstone/tags/item/recipes_ignore_components.json

@@ -1,0 +1,11 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": {
+    "item": "minecraft:dandelion"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:blue_orchid"
+  },
+  "reversible": true
+}

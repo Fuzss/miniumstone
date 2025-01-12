@@ -1,0 +1,11 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": {
+    "item": "minecraft:cyan_concrete_powder"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:purple_concrete_powder"
+  },
+  "reversible": true
+}

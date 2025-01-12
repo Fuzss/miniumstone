@@ -1,0 +1,11 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": {
+    "item": "minecraft:green_carpet"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:red_carpet"
+  },
+  "reversible": true
+}

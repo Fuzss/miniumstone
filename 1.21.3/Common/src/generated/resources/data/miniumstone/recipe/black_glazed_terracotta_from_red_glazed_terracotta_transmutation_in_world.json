@@ -1,0 +1,11 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": {
+    "item": "minecraft:red_glazed_terracotta"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:black_glazed_terracotta"
+  },
+  "reversible": true
+}

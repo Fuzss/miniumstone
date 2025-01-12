@@ -1,0 +1,11 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": {
+    "item": "minecraft:bamboo_planks"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:oak_planks"
+  },
+  "reversible": true
+}

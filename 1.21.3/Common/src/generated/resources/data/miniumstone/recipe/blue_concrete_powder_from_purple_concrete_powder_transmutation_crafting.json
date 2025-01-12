@@ -1,0 +1,13 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:purple_concrete_powder"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:blue_concrete_powder"
+  }
+}

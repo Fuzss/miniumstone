@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_17",
+  "package": "${modGroup}.mixin",
+  "mixins": [
+    "CraftingInputMixin",
+    "ResultSlotMixin",
+    "ServerPlaceRecipeMixin",
+    "StackedContentsMixin"
+  ],
+  "client": [
+    "client.accessor.LevelRendererAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

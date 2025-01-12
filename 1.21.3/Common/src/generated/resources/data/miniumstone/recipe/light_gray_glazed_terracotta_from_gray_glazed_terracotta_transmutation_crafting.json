@@ -1,0 +1,13 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:gray_glazed_terracotta"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:light_gray_glazed_terracotta"
+  }
+}

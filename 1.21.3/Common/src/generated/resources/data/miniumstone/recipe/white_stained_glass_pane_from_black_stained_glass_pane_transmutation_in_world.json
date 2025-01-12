@@ -1,0 +1,11 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": {
+    "item": "minecraft:black_stained_glass_pane"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:white_stained_glass_pane"
+  },
+  "reversible": true
+}

@@ -1,0 +1,11 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": {
+    "item": "minecraft:red_sandstone"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:sandstone"
+  },
+  "reversible": true
+}
