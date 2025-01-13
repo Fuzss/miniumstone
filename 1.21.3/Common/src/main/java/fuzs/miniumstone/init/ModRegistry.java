@@ -22,6 +22,7 @@ import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeBookCategory;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.level.storage.loot.LootTable;
 
 public class ModRegistry {
@@ -40,6 +41,10 @@ public class ModRegistry {
                     .rarity(Rarity.UNCOMMON)
                     .component(CHARGE_DATA_COMPONENT_TYPE.value(), (byte) 0)
                     .component(SELECTION_DATA_COMPONENT_TYPE.value(), MiniumStoneItem.SelectionMode.FLAT));
+    public static final Holder.Reference<SlotDisplay.Type<BlockSlotDisplay>> BLOCK_SLOT_DISPLAY = REGISTRIES.register(
+            Registries.SLOT_DISPLAY,
+            "block",
+            () -> new SlotDisplay.Type<>(BlockSlotDisplay.MAP_CODEC, BlockSlotDisplay.STREAM_CODEC));
     public static final Holder.Reference<RecipeType<TransmutationInWorldRecipe>> TRANSMUTATION_IN_WORLD_RECIPE_TYPE = REGISTRIES.registerRecipeType(
             "transmutation_in_world");
     public static final Holder.Reference<RecipeSerializer<TransmutationInWorldRecipe>> TRANSMUTATION_IN_WORLD_RECIPE_SERIALIZER = REGISTRIES.register(
@@ -81,6 +86,6 @@ public class ModRegistry {
     public static final TagKey<Item> RECIPES_DO_NOT_CONSUME_ITEM_TAG = TAGS.registerItemTag("recipes_do_not_consume");
 
     public static void bootstrap() {
-        REGISTRIES.register(Registries.SLOT_DISPLAY, "block", () -> BlockSlotDisplay.TYPE);
+        // NO-OP
     }
 }

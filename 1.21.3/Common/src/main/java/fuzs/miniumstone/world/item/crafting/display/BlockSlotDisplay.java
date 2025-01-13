@@ -3,6 +3,7 @@ package fuzs.miniumstone.world.item.crafting.display;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import fuzs.miniumstone.init.ModRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -32,7 +33,6 @@ public record BlockSlotDisplay(Block block, boolean isReversible) implements Slo
             ByteBufCodecs.BOOL,
             BlockSlotDisplay::isReversible,
             BlockSlotDisplay::new);
-    public static final SlotDisplay.Type<BlockSlotDisplay> TYPE = new SlotDisplay.Type<>(MAP_CODEC, STREAM_CODEC);
 
     @Override
     public <T> Stream<T> resolve(ContextMap context, DisplayContentsFactory<T> output) {
@@ -42,6 +42,6 @@ public record BlockSlotDisplay(Block block, boolean isReversible) implements Slo
 
     @Override
     public Type<? extends SlotDisplay> type() {
-        return TYPE;
+        return ModRegistry.BLOCK_SLOT_DISPLAY.value();
     }
 }
