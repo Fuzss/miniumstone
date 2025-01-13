@@ -1,8 +1,6 @@
 {
   "type": "miniumstone:transmutation_in_world",
-  "ingredient": {
-    "item": "minecraft:gravel"
-  },
+  "ingredient": "minecraft:gravel",
   "result": {
     "count": 1,
     "id": "minecraft:sandstone"

@@ -1,8 +1,6 @@
 {
   "type": "miniumstone:transmutation_in_world",
-  "ingredient": {
-    "item": "minecraft:purple_wool"
-  },
+  "ingredient": "minecraft:purple_wool",
   "result": {
     "count": 1,
     "id": "minecraft:blue_wool"

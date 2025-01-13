@@ -1,8 +1,6 @@
 {
   "type": "miniumstone:transmutation_in_world",
-  "ingredient": {
-    "item": "minecraft:gray_carpet"
-  },
+  "ingredient": "minecraft:gray_carpet",
   "result": {
     "count": 1,
     "id": "minecraft:light_gray_carpet"

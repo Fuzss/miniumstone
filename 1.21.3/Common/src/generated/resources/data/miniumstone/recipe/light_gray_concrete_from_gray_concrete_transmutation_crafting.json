@@ -2,9 +2,7 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:gray_concrete"
-    }
+    "minecraft:gray_concrete"
   ],
   "result": {
     "count": 1,

@@ -2,9 +2,7 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:brick"
-    }
+    "minecraft:brick"
   ],
   "result": {
     "count": 4,

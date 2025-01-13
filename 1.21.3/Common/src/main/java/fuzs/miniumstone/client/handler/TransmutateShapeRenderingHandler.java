@@ -3,18 +3,15 @@ package fuzs.miniumstone.client.handler;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import fuzs.miniumstone.client.renderer.ModRenderType;
-import fuzs.miniumstone.mixin.client.accessor.LevelRendererAccessor;
 import fuzs.miniumstone.util.MiniumStoneHelper;
 import fuzs.miniumstone.world.item.MiniumStoneItem;
 import net.minecraft.client.Camera;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.LevelRenderer;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.culling.Frustum;
+import net.minecraft.util.ARGB;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -47,8 +44,9 @@ public class TransmutateShapeRenderingHandler {
                     if (blockWalker == null || !blockWalker.stillValid(charge, selectionMode, hitResult, level)) {
 
                         TransmutateShapeRenderingHandler.blockWalker = blockWalker = BlockWalker.fromHitResult(charge,
-                                selectionMode, (BlockHitResult) hitResult, level
-                        );
+                                selectionMode,
+                                (BlockHitResult) hitResult,
+                                level);
                     }
 
                     MultiBufferSource.BufferSource bufferSource = minecraft.renderBuffers().bufferSource();
@@ -65,15 +63,23 @@ public class TransmutateShapeRenderingHandler {
 
     private static void renderLines(Vec3 cameraPosition, MultiBufferSource.BufferSource bufferSource, PoseStack poseStack, VoxelShape voxelShape) {
 
-        VertexConsumer buffer = bufferSource.getBuffer(ModRenderType.LINES_SEE_THROUGH);
-        LevelRendererAccessor.miniumstone$callRenderShape(poseStack, buffer, voxelShape, -cameraPosition.x,
-                -cameraPosition.y, -cameraPosition.z, 1.0F, 1.0F, 1.0F, 0.65F
-        );
+        VertexConsumer vertexConsumer = bufferSource.getBuffer(ModRenderType.LINES_SEE_THROUGH);
+        ShapeRenderer.renderShape(poseStack,
+                vertexConsumer,
+                voxelShape,
+                -cameraPosition.x,
+                -cameraPosition.y,
+                -cameraPosition.z,
+                ARGB.white(0.65F));
         bufferSource.endBatch(ModRenderType.LINES_SEE_THROUGH);
-        buffer = bufferSource.getBuffer(RenderType.LINES);
-        LevelRendererAccessor.miniumstone$callRenderShape(poseStack, buffer, voxelShape, -cameraPosition.x,
-                -cameraPosition.y, -cameraPosition.z, 1.0F, 1.0F, 1.0F, 1.0F
-        );
+        vertexConsumer = bufferSource.getBuffer(RenderType.LINES);
+        ShapeRenderer.renderShape(poseStack,
+                vertexConsumer,
+                voxelShape,
+                -cameraPosition.x,
+                -cameraPosition.y,
+                -cameraPosition.z,
+                -1);
         bufferSource.endBatch(RenderType.LINES);
     }
 

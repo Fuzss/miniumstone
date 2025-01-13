@@ -1,8 +1,11 @@
 package fuzs.miniumstone.mixin;
 
 import fuzs.miniumstone.init.ModRegistry;
+import it.unimi.dsi.fastutil.objects.Reference2IntOpenHashMap;
+import net.minecraft.core.Holder;
 import net.minecraft.world.entity.player.StackedContents;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Item;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -10,36 +13,18 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(StackedContents.class)
-abstract class StackedContentsMixin {
-
-    @Inject(method = "accountSimpleStack", at = @At("HEAD"), cancellable = true)
-    public void accountSimpleStack(ItemStack itemStack, CallbackInfo callback) {
-        // skip checks related to item components, such as damage, enchantments, and display name
-        // when trying to find items that can be moved to the recipe grid
-        if (itemStack.is(ModRegistry.RECIPES_IGNORE_COMPONENTS_ITEM_TAG)) {
-            this.accountStack(itemStack);
-            callback.cancel();
-        }
-    }
-
+abstract class StackedContentsMixin<T> {
     @Shadow
-    public abstract void accountStack(ItemStack stack);
+    @Final
+    public Reference2IntOpenHashMap<T> amounts;
 
-    @Inject(method = "accountStack(Lnet/minecraft/world/item/ItemStack;I)V", at = @At("HEAD"), cancellable = true)
-    public void accountStack(ItemStack itemStack, int amount, CallbackInfo callback) {
+    @Inject(method = "put", at = @At("HEAD"), cancellable = true)
+    void put(T item, int amount, CallbackInfo callback) {
         // pretend an item that can be reused during crafting is available at max amount (usually 64 times)
-        if (itemStack.is(ModRegistry.RECIPES_DO_NOT_CONSUME_ITEM_TAG)) {
-            int stackingIndex = getStackingIndex(itemStack);
-            this.put(stackingIndex, Integer.MAX_VALUE);
+        if (item instanceof Holder<?> holder &&
+                ((Holder<Item>) holder).is(ModRegistry.RECIPES_DO_NOT_CONSUME_ITEM_TAG)) {
+            this.amounts.put(item, Integer.MAX_VALUE);
             callback.cancel();
         }
     }
-
-    @Shadow
-    private static int getStackingIndex(ItemStack stack) {
-        throw new RuntimeException();
-    }
-
-    @Shadow
-    abstract void put(int stackingIndex, int increment);
 }

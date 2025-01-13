@@ -2,9 +2,7 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:purple_terracotta"
-    }
+    "minecraft:purple_terracotta"
   ],
   "result": {
     "count": 1,

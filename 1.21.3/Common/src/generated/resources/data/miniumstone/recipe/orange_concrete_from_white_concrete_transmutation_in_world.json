@@ -1,8 +1,6 @@
 {
   "type": "miniumstone:transmutation_in_world",
-  "ingredient": {
-    "item": "minecraft:white_concrete"
-  },
+  "ingredient": "minecraft:white_concrete",
   "result": {
     "count": 1,
     "id": "minecraft:orange_concrete"

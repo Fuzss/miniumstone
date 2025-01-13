@@ -2,9 +2,7 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:blue_orchid"
-    }
+    "minecraft:blue_orchid"
   ],
   "result": {
     "count": 1,

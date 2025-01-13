@@ -2,9 +2,7 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:jungle_log"
-    }
+    "minecraft:jungle_log"
   ],
   "result": {
     "count": 1,

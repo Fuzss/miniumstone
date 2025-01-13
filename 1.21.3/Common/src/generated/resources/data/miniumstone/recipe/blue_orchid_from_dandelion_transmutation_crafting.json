@@ -2,9 +2,7 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:dandelion"
-    }
+    "minecraft:dandelion"
   ],
   "result": {
     "count": 1,

@@ -35,13 +35,12 @@ public class StoneTransmuteHandler {
                     Block result = secondaryUseActive ? recipe.getBlockIngredient() : recipe.getBlockResult();
                     MiniumStoneHelper.transmuteBlocks(blockPos, blocks, level, ingredient, result, itemInHand);
                     int selectedSlot = player.getInventory().selected;
-                    MiniumStone.NETWORK.sendToServer(new ServerboundStoneTransmutationMessage(selectedSlot,
+                    MiniumStone.NETWORK.sendMessage(new ServerboundStoneTransmutationMessage(selectedSlot,
                             interactionHand,
                             blockPos,
                             blocks,
                             secondaryUseActive,
-                            holder.id()
-                    ));
+                            holder.id()));
                     TransmutateShapeRenderingHandler.clearBlockWalker();
                     TransmutationResultGuiHandler.setBlockPopTime(5);
                     return EventResultHolder.interrupt(InteractionResult.SUCCESS);

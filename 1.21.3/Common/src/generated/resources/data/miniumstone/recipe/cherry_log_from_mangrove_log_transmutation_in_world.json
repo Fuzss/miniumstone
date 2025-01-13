@@ -1,8 +1,6 @@
 {
   "type": "miniumstone:transmutation_in_world",
-  "ingredient": {
-    "item": "minecraft:mangrove_log"
-  },
+  "ingredient": "minecraft:mangrove_log",
   "result": {
     "count": 1,
     "id": "minecraft:cherry_log"

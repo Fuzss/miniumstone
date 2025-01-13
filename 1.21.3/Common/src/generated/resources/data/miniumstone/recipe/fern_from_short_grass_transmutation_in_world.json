@@ -1,8 +1,6 @@
 {
   "type": "miniumstone:transmutation_in_world",
-  "ingredient": {
-    "item": "minecraft:short_grass"
-  },
+  "ingredient": "minecraft:short_grass",
   "result": {
     "count": 1,
     "id": "minecraft:fern"

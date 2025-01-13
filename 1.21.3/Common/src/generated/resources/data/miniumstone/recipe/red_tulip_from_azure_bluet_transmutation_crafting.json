@@ -2,9 +2,7 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:azure_bluet"
-    }
+    "minecraft:azure_bluet"
   ],
   "result": {
     "count": 1,

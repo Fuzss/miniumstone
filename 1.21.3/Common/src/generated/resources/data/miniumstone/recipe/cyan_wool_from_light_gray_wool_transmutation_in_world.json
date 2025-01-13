@@ -1,8 +1,6 @@
 {
   "type": "miniumstone:transmutation_in_world",
-  "ingredient": {
-    "item": "minecraft:light_gray_wool"
-  },
+  "ingredient": "minecraft:light_gray_wool",
   "result": {
     "count": 1,
     "id": "minecraft:cyan_wool"

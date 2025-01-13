@@ -1,8 +1,6 @@
 {
   "type": "miniumstone:transmutation_in_world",
-  "ingredient": {
-    "item": "minecraft:red_carpet"
-  },
+  "ingredient": "minecraft:red_carpet",
   "result": {
     "count": 1,
     "id": "minecraft:black_carpet"

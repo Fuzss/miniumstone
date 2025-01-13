@@ -2,18 +2,10 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:gold_ingot"
-    },
-    {
-      "item": "minecraft:gold_ingot"
-    },
-    {
-      "item": "minecraft:gold_ingot"
-    },
-    {
-      "item": "minecraft:gold_ingot"
-    }
+    "minecraft:gold_ingot",
+    "minecraft:gold_ingot",
+    "minecraft:gold_ingot",
+    "minecraft:gold_ingot"
   ],
   "result": {
     "count": 1,

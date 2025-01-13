@@ -1,8 +1,6 @@
 {
   "type": "miniumstone:transmutation_in_world",
-  "ingredient": {
-    "item": "minecraft:fern"
-  },
+  "ingredient": "minecraft:fern",
   "result": {
     "count": 1,
     "id": "minecraft:dead_bush"

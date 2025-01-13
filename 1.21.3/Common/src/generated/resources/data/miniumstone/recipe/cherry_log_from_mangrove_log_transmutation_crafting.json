@@ -2,9 +2,7 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:mangrove_log"
-    }
+    "minecraft:mangrove_log"
   ],
   "result": {
     "count": 1,

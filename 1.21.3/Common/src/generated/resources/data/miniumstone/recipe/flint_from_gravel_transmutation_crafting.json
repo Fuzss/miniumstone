@@ -2,18 +2,10 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:gravel"
-    },
-    {
-      "item": "minecraft:gravel"
-    },
-    {
-      "item": "minecraft:gravel"
-    },
-    {
-      "item": "minecraft:gravel"
-    }
+    "minecraft:gravel",
+    "minecraft:gravel",
+    "minecraft:gravel",
+    "minecraft:gravel"
   ],
   "result": {
     "count": 1,

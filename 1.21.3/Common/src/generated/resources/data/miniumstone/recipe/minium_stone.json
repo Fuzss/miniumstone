@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": {
-      "item": "miniumstone:minium_shard"
-    },
-    "X": {
-      "item": "minecraft:diamond"
-    }
+    "#": "miniumstone:minium_shard",
+    "X": "minecraft:diamond"
   },
   "pattern": [
     "###",

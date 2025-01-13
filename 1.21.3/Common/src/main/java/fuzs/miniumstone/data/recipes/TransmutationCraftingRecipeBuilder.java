@@ -4,10 +4,11 @@ import fuzs.miniumstone.init.ModRegistry;
 import fuzs.miniumstone.world.item.crafting.TransmutationCraftingRecipe;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -19,8 +20,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class TransmutationCraftingRecipeBuilder extends ShapelessRecipeBuilder {
 
-    protected TransmutationCraftingRecipeBuilder(RecipeCategory recipeCategory, Ingredient ingredient, ItemLike result, int ingredientCount, int resultCount) {
-        super(recipeCategory, result, resultCount);
+    protected TransmutationCraftingRecipeBuilder(HolderGetter<Item> items, RecipeCategory recipeCategory, Ingredient ingredient, ItemStack result, int ingredientCount) {
+        super(items, recipeCategory, result);
         if (ingredient.test(new ItemStack(ModRegistry.MINIUM_STONE_ITEM.value()))) {
             throw new IllegalArgumentException("Transmutation recipe must not include minium stone as ingredient");
         } else {
@@ -54,29 +55,43 @@ public class TransmutationCraftingRecipeBuilder extends ShapelessRecipeBuilder {
     }
 
     @Override
-    public void save(RecipeOutput recipeOutput, ResourceLocation id) {
+    public void save(RecipeOutput recipeOutput, ResourceKey<Recipe<?>> resourceKey) {
         super.save(new RecipeOutput() {
+
             @Override
-            public void accept(ResourceLocation location, Recipe<?> recipe, @Nullable AdvancementHolder advancement) {
-                recipeOutput.accept(location, new TransmutationCraftingRecipe((ShapelessRecipe) recipe), advancement);
+            public void accept(ResourceKey<Recipe<?>> key, Recipe<?> recipe, @Nullable AdvancementHolder advancement) {
+                recipeOutput.accept(key, new TransmutationCraftingRecipe((ShapelessRecipe) recipe), advancement);
             }
 
             @Override
             public Advancement.Builder advancement() {
                 return recipeOutput.advancement();
             }
-        }, id);
+
+            @Override
+            public void includeRootAdvancement() {
+                // NO-OP
+            }
+        }, resourceKey);
     }
 
-    public static TransmutationCraftingRecipeBuilder singleResult(Ingredient ingredient, ItemLike result, int ingredientCount) {
-        return new TransmutationCraftingRecipeBuilder(RecipeCategory.MISC, ingredient, result, ingredientCount, 1);
+    public static TransmutationCraftingRecipeBuilder singleResult(HolderGetter<Item> items, Ingredient ingredient, ItemLike result, int ingredientCount) {
+        return new TransmutationCraftingRecipeBuilder(items,
+                RecipeCategory.MISC,
+                ingredient,
+                result.asItem().getDefaultInstance().copyWithCount(1),
+                ingredientCount);
     }
 
-    public static TransmutationCraftingRecipeBuilder singleIngredient(Ingredient ingredient, ItemLike result, int count) {
-        return new TransmutationCraftingRecipeBuilder(RecipeCategory.MISC, ingredient, result, 1, count);
+    public static TransmutationCraftingRecipeBuilder singleIngredient(HolderGetter<Item> items, Ingredient ingredient, ItemLike result, int count) {
+        return new TransmutationCraftingRecipeBuilder(items,
+                RecipeCategory.MISC,
+                ingredient,
+                result.asItem().getDefaultInstance().copyWithCount(count),
+                1);
     }
 
-    public static TransmutationCraftingRecipeBuilder single(Ingredient ingredient, ItemLike result) {
-        return new TransmutationCraftingRecipeBuilder(RecipeCategory.MISC, ingredient, result, 1, 1);
+    public static TransmutationCraftingRecipeBuilder single(HolderGetter<Item> items, Ingredient ingredient, ItemLike result) {
+        return singleIngredient(items, ingredient, result, 1);
     }
 }

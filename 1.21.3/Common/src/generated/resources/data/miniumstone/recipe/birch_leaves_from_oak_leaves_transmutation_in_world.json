@@ -1,8 +1,6 @@
 {
   "type": "miniumstone:transmutation_in_world",
-  "ingredient": {
-    "item": "minecraft:oak_leaves"
-  },
+  "ingredient": "minecraft:oak_leaves",
   "result": {
     "count": 1,
     "id": "minecraft:birch_leaves"

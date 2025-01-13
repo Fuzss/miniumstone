@@ -1,13 +1,12 @@
 package fuzs.miniumstone.client.handler;
 
-import fuzs.miniumstone.init.ModRegistry;
 import fuzs.miniumstone.world.item.MiniumStoneItem;
 import fuzs.miniumstone.world.item.crafting.TransmutationInWorldRecipe;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.SelectableRecipe;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -19,10 +18,11 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.apache.commons.compress.utils.Lists;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -33,6 +33,8 @@ public class BlockWalker {
     private static final Function<Direction, List<BlockPos>> NEIGHBOR_POSITIONS_FLAT = Util.memoize(direction -> BlockPos.betweenClosedStream(-1, -1, -1, 1, 1, 1).filter(t -> !t.equals(BlockPos.ZERO) && direction.getAxis().choose(t.getX(), t.getY(), t.getZ()) == 0).map(BlockPos::immutable).toList());
     private static final Function<Direction, List<BlockPos>> NEIGHBOR_POSITIONS_LINE = Util.memoize(direction -> List.of(BlockPos.ZERO.relative(direction.getOpposite())));
     private static final List<BlockPos> NEIGHBOR_POSITIONS_BUSH = BlockPos.betweenClosedStream(-2, -1, -2, 2, 1, 2).filter(t -> !BlockPos.ZERO.equals(t) && (t.getY() == 0 || t.distManhattan(BlockPos.ZERO) == 1)).map(BlockPos::immutable).toList();
+
+    public static SelectableRecipe.SingleInputSet<TransmutationInWorldRecipe> transmutationInWorldRecipes = SelectableRecipe.SingleInputSet.empty();
 
     private final MiniumStoneItem.SelectionMode selectionMode;
     private final BlockPos blockPos;
@@ -108,7 +110,7 @@ public class BlockWalker {
 
     public List<BlockPos> getBlocks(Level level, boolean reverse) {
         if (this.blocks == null) {
-            if (this.findRecipes(level.getRecipeManager())) {
+            if (this.findRecipes(transmutationInWorldRecipes)) {
                 this.blocks = this.findBlocks(level);
             } else {
                 this.blocks = List.of();
@@ -117,9 +119,16 @@ public class BlockWalker {
         return reverse && this.reversedRecipe != null || !reverse && this.recipe != null ? this.blocks : List.of();
     }
 
-    private boolean findRecipes(RecipeManager recipeManager) {
+    private boolean findRecipes(SelectableRecipe.SingleInputSet<TransmutationInWorldRecipe> transmutationInWorldRecipes) {
         AtomicBoolean result = new AtomicBoolean();
-        List<RecipeHolder<TransmutationInWorldRecipe>> recipes = recipeManager.getAllRecipesFor(ModRegistry.TRANSMUTATION_IN_WORLD_RECIPE_TYPE.value());
+
+        List<RecipeHolder<TransmutationInWorldRecipe>> recipes = transmutationInWorldRecipes.entries()
+                .stream()
+                .map(SelectableRecipe.SingleInputEntry::recipe)
+                .map(SelectableRecipe::recipe)
+                .mapMulti(Optional<RecipeHolder<TransmutationInWorldRecipe>>::ifPresent)
+                .toList();
+
         recipes.stream().filter(recipe -> recipe.value().getBlockIngredient() == this.blockState.getBlock()).findFirst().ifPresent(recipe -> {
             this.recipe = recipe;
             result.set(true);
@@ -133,7 +142,7 @@ public class BlockWalker {
 
     private List<BlockPos> findBlocks(BlockGetter blockGetter) {
 
-        List<BlockPos> blocks = Lists.newArrayList();
+        List<BlockPos> blocks = new ArrayList<>();
         BlockPos.breadthFirstTraversal(this.blockPos, this.maxDepth, 1024, (BlockPos pos, Consumer<BlockPos> blockPosConsumer) -> {
             for (BlockPos side : this.neighborPositions) {
                 blockPosConsumer.accept(pos.offset(side));

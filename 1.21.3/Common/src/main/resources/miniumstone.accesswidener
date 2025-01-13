@@ -1,1 +1,2 @@
 accessWidener   v2  named
+extendable  method  net/minecraft/world/item/Item   getCraftingRemainder    ()Lnet/minecraft/world/item/ItemStack;

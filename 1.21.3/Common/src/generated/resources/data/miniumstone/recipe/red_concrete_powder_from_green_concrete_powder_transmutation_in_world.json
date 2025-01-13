@@ -1,8 +1,6 @@
 {
   "type": "miniumstone:transmutation_in_world",
-  "ingredient": {
-    "item": "minecraft:green_concrete_powder"
-  },
+  "ingredient": "minecraft:green_concrete_powder",
   "result": {
     "count": 1,
     "id": "minecraft:red_concrete_powder"

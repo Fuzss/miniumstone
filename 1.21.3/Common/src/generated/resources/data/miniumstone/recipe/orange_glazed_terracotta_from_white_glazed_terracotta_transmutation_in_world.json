@@ -1,8 +1,6 @@
 {
   "type": "miniumstone:transmutation_in_world",
-  "ingredient": {
-    "item": "minecraft:white_glazed_terracotta"
-  },
+  "ingredient": "minecraft:white_glazed_terracotta",
   "result": {
     "count": 1,
     "id": "minecraft:orange_glazed_terracotta"

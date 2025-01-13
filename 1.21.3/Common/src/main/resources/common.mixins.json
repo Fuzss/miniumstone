@@ -5,12 +5,13 @@
   "package": "${modGroup}.mixin",
   "mixins": [
     "CraftingInputMixin",
+    "InventoryMixin",
+    "RecipeManagerMixin",
     "ResultSlotMixin",
     "ServerPlaceRecipeMixin",
     "StackedContentsMixin"
   ],
   "client": [
-    "client.accessor.LevelRendererAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

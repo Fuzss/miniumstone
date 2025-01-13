@@ -2,9 +2,7 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:lime_candle"
-    }
+    "minecraft:lime_candle"
   ],
   "result": {
     "count": 1,

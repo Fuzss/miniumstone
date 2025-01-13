@@ -5,12 +5,17 @@ import fuzs.miniumstone.init.ModRegistry;
 import fuzs.miniumstone.world.item.crafting.TransmutationSmeltingRecipe;
 import fuzs.puzzleslib.api.data.v2.AbstractRecipeProvider;
 import fuzs.puzzleslib.api.data.v2.core.DataProviderContext;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.SpecialRecipeBuilder;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -23,36 +28,37 @@ public class ModRecipeProvider extends AbstractRecipeProvider {
 
     @Override
     public void addRecipes(RecipeOutput recipeOutput) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModRegistry.MINIUM_STONE_ITEM.value())
+        ShapedRecipeBuilder.shaped(this.items(), RecipeCategory.TOOLS, ModRegistry.MINIUM_STONE_ITEM.value())
                 .define('#', ModRegistry.MINIUM_SHARD_ITEM.value())
                 .define('X', Items.DIAMOND)
                 .pattern("###")
                 .pattern("#X#")
                 .pattern("###")
-                .unlockedBy(getHasName(ModRegistry.MINIUM_SHARD_ITEM.value(), Items.DIAMOND),
-                        has(ModRegistry.MINIUM_SHARD_ITEM.value(), Items.DIAMOND)
-                )
+                .unlockedBy(getHasName(ModRegistry.MINIUM_SHARD_ITEM.value()),
+                        this.has(ModRegistry.MINIUM_SHARD_ITEM.value()))
+                .unlockedBy(getHasName(Items.DIAMOND), this.has(Items.DIAMOND))
                 .save(recipeOutput);
         SpecialRecipeBuilder.special(TransmutationSmeltingRecipe::new).save(recipeOutput, "transmutation_smelting");
-        singleResultReversible(recipeOutput, Items.IRON_INGOT, Items.ENDER_PEARL, 4);
-        singleResultReversible(recipeOutput, Items.IRON_INGOT, Items.GOLD_INGOT, 8);
-        singleResultReversible(recipeOutput, Items.GOLD_INGOT, Items.DIAMOND, 4);
-        singleIngredient(recipeOutput, Items.GLOWSTONE, Items.GLOWSTONE_DUST, 4);
-        singleIngredient(recipeOutput, Items.BRICK, Items.BRICKS, 4);
-        singleResult(recipeOutput, Items.BONE_MEAL, Items.BONE, 3);
-        singleResult(recipeOutput, Items.BLAZE_POWDER, Items.BLAZE_ROD, 2);
-        singleResult(recipeOutput, Items.GRAVEL, Items.FLINT, 4);
-        inWorldReversible(recipeOutput, Blocks.MELON, Blocks.PUMPKIN);
-        inWorldReversible(recipeOutput, Blocks.RED_MUSHROOM, Blocks.BROWN_MUSHROOM);
-        inWorldReversible(recipeOutput, Blocks.RED_MUSHROOM_BLOCK, Blocks.BROWN_MUSHROOM_BLOCK);
-        inWorldReversible(recipeOutput, Blocks.SAND, Blocks.DIRT, Blocks.STONE, Blocks.GRASS_BLOCK);
-        inWorldOneWay(recipeOutput, Blocks.COBBLESTONE, Blocks.STONE);
-        inWorldOneWay(recipeOutput, Blocks.NETHERRACK, Blocks.COBBLESTONE);
-        inWorldReversible(recipeOutput, Blocks.NETHER_BRICKS, Blocks.RED_NETHER_BRICKS);
-        inWorldReversible(recipeOutput, Blocks.NETHER_WART_BLOCK, Blocks.WARPED_WART_BLOCK);
-        inWorldReversible(recipeOutput, Blocks.CRIMSON_FUNGUS, Blocks.WARPED_FUNGUS);
-        inWorldReversible(recipeOutput, Blocks.CRIMSON_STEM, Blocks.WARPED_STEM);
-        inWorldReversible(recipeOutput,
+        this.singleResultReversible(recipeOutput, this.items(), Items.IRON_INGOT, Items.ENDER_PEARL, 4);
+        this.singleResultReversible(recipeOutput, this.items(), Items.IRON_INGOT, Items.GOLD_INGOT, 8);
+        this.singleResultReversible(recipeOutput, this.items(), Items.GOLD_INGOT, Items.DIAMOND, 4);
+        this.singleIngredient(recipeOutput, this.items(), Items.GLOWSTONE, Items.GLOWSTONE_DUST, 4);
+        this.singleIngredient(recipeOutput, this.items(), Items.BRICK, Items.BRICKS, 4);
+        this.singleResult(recipeOutput, this.items(), Items.BONE_MEAL, Items.BONE, 3);
+        this.singleResult(recipeOutput, this.items(), Items.BLAZE_POWDER, Items.BLAZE_ROD, 2);
+        this.singleResult(recipeOutput, this.items(), Items.GRAVEL, Items.FLINT, 4);
+        this.inWorldReversible(recipeOutput, this.items(), Blocks.MELON, Blocks.PUMPKIN);
+        this.inWorldReversible(recipeOutput, this.items(), Blocks.RED_MUSHROOM, Blocks.BROWN_MUSHROOM);
+        this.inWorldReversible(recipeOutput, this.items(), Blocks.RED_MUSHROOM_BLOCK, Blocks.BROWN_MUSHROOM_BLOCK);
+        this.inWorldReversible(recipeOutput, this.items(), Blocks.SAND, Blocks.DIRT, Blocks.STONE, Blocks.GRASS_BLOCK);
+        this.inWorldOneWay(recipeOutput, this.items(), Blocks.COBBLESTONE, Blocks.STONE);
+        this.inWorldOneWay(recipeOutput, this.items(), Blocks.NETHERRACK, Blocks.COBBLESTONE);
+        this.inWorldReversible(recipeOutput, this.items(), Blocks.NETHER_BRICKS, Blocks.RED_NETHER_BRICKS);
+        this.inWorldReversible(recipeOutput, this.items(), Blocks.NETHER_WART_BLOCK, Blocks.WARPED_WART_BLOCK);
+        this.inWorldReversible(recipeOutput, this.items(), Blocks.CRIMSON_FUNGUS, Blocks.WARPED_FUNGUS);
+        this.inWorldReversible(recipeOutput, this.items(), Blocks.CRIMSON_STEM, Blocks.WARPED_STEM);
+        this.inWorldReversible(recipeOutput,
+                this.items(),
                 Blocks.OAK_LOG,
                 Blocks.BIRCH_LOG,
                 Blocks.SPRUCE_LOG,
@@ -60,9 +66,9 @@ public class ModRecipeProvider extends AbstractRecipeProvider {
                 Blocks.ACACIA_LOG,
                 Blocks.DARK_OAK_LOG,
                 Blocks.MANGROVE_LOG,
-                Blocks.CHERRY_LOG
-        );
-        inWorldReversible(recipeOutput,
+                Blocks.CHERRY_LOG);
+        this.inWorldReversible(recipeOutput,
+                this.items(),
                 Blocks.OAK_LEAVES,
                 Blocks.BIRCH_LEAVES,
                 Blocks.SPRUCE_LEAVES,
@@ -70,9 +76,9 @@ public class ModRecipeProvider extends AbstractRecipeProvider {
                 Blocks.ACACIA_LEAVES,
                 Blocks.DARK_OAK_LEAVES,
                 Blocks.MANGROVE_LEAVES,
-                Blocks.CHERRY_LEAVES
-        );
-        inWorldReversible(recipeOutput,
+                Blocks.CHERRY_LEAVES);
+        this.inWorldReversible(recipeOutput,
+                this.items(),
                 Blocks.OAK_PLANKS,
                 Blocks.BIRCH_PLANKS,
                 Blocks.SPRUCE_PLANKS,
@@ -81,13 +87,13 @@ public class ModRecipeProvider extends AbstractRecipeProvider {
                 Blocks.DARK_OAK_PLANKS,
                 Blocks.MANGROVE_PLANKS,
                 Blocks.CHERRY_PLANKS,
-                Blocks.BAMBOO_PLANKS
-        );
-        inWorldOneWay(recipeOutput, Blocks.GRAVEL, Blocks.SANDSTONE);
-        inWorldReversible(recipeOutput, Blocks.SANDSTONE, Blocks.RED_SANDSTONE);
-        inWorldReversible(recipeOutput, Blocks.CUT_SANDSTONE, Blocks.CUT_RED_SANDSTONE);
-        inWorldReversible(recipeOutput, Blocks.CHISELED_SANDSTONE, Blocks.CHISELED_RED_SANDSTONE);
-        inWorldReversible(recipeOutput,
+                Blocks.BAMBOO_PLANKS);
+        this.inWorldOneWay(recipeOutput, this.items(), Blocks.GRAVEL, Blocks.SANDSTONE);
+        this.inWorldReversible(recipeOutput, this.items(), Blocks.SANDSTONE, Blocks.RED_SANDSTONE);
+        this.inWorldReversible(recipeOutput, this.items(), Blocks.CUT_SANDSTONE, Blocks.CUT_RED_SANDSTONE);
+        this.inWorldReversible(recipeOutput, this.items(), Blocks.CHISELED_SANDSTONE, Blocks.CHISELED_RED_SANDSTONE);
+        this.inWorldReversible(recipeOutput,
+                this.items(),
                 Blocks.WHITE_WOOL,
                 Blocks.ORANGE_WOOL,
                 Blocks.MAGENTA_WOOL,
@@ -103,9 +109,9 @@ public class ModRecipeProvider extends AbstractRecipeProvider {
                 Blocks.BROWN_WOOL,
                 Blocks.GREEN_WOOL,
                 Blocks.RED_WOOL,
-                Blocks.BLACK_WOOL
-        );
-        inWorldReversible(recipeOutput,
+                Blocks.BLACK_WOOL);
+        this.inWorldReversible(recipeOutput,
+                this.items(),
                 Blocks.WHITE_CARPET,
                 Blocks.ORANGE_CARPET,
                 Blocks.MAGENTA_CARPET,
@@ -121,9 +127,9 @@ public class ModRecipeProvider extends AbstractRecipeProvider {
                 Blocks.BROWN_CARPET,
                 Blocks.GREEN_CARPET,
                 Blocks.RED_CARPET,
-                Blocks.BLACK_CARPET
-        );
-        inWorldReversible(recipeOutput,
+                Blocks.BLACK_CARPET);
+        this.inWorldReversible(recipeOutput,
+                this.items(),
                 Blocks.WHITE_TERRACOTTA,
                 Blocks.ORANGE_TERRACOTTA,
                 Blocks.MAGENTA_TERRACOTTA,
@@ -139,9 +145,9 @@ public class ModRecipeProvider extends AbstractRecipeProvider {
                 Blocks.BROWN_TERRACOTTA,
                 Blocks.GREEN_TERRACOTTA,
                 Blocks.RED_TERRACOTTA,
-                Blocks.BLACK_TERRACOTTA
-        );
-        inWorldReversible(recipeOutput,
+                Blocks.BLACK_TERRACOTTA);
+        this.inWorldReversible(recipeOutput,
+                this.items(),
                 Blocks.WHITE_GLAZED_TERRACOTTA,
                 Blocks.ORANGE_GLAZED_TERRACOTTA,
                 Blocks.MAGENTA_GLAZED_TERRACOTTA,
@@ -157,9 +163,9 @@ public class ModRecipeProvider extends AbstractRecipeProvider {
                 Blocks.BROWN_GLAZED_TERRACOTTA,
                 Blocks.GREEN_GLAZED_TERRACOTTA,
                 Blocks.RED_GLAZED_TERRACOTTA,
-                Blocks.BLACK_GLAZED_TERRACOTTA
-        );
-        inWorldReversible(recipeOutput,
+                Blocks.BLACK_GLAZED_TERRACOTTA);
+        this.inWorldReversible(recipeOutput,
+                this.items(),
                 Blocks.WHITE_STAINED_GLASS,
                 Blocks.ORANGE_STAINED_GLASS,
                 Blocks.MAGENTA_STAINED_GLASS,
@@ -175,9 +181,9 @@ public class ModRecipeProvider extends AbstractRecipeProvider {
                 Blocks.BROWN_STAINED_GLASS,
                 Blocks.GREEN_STAINED_GLASS,
                 Blocks.RED_STAINED_GLASS,
-                Blocks.BLACK_STAINED_GLASS
-        );
-        inWorldReversible(recipeOutput,
+                Blocks.BLACK_STAINED_GLASS);
+        this.inWorldReversible(recipeOutput,
+                this.items(),
                 Blocks.WHITE_STAINED_GLASS_PANE,
                 Blocks.ORANGE_STAINED_GLASS_PANE,
                 Blocks.MAGENTA_STAINED_GLASS_PANE,
@@ -193,9 +199,9 @@ public class ModRecipeProvider extends AbstractRecipeProvider {
                 Blocks.BROWN_STAINED_GLASS_PANE,
                 Blocks.GREEN_STAINED_GLASS_PANE,
                 Blocks.RED_STAINED_GLASS_PANE,
-                Blocks.BLACK_STAINED_GLASS_PANE
-        );
-        inWorldReversible(recipeOutput,
+                Blocks.BLACK_STAINED_GLASS_PANE);
+        this.inWorldReversible(recipeOutput,
+                this.items(),
                 Blocks.WHITE_CANDLE,
                 Blocks.ORANGE_CANDLE,
                 Blocks.MAGENTA_CANDLE,
@@ -211,9 +217,9 @@ public class ModRecipeProvider extends AbstractRecipeProvider {
                 Blocks.BROWN_CANDLE,
                 Blocks.GREEN_CANDLE,
                 Blocks.RED_CANDLE,
-                Blocks.BLACK_CANDLE
-        );
-        inWorldReversible(recipeOutput,
+                Blocks.BLACK_CANDLE);
+        this.inWorldReversible(recipeOutput,
+                this.items(),
                 Blocks.WHITE_CONCRETE,
                 Blocks.ORANGE_CONCRETE,
                 Blocks.MAGENTA_CONCRETE,
@@ -229,9 +235,9 @@ public class ModRecipeProvider extends AbstractRecipeProvider {
                 Blocks.BROWN_CONCRETE,
                 Blocks.GREEN_CONCRETE,
                 Blocks.RED_CONCRETE,
-                Blocks.BLACK_CONCRETE
-        );
-        inWorldReversible(recipeOutput,
+                Blocks.BLACK_CONCRETE);
+        this.inWorldReversible(recipeOutput,
+                this.items(),
                 Blocks.WHITE_CONCRETE_POWDER,
                 Blocks.ORANGE_CONCRETE_POWDER,
                 Blocks.MAGENTA_CONCRETE_POWDER,
@@ -247,10 +253,10 @@ public class ModRecipeProvider extends AbstractRecipeProvider {
                 Blocks.BROWN_CONCRETE_POWDER,
                 Blocks.GREEN_CONCRETE_POWDER,
                 Blocks.RED_CONCRETE_POWDER,
-                Blocks.BLACK_CONCRETE_POWDER
-        );
-        inWorldReversible(recipeOutput, Blocks.SHORT_GRASS, Blocks.FERN, Blocks.DEAD_BUSH);
-        inWorldReversible(recipeOutput,
+                Blocks.BLACK_CONCRETE_POWDER);
+        this.inWorldReversible(recipeOutput, this.items(), Blocks.SHORT_GRASS, Blocks.FERN, Blocks.DEAD_BUSH);
+        this.inWorldReversible(recipeOutput,
+                this.items(),
                 Blocks.POPPY,
                 Blocks.DANDELION,
                 Blocks.BLUE_ORCHID,
@@ -262,69 +268,61 @@ public class ModRecipeProvider extends AbstractRecipeProvider {
                 Blocks.PINK_TULIP,
                 Blocks.OXEYE_DAISY,
                 Blocks.CORNFLOWER,
-                Blocks.LILY_OF_THE_VALLEY
-        );
+                Blocks.LILY_OF_THE_VALLEY);
     }
 
-    public static void singleResultReversible(RecipeOutput recipeOutput, ItemLike ingredient, ItemLike result, int ingredientCount) {
-        singleResult(recipeOutput, ingredient, result, ingredientCount);
-        singleIngredient(recipeOutput, result, ingredient, ingredientCount);
+    public void singleResultReversible(RecipeOutput recipeOutput, HolderGetter<Item> items, ItemLike ingredient, ItemLike result, int ingredientCount) {
+        this.singleResult(recipeOutput, items, ingredient, result, ingredientCount);
+        this.singleIngredient(recipeOutput, items, result, ingredient, ingredientCount);
     }
 
-    public static void singleIngredient(RecipeOutput recipeOutput, ItemLike ingredient, ItemLike result, int resultCount) {
-        TransmutationCraftingRecipeBuilder.singleIngredient(Ingredient.of(ingredient), result, resultCount)
-                .unlockedBy(getHasName(ingredient), has(ingredient))
-                .save(recipeOutput,
-                        MiniumStone.id(getConversionRecipeName(result, ingredient) + "_transmutation_crafting")
-                );
+    public void singleIngredient(RecipeOutput recipeOutput, HolderGetter<Item> items, ItemLike ingredient, ItemLike result, int resultCount) {
+        TransmutationCraftingRecipeBuilder.singleIngredient(items, Ingredient.of(ingredient), result, resultCount)
+                .unlockedBy(getHasName(ingredient), this.has(ingredient))
+                .save(recipeOutput, id(getConversionRecipeName(result, ingredient) + "_transmutation_crafting"));
     }
 
-    public static void singleResult(RecipeOutput recipeOutput, ItemLike ingredient, ItemLike result, int ingredientCount) {
-        TransmutationCraftingRecipeBuilder.singleResult(Ingredient.of(ingredient), result, ingredientCount)
-                .unlockedBy(getHasName(ingredient), has(ingredient))
-                .save(recipeOutput,
-                        MiniumStone.id(getConversionRecipeName(result, ingredient) + "_transmutation_crafting")
-                );
+    public void singleResult(RecipeOutput recipeOutput, HolderGetter<Item> items, ItemLike ingredient, ItemLike result, int ingredientCount) {
+        TransmutationCraftingRecipeBuilder.singleResult(items, Ingredient.of(ingredient), result, ingredientCount)
+                .unlockedBy(getHasName(ingredient), this.has(ingredient))
+                .save(recipeOutput, id(getConversionRecipeName(result, ingredient) + "_transmutation_crafting"));
     }
 
-    public static void inWorldReversible(RecipeOutput recipeOutput, Block... blocks) {
+    public void inWorldReversible(RecipeOutput recipeOutput, HolderGetter<Item> items, Block... blocks) {
         for (int i = 0; i < blocks.length; i++) {
             Block ingredient = blocks[i];
             Block result = blocks[(i + 1) % blocks.length];
             TransmutationInWorldRecipeBuilder.reversible(ingredient, result)
-                    .unlockedBy(getHasName(ingredient), has(ingredient))
-                    .save(recipeOutput,
-                            MiniumStone.id(getConversionRecipeName(result, ingredient
-                            ) + "_transmutation_in_world")
-                    );
-            single(recipeOutput, ingredient, result);
+                    .unlockedBy(getHasName(ingredient), this.has(ingredient))
+                    .save(recipeOutput, id(getConversionRecipeName(result, ingredient) + "_transmutation_in_world"));
+            this.single(recipeOutput, items, ingredient, result);
         }
     }
 
-    public static void inWorldOneWay(RecipeOutput recipeOutput, Block ingredient, Block result) {
+    public void inWorldOneWay(RecipeOutput recipeOutput, HolderGetter<Item> items, Block ingredient, Block result) {
         TransmutationInWorldRecipeBuilder.oneWay(ingredient, result)
-                .unlockedBy(getHasName(ingredient), has(ingredient))
-                .save(recipeOutput,
-                        MiniumStone.id(getConversionRecipeName(result, ingredient) + "_transmutation_in_world")
-                );
-        single(recipeOutput, ingredient, result);
+                .unlockedBy(getHasName(ingredient), this.has(ingredient))
+                .save(recipeOutput, id(getConversionRecipeName(result, ingredient) + "_transmutation_in_world"));
+        this.single(recipeOutput, items, ingredient, result);
     }
 
-    public static void single(RecipeOutput recipeOutput, ItemLike ingredient, ItemLike result) {
-        TransmutationCraftingRecipeBuilder.single(Ingredient.of(ingredient), result)
-                .unlockedBy(getHasName(ingredient), has(ingredient))
-                .save(recipeOutput,
-                        MiniumStone.id(getConversionRecipeName(result, ingredient) + "_transmutation_crafting")
-                );
+    public void single(RecipeOutput recipeOutput, HolderGetter<Item> items, ItemLike ingredient, ItemLike result) {
+        TransmutationCraftingRecipeBuilder.single(items, Ingredient.of(ingredient), result)
+                .unlockedBy(getHasName(ingredient), this.has(ingredient))
+                .save(recipeOutput, id(getConversionRecipeName(result, ingredient) + "_transmutation_crafting"));
     }
 
-    public static void singleIngredientReversible(RecipeOutput recipeOutput, ItemLike ingredient, ItemLike result, int resultCount) {
-        singleIngredient(recipeOutput, ingredient, result, resultCount);
-        singleResult(recipeOutput, result, ingredient, resultCount);
+    public void singleIngredientReversible(RecipeOutput recipeOutput, HolderGetter<Item> items, ItemLike ingredient, ItemLike result, int resultCount) {
+        this.singleIngredient(recipeOutput, items, ingredient, result, resultCount);
+        this.singleResult(recipeOutput, items, result, ingredient, resultCount);
     }
 
-    public static void singleReversible(RecipeOutput recipeOutput, ItemLike ingredient, ItemLike result) {
-        single(recipeOutput, ingredient, result);
-        single(recipeOutput, result, ingredient);
+    public void singleReversible(RecipeOutput recipeOutput, HolderGetter<Item> items, ItemLike ingredient, ItemLike result) {
+        this.single(recipeOutput, items, ingredient, result);
+        this.single(recipeOutput, items, result, ingredient);
+    }
+
+    static ResourceKey<Recipe<?>> id(String path) {
+        return ResourceKey.create(Registries.RECIPE, MiniumStone.id(path));
     }
 }

@@ -2,9 +2,7 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:brown_candle"
-    }
+    "minecraft:brown_candle"
   ],
   "result": {
     "count": 1,

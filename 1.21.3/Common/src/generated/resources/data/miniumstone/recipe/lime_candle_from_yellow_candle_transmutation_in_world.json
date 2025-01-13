@@ -1,8 +1,6 @@
 {
   "type": "miniumstone:transmutation_in_world",
-  "ingredient": {
-    "item": "minecraft:yellow_candle"
-  },
+  "ingredient": "minecraft:yellow_candle",
   "result": {
     "count": 1,
     "id": "minecraft:lime_candle"

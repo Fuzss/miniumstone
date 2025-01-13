@@ -1,8 +1,6 @@
 {
   "type": "miniumstone:transmutation_in_world",
-  "ingredient": {
-    "item": "minecraft:lime_concrete_powder"
-  },
+  "ingredient": "minecraft:lime_concrete_powder",
   "result": {
     "count": 1,
     "id": "minecraft:pink_concrete_powder"

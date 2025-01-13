@@ -4,10 +4,11 @@ import fuzs.miniumstone.util.MiniumStoneHelper;
 import fuzs.puzzleslib.api.core.v1.utility.ResourceLocationHelper;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.HumanoidArm;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 
@@ -23,34 +24,44 @@ public class TransmutationResultGuiHandler {
         if (blockPopTime > 0) blockPopTime--;
     }
 
-    public static void onRenderGui(Minecraft minecraft, GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
-        if (MiniumStoneHelper.getMiniumStoneHand(minecraft.player) != null) {
+    public static void onAfterRenderGui(Gui gui, GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
+        if (MiniumStoneHelper.getMiniumStoneHand(gui.minecraft.player) != null) {
             BlockWalker blockWalker = TransmutateShapeRenderingHandler.getBlockWalker();
             if (blockWalker != null) {
-                Block block = blockWalker.getResult(minecraft.player.isShiftKeyDown());
+                Block block = blockWalker.getResult(gui.minecraft.player.isShiftKeyDown());
                 if (block != null) {
                     guiGraphics.pose().pushPose();
                     guiGraphics.pose().translate(0.0F, 0.0F, -90.0F);
                     ItemStack itemStack = new ItemStack(block);
                     itemStack.setPopTime(blockPopTime);
-                    HumanoidArm humanoidArm = minecraft.player.getMainArm().getOpposite();
+                    HumanoidArm humanoidArm = gui.minecraft.player.getMainArm().getOpposite();
                     float partialTick = deltaTracker.getGameTimeDeltaPartialTick(false);
                     int screenWidth = guiGraphics.guiWidth();
                     int screenHeight = guiGraphics.guiHeight();
                     if (humanoidArm == HumanoidArm.LEFT) {
-                        guiGraphics.blitSprite(HOTBAR_OFFHAND_LEFT_SPRITE, screenWidth / 2 - 91 - 29 * 2,
-                                screenHeight - 23, 29, 24
-                        );
-                        renderItemWithPopTime(minecraft.player, guiGraphics, partialTick, itemStack,
-                                screenWidth / 2 - 91 - 29 * 2 + 3, screenHeight - 23 + 4
-                        );
+                        guiGraphics.blitSprite(RenderType::guiTextured,
+                                HOTBAR_OFFHAND_LEFT_SPRITE,
+                                screenWidth / 2 - 91 - 29 * 2,
+                                screenHeight - 23,
+                                29,
+                                24);
+                        renderItemWithPopTime(guiGraphics,
+                                partialTick,
+                                itemStack,
+                                screenWidth / 2 - 91 - 29 * 2 + 3,
+                                screenHeight - 23 + 4);
                     } else {
-                        guiGraphics.blitSprite(HOTBAR_OFFHAND_RIGHT_SPRITE, screenWidth / 2 + 91 + 29,
-                                screenHeight - 23, 29, 24
-                        );
-                        renderItemWithPopTime(minecraft.player, guiGraphics, partialTick, itemStack,
-                                screenWidth / 2 + 91 + 29 + 10, screenHeight - 23 + 4
-                        );
+                        guiGraphics.blitSprite(RenderType::guiTextured,
+                                HOTBAR_OFFHAND_RIGHT_SPRITE,
+                                screenWidth / 2 + 91 + 29,
+                                screenHeight - 23,
+                                29,
+                                24);
+                        renderItemWithPopTime(guiGraphics,
+                                partialTick,
+                                itemStack,
+                                screenWidth / 2 + 91 + 29 + 10,
+                                screenHeight - 23 + 4);
                     }
                     guiGraphics.pose().popPose();
                     ;
@@ -59,7 +70,7 @@ public class TransmutationResultGuiHandler {
         }
     }
 
-    private static void renderItemWithPopTime(Player player, GuiGraphics guiGraphics, float tickDelta, ItemStack itemStack, int posX, int posY) {
+    private static void renderItemWithPopTime(GuiGraphics guiGraphics, float tickDelta, ItemStack itemStack, int posX, int posY) {
 
         float popTime = (float) itemStack.getPopTime() - tickDelta;
 
@@ -71,7 +82,7 @@ public class TransmutationResultGuiHandler {
             guiGraphics.pose().translate((float) (-(posX + 8)), (float) (-(posY + 12)), 0.0F);
         }
 
-        guiGraphics.renderItem(player, itemStack, posX, posY, 0);
+        guiGraphics.renderFakeItem(itemStack, posX, posY, 0);
 
         if (popTime > 0.0F) {
             guiGraphics.pose().popPose();

@@ -2,9 +2,7 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:warped_wart_block"
-    }
+    "minecraft:warped_wart_block"
   ],
   "result": {
     "count": 1,

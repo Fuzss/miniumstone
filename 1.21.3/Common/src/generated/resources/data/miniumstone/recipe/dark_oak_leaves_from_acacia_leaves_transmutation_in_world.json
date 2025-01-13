@@ -1,8 +1,6 @@
 {
   "type": "miniumstone:transmutation_in_world",
-  "ingredient": {
-    "item": "minecraft:acacia_leaves"
-  },
+  "ingredient": "minecraft:acacia_leaves",
   "result": {
     "count": 1,
     "id": "minecraft:dark_oak_leaves"

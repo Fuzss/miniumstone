@@ -1,8 +1,6 @@
 {
   "type": "miniumstone:transmutation_in_world",
-  "ingredient": {
-    "item": "minecraft:acacia_log"
-  },
+  "ingredient": "minecraft:acacia_log",
   "result": {
     "count": 1,
     "id": "minecraft:dark_oak_log"

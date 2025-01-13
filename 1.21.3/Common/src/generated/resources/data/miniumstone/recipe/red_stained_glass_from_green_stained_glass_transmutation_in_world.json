@@ -1,8 +1,6 @@
 {
   "type": "miniumstone:transmutation_in_world",
-  "ingredient": {
-    "item": "minecraft:green_stained_glass"
-  },
+  "ingredient": "minecraft:green_stained_glass",
   "result": {
     "count": 1,
     "id": "minecraft:red_stained_glass"

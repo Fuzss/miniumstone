@@ -82,21 +82,21 @@ public class MiniumStoneHelper {
     public static NonNullList<ItemStack> damageMiniumStoneClearRest(CraftingInput craftingInput) {
         NonNullList<ItemStack> items = NonNullList.withSize(craftingInput.size(), ItemStack.EMPTY);
         for (int i = 0; i < items.size(); ++i) {
-            ItemStack itemstack = craftingInput.getItem(i);
-            if (itemstack.getItem().hasCraftingRemainingItem()) {
-                items.set(i, new ItemStack(itemstack.getItem().getCraftingRemainingItem()));
-            } else if (itemstack.is(ModRegistry.MINIUM_STONE_ITEM.value())) {
-                itemstack = itemstack.copy();
+            ItemStack itemStack = craftingInput.getItem(i);
+            if (itemStack.is(ModRegistry.MINIUM_STONE_ITEM.value())) {
+                itemStack = itemStack.copy();
                 Player player = ((PlayerRecipeInput) craftingInput).miniumstone$getPlayer();
                 if (player instanceof ServerPlayer serverPlayer) {
-                    ItemHelper.hurtAndBreak(itemstack, 1, serverPlayer.serverLevel(), serverPlayer,
+                    ItemHelper.hurtAndBreak(itemStack, 1, serverPlayer.serverLevel(), serverPlayer,
                             Function.identity()::apply
                     );
                 } else {
-                    hurtAndBreak(itemstack, 1);
+                    hurtAndBreak(itemStack, 1);
                 }
-                items.set(i, itemstack.isEmpty() ? ItemStack.EMPTY : itemstack);
+                items.set(i, itemStack.isEmpty() ? ItemStack.EMPTY : itemStack);
                 break;
+            } else if (!itemStack.getItem().getCraftingRemainder().isEmpty()) {
+                items.set(i, itemStack.getItem().getCraftingRemainder());
             }
         }
         return items;

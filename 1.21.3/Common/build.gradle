@@ -5,7 +5,10 @@ dependencies {
     modApi libs.puzzleslib.common
 
     // Just Enough Items
-    api libs.jeiapi.common
+//    modCompileOnly libs.jeiapi.common
+
+    // Roughly Enough Items
+    modCompileOnly libs.reiapi.common
 }
 
 tasks.withType(net.fabricmc.loom.task.AbstractRemapJarTask).configureEach {

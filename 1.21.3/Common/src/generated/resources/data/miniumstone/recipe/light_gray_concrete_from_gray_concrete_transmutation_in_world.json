@@ -1,8 +1,6 @@
 {
   "type": "miniumstone:transmutation_in_world",
-  "ingredient": {
-    "item": "minecraft:gray_concrete"
-  },
+  "ingredient": "minecraft:gray_concrete",
   "result": {
     "count": 1,
     "id": "minecraft:light_gray_concrete"

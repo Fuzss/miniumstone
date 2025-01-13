@@ -1,8 +1,6 @@
 {
   "type": "miniumstone:transmutation_in_world",
-  "ingredient": {
-    "item": "minecraft:blue_terracotta"
-  },
+  "ingredient": "minecraft:blue_terracotta",
   "result": {
     "count": 1,
     "id": "minecraft:brown_terracotta"

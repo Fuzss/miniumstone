@@ -2,9 +2,7 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:lime_concrete"
-    }
+    "minecraft:lime_concrete"
   ],
   "result": {
     "count": 1,

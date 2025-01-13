@@ -1,8 +1,6 @@
 {
   "type": "miniumstone:transmutation_in_world",
-  "ingredient": {
-    "item": "minecraft:magenta_stained_glass_pane"
-  },
+  "ingredient": "minecraft:magenta_stained_glass_pane",
   "result": {
     "count": 1,
     "id": "minecraft:light_blue_stained_glass_pane"

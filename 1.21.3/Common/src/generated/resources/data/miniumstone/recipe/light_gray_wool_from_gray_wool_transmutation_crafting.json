@@ -2,9 +2,7 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:gray_wool"
-    }
+    "minecraft:gray_wool"
   ],
   "result": {
     "count": 1,

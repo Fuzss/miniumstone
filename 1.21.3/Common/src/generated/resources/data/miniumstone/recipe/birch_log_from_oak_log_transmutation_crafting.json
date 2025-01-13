@@ -2,9 +2,7 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:oak_log"
-    }
+    "minecraft:oak_log"
   ],
   "result": {
     "count": 1,

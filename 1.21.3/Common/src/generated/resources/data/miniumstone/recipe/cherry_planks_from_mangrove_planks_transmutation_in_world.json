@@ -1,8 +1,6 @@
 {
   "type": "miniumstone:transmutation_in_world",
-  "ingredient": {
-    "item": "minecraft:mangrove_planks"
-  },
+  "ingredient": "minecraft:mangrove_planks",
   "result": {
     "count": 1,
     "id": "minecraft:cherry_planks"

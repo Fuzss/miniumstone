@@ -1,8 +1,6 @@
 {
   "type": "miniumstone:transmutation_in_world",
-  "ingredient": {
-    "item": "minecraft:crimson_stem"
-  },
+  "ingredient": "minecraft:crimson_stem",
   "result": {
     "count": 1,
     "id": "minecraft:warped_stem"

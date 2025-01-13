@@ -1,8 +1,6 @@
 {
   "type": "miniumstone:transmutation_in_world",
-  "ingredient": {
-    "item": "minecraft:chiseled_sandstone"
-  },
+  "ingredient": "minecraft:chiseled_sandstone",
   "result": {
     "count": 1,
     "id": "minecraft:chiseled_red_sandstone"

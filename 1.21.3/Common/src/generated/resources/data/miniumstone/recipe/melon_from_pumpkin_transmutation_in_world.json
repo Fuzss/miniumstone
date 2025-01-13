@@ -1,8 +1,6 @@
 {
   "type": "miniumstone:transmutation_in_world",
-  "ingredient": {
-    "item": "minecraft:pumpkin"
-  },
+  "ingredient": "minecraft:pumpkin",
   "result": {
     "count": 1,
     "id": "minecraft:melon"

@@ -2,9 +2,7 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:crimson_stem"
-    }
+    "minecraft:crimson_stem"
   ],
   "result": {
     "count": 1,

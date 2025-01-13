@@ -1,8 +1,6 @@
 {
   "type": "miniumstone:transmutation_in_world",
-  "ingredient": {
-    "item": "minecraft:white_tulip"
-  },
+  "ingredient": "minecraft:white_tulip",
   "result": {
     "count": 1,
     "id": "minecraft:pink_tulip"

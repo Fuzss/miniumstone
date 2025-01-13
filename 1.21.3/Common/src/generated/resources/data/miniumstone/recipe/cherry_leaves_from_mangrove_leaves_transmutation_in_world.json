@@ -1,8 +1,6 @@
 {
   "type": "miniumstone:transmutation_in_world",
-  "ingredient": {
-    "item": "minecraft:mangrove_leaves"
-  },
+  "ingredient": "minecraft:mangrove_leaves",
   "result": {
     "count": 1,
     "id": "minecraft:cherry_leaves"

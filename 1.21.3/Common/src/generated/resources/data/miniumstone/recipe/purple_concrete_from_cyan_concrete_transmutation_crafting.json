@@ -2,9 +2,7 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:cyan_concrete"
-    }
+    "minecraft:cyan_concrete"
   ],
   "result": {
     "count": 1,

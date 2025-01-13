@@ -2,9 +2,7 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:allium"
-    }
+    "minecraft:allium"
   ],
   "result": {
     "count": 1,

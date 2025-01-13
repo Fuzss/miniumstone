@@ -3,8 +3,8 @@ package fuzs.miniumstone.data.client;
 import fuzs.miniumstone.MiniumStone;
 import fuzs.miniumstone.client.handler.MiniumStoneKeyHandler;
 import fuzs.miniumstone.init.ModRegistry;
-import fuzs.miniumstone.integration.jei.TransmutationInWorldRecipeCategory;
 import fuzs.miniumstone.world.item.MiniumStoneItem;
+import fuzs.miniumstone.world.item.crafting.TransmutationInWorldRecipe;
 import fuzs.puzzleslib.api.client.data.v2.AbstractLanguageProvider;
 import fuzs.puzzleslib.api.data.v2.core.DataProviderContext;
 
@@ -34,6 +34,6 @@ public class ModLanguageProvider extends AbstractLanguageProvider {
         builder.add(ModRegistry.ITEM_MINIUM_STONE_CHARGE_SOUND_EVENT.value(), "Minium Stone charges");
         builder.add(ModRegistry.ITEM_MINIUM_STONE_UNCHARGE_SOUND_EVENT.value(), "Minium Stone uncharges");
         builder.add(ModRegistry.ITEM_MINIUM_STONE_TRANSMUTE_SOUND_EVENT.value(), "Minium Stone transmutes");
-        builder.add(TransmutationInWorldRecipeCategory.RECIPE_TYPE_COMPONENT, "Block Transmutation");
+        builder.add(TransmutationInWorldRecipe.TRANSMUTATION_IN_WORLD_COMPONENT, "Block Transmutation");
     }
 }

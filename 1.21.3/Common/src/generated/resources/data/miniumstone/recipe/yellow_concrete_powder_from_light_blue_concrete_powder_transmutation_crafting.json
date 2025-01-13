@@ -2,9 +2,7 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:light_blue_concrete_powder"
-    }
+    "minecraft:light_blue_concrete_powder"
   ],
   "result": {
     "count": 1,

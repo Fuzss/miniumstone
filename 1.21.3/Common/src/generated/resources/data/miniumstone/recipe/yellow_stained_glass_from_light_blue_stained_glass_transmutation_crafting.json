@@ -2,9 +2,7 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:light_blue_stained_glass"
-    }
+    "minecraft:light_blue_stained_glass"
   ],
   "result": {
     "count": 1,

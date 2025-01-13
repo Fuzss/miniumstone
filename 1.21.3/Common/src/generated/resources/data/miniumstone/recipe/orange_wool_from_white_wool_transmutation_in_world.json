@@ -1,8 +1,6 @@
 {
   "type": "miniumstone:transmutation_in_world",
-  "ingredient": {
-    "item": "minecraft:white_wool"
-  },
+  "ingredient": "minecraft:white_wool",
   "result": {
     "count": 1,
     "id": "minecraft:orange_wool"

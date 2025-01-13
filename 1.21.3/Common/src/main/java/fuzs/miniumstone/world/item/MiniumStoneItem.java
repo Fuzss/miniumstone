@@ -2,6 +2,7 @@ package fuzs.miniumstone.world.item;
 
 import fuzs.miniumstone.init.ModRegistry;
 import fuzs.puzzleslib.api.core.v1.Proxy;
+import fuzs.puzzleslib.api.util.v1.InteractionResultHelper;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -12,7 +13,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -31,21 +31,29 @@ public class MiniumStoneItem extends Item {
     }
 
     @Override
-    public InteractionResult useOn(UseOnContext context) {
-        return InteractionResult.sidedSuccess(context.getLevel().isClientSide);
+    public ItemStack getCraftingRemainder() {
+        // cannot set this in item properties, as item instance has not been constructed
+        // we also do not necessarily need this, as our recipes handle the minium stone item separately,
+        // but a bug remains where the recipe book will forget the minium stone item is still there
+        // after every crafting operation, until the inventory is updated (by clicking any slot)
+        return new ItemStack(this);
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
+    public InteractionResult useOn(UseOnContext context) {
+        return InteractionResultHelper.sidedSuccess(context.getLevel().isClientSide);
+    }
+
+    @Override
+    public InteractionResult use(Level level, Player player, InteractionHand usedHand) {
         if (player.isSecondaryUseActive()) {
             ItemStack itemInHand = player.getItemInHand(usedHand);
             if (!level.isClientSide) {
                 cycleSelectionMode(itemInHand);
                 player.displayClientMessage(Component.translatable(this.getDescriptionId() + ".changedSelection",
-                        getSelectionMode(itemInHand).getComponent()
-                ), true);
+                        getSelectionMode(itemInHand).getComponent()), true);
             }
-            return InteractionResultHolder.sidedSuccess(itemInHand, level.isClientSide);
+            return InteractionResultHelper.sidedSuccess(itemInHand, level.isClientSide);
         } else {
             return super.use(level, player, usedHand);
         }
@@ -60,23 +68,22 @@ public class MiniumStoneItem extends Item {
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         if (context != TooltipContext.EMPTY) {
             tooltipComponents.add(Component.translatable(this.getDescriptionId() + ".selection",
-                    getSelectionMode(stack).getComponent()
-            ).withStyle(ChatFormatting.GRAY));
+                    getSelectionMode(stack).getComponent()).withStyle(ChatFormatting.GRAY));
             if (!Proxy.INSTANCE.hasShiftDown()) {
                 tooltipComponents.add(Component.translatable(this.getDescriptionId() + ".more",
-                        Component.translatable(this.getDescriptionId() + ".shift").withStyle(ChatFormatting.YELLOW)
-                ).withStyle(ChatFormatting.GRAY));
+                                Component.translatable(this.getDescriptionId() + ".shift").withStyle(ChatFormatting.YELLOW))
+                        .withStyle(ChatFormatting.GRAY));
             } else {
                 Component sneak = Component.keybind("key.sneak").withStyle(ChatFormatting.LIGHT_PURPLE);
                 Component use = Component.keybind("key.use").withStyle(ChatFormatting.LIGHT_PURPLE);
                 tooltipComponents.add(Component.translatable(this.getDescriptionId() + ".changeSelection", sneak, use)
                         .withStyle(ChatFormatting.GRAY));
-                Component chargeMiniumStone = Component.keybind("key.charge_minium_stone").withStyle(
-                        ChatFormatting.LIGHT_PURPLE);
+                Component chargeMiniumStone = Component.keybind("key.charge_minium_stone")
+                        .withStyle(ChatFormatting.LIGHT_PURPLE);
                 tooltipComponents.add(Component.translatable(this.getDescriptionId() + ".charge", chargeMiniumStone)
                         .withStyle(ChatFormatting.GRAY));
-                Component openCraftingGrid = Component.keybind("key.open_crafting_grid").withStyle(
-                        ChatFormatting.LIGHT_PURPLE);
+                Component openCraftingGrid = Component.keybind("key.open_crafting_grid")
+                        .withStyle(ChatFormatting.LIGHT_PURPLE);
                 tooltipComponents.add(Component.translatable(this.getDescriptionId() + ".crafting", openCraftingGrid)
                         .withStyle(ChatFormatting.GRAY));
             }
@@ -125,9 +132,9 @@ public class MiniumStoneItem extends Item {
         public static final StreamCodec<ByteBuf, SelectionMode> STREAM_CODEC = fromEnum(SelectionMode.class);
 
         static <E extends Enum<E>> StreamCodec<ByteBuf, E> fromEnum(Class<E> clazz) {
-            IntFunction<E> idMapper = ByIdMap.continuous(E::ordinal, clazz.getEnumConstants(),
-                    ByIdMap.OutOfBoundsStrategy.ZERO
-            );
+            IntFunction<E> idMapper = ByIdMap.continuous(E::ordinal,
+                    clazz.getEnumConstants(),
+                    ByIdMap.OutOfBoundsStrategy.ZERO);
             return ByteBufCodecs.idMapper(idMapper, E::ordinal);
         }
 

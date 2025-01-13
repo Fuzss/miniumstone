@@ -2,9 +2,7 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:dark_oak_leaves"
-    }
+    "minecraft:dark_oak_leaves"
   ],
   "result": {
     "count": 1,

@@ -1,8 +1,6 @@
 {
   "type": "miniumstone:transmutation_in_world",
-  "ingredient": {
-    "item": "minecraft:magenta_carpet"
-  },
+  "ingredient": "minecraft:magenta_carpet",
   "result": {
     "count": 1,
     "id": "minecraft:light_blue_carpet"

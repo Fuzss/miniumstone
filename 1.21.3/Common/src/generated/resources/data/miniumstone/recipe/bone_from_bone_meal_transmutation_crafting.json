@@ -2,15 +2,9 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:bone_meal"
-    },
-    {
-      "item": "minecraft:bone_meal"
-    },
-    {
-      "item": "minecraft:bone_meal"
-    }
+    "minecraft:bone_meal",
+    "minecraft:bone_meal",
+    "minecraft:bone_meal"
   ],
   "result": {
     "count": 1,

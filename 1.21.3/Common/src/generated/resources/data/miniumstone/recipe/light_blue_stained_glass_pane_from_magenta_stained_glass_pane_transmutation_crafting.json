@@ -2,9 +2,7 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:magenta_stained_glass_pane"
-    }
+    "minecraft:magenta_stained_glass_pane"
   ],
   "result": {
     "count": 1,

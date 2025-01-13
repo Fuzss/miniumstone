@@ -2,9 +2,7 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:acacia_log"
-    }
+    "minecraft:acacia_log"
   ],
   "result": {
     "count": 1,

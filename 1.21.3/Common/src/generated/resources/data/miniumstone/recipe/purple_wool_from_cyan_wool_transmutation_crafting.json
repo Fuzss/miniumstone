@@ -2,9 +2,7 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:cyan_wool"
-    }
+    "minecraft:cyan_wool"
   ],
   "result": {
     "count": 1,

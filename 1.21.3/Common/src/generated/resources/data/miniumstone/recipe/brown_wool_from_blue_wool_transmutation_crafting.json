@@ -2,9 +2,7 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:blue_wool"
-    }
+    "minecraft:blue_wool"
   ],
   "result": {
     "count": 1,

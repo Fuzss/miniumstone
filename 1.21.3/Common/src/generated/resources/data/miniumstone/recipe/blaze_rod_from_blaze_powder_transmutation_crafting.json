@@ -2,12 +2,8 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:blaze_powder"
-    },
-    {
-      "item": "minecraft:blaze_powder"
-    }
+    "minecraft:blaze_powder",
+    "minecraft:blaze_powder"
   ],
   "result": {
     "count": 1,

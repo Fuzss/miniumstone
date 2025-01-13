@@ -1,8 +1,6 @@
 {
   "type": "miniumstone:transmutation_in_world",
-  "ingredient": {
-    "item": "minecraft:oak_log"
-  },
+  "ingredient": "minecraft:oak_log",
   "result": {
     "count": 1,
     "id": "minecraft:birch_log"

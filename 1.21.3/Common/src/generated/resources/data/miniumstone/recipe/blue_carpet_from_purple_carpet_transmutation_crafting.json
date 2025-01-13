@@ -2,9 +2,7 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:purple_carpet"
-    }
+    "minecraft:purple_carpet"
   ],
   "result": {
     "count": 1,

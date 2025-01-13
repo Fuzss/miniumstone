@@ -1,8 +1,6 @@
 {
   "type": "miniumstone:transmutation_in_world",
-  "ingredient": {
-    "item": "minecraft:poppy"
-  },
+  "ingredient": "minecraft:poppy",
   "result": {
     "count": 1,
     "id": "minecraft:dandelion"

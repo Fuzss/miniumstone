@@ -2,9 +2,7 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:cyan_carpet"
-    }
+    "minecraft:cyan_carpet"
   ],
   "result": {
     "count": 1,

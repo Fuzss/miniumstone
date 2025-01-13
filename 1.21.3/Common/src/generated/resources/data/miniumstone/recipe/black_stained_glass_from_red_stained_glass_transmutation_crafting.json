@@ -2,9 +2,7 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:red_stained_glass"
-    }
+    "minecraft:red_stained_glass"
   ],
   "result": {
     "count": 1,

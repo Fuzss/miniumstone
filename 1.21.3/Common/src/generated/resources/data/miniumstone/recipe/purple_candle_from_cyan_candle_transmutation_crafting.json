@@ -2,9 +2,7 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:cyan_candle"
-    }
+    "minecraft:cyan_candle"
   ],
   "result": {
     "count": 1,

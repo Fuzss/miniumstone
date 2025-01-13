@@ -30,6 +30,12 @@
     ],
     "jei_mod_plugin": [
       "${modGroup}.integration.jei.MiniumStoneJeiPlugin"
+    ],
+    "rei_common": [
+      "${modGroup}.integration.rei.MiniumStoneReiPlugin"
+    ],
+    "rei_client": [
+      "${modGroup}.integration.rei.MiniumStoneReiClientPlugin"
     ]
   },
 
@@ -47,6 +53,7 @@
   },
 
   "recommends": {
-    "jei": "*"
+    "jei": "*",
+    "rei": "*"
   }
 }

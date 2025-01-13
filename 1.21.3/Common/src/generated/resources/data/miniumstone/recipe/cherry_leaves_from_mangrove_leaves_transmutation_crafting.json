@@ -2,9 +2,7 @@
   "type": "miniumstone:transmutation_crafting",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:mangrove_leaves"
-    }
+    "minecraft:mangrove_leaves"
   ],
   "result": {
     "count": 1,
