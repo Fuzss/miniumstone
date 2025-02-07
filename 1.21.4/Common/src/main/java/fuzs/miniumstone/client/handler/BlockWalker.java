@@ -29,10 +29,26 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class BlockWalker {
-    private static final List<BlockPos> NEIGHBOR_POSITIONS_CUBE = BlockPos.betweenClosedStream(-1, -1, -1, 1, 1, 1).filter(Predicate.not(BlockPos.ZERO::equals)).map(BlockPos::immutable).toList();
-    private static final Function<Direction, List<BlockPos>> NEIGHBOR_POSITIONS_FLAT = Util.memoize(direction -> BlockPos.betweenClosedStream(-1, -1, -1, 1, 1, 1).filter(t -> !t.equals(BlockPos.ZERO) && direction.getAxis().choose(t.getX(), t.getY(), t.getZ()) == 0).map(BlockPos::immutable).toList());
-    private static final Function<Direction, List<BlockPos>> NEIGHBOR_POSITIONS_LINE = Util.memoize(direction -> List.of(BlockPos.ZERO.relative(direction.getOpposite())));
-    private static final List<BlockPos> NEIGHBOR_POSITIONS_BUSH = BlockPos.betweenClosedStream(-2, -1, -2, 2, 1, 2).filter(t -> !BlockPos.ZERO.equals(t) && (t.getY() == 0 || t.distManhattan(BlockPos.ZERO) == 1)).map(BlockPos::immutable).toList();
+    private static final List<BlockPos> NEIGHBOR_POSITIONS_CUBE = BlockPos.betweenClosedStream(-1, -1, -1, 1, 1, 1)
+            .filter(Predicate.not(BlockPos.ZERO::equals))
+            .map(BlockPos::immutable)
+            .toList();
+    private static final Function<Direction, List<BlockPos>> NEIGHBOR_POSITIONS_FLAT = Util.memoize(direction -> BlockPos.betweenClosedStream(
+                    -1,
+                    -1,
+                    -1,
+                    1,
+                    1,
+                    1)
+            .filter(t -> !t.equals(BlockPos.ZERO) && direction.getAxis().choose(t.getX(), t.getY(), t.getZ()) == 0)
+            .map(BlockPos::immutable)
+            .toList());
+    private static final Function<Direction, List<BlockPos>> NEIGHBOR_POSITIONS_LINE = Util.memoize(direction -> List.of(
+            BlockPos.ZERO.relative(direction.getOpposite())));
+    private static final List<BlockPos> NEIGHBOR_POSITIONS_BUSH = BlockPos.betweenClosedStream(-2, -1, -2, 2, 1, 2)
+            .filter(t -> !BlockPos.ZERO.equals(t) && (t.getY() == 0 || t.distManhattan(BlockPos.ZERO) == 1))
+            .map(BlockPos::immutable)
+            .toList();
 
     public static SelectableRecipe.SingleInputSet<TransmutationInWorldRecipe> transmutationInWorldRecipes = SelectableRecipe.SingleInputSet.empty();
 
@@ -58,22 +74,30 @@ public class BlockWalker {
         this.blockPos = blockPos;
         this.blockDirection = blockDirection;
         this.blockState = blockState;
-        this.neighborPositions = blockState.getBlock() instanceof BushBlock ? NEIGHBOR_POSITIONS_BUSH : switch (selectionMode) {
-            case CUBE -> NEIGHBOR_POSITIONS_CUBE;
-            case FLAT -> NEIGHBOR_POSITIONS_FLAT.apply(blockDirection);
-            case LINE -> NEIGHBOR_POSITIONS_LINE.apply(blockDirection);
-        };
+        this.neighborPositions =
+                blockState.getBlock() instanceof BushBlock ? NEIGHBOR_POSITIONS_BUSH : switch (selectionMode) {
+                    case CUBE -> NEIGHBOR_POSITIONS_CUBE;
+                    case FLAT -> NEIGHBOR_POSITIONS_FLAT.apply(blockDirection);
+                    case LINE -> NEIGHBOR_POSITIONS_LINE.apply(blockDirection);
+                };
     }
 
     public static BlockWalker fromHitResult(int maxDepth, MiniumStoneItem.SelectionMode selectionMode, BlockHitResult hitResult, BlockGetter blockGetter) {
-        return new BlockWalker(maxDepth, selectionMode, hitResult.getBlockPos(), hitResult.getDirection(), blockGetter.getBlockState(hitResult.getBlockPos()));
+        return new BlockWalker(maxDepth,
+                selectionMode,
+                hitResult.getBlockPos(),
+                hitResult.getDirection(),
+                blockGetter.getBlockState(hitResult.getBlockPos()));
     }
 
     public boolean stillValid(int maxDepth, @Nullable MiniumStoneItem.SelectionMode selectionMode, @Nullable HitResult hitResult, @Nullable BlockGetter blockGetter) {
-        if ((maxDepth == -1 || maxDepth == this.maxDepth) && (selectionMode == null || selectionMode == this.selectionMode)) {
+        if ((maxDepth == -1 || maxDepth == this.maxDepth) &&
+                (selectionMode == null || selectionMode == this.selectionMode)) {
             if (hitResult != null && hitResult.getType() == HitResult.Type.BLOCK && blockGetter != null) {
                 BlockHitResult blockHitResult = (BlockHitResult) hitResult;
-                return this.blockPos.equals(blockHitResult.getBlockPos()) && this.blockDirection.equals(blockHitResult.getDirection()) && this.blockState.equals(blockGetter.getBlockState(blockHitResult.getBlockPos()));
+                return this.blockPos.equals(blockHitResult.getBlockPos()) &&
+                        this.blockDirection.equals(blockHitResult.getDirection()) &&
+                        this.blockState.equals(blockGetter.getBlockState(blockHitResult.getBlockPos()));
             }
         }
         return false;
@@ -129,28 +153,41 @@ public class BlockWalker {
                 .mapMulti(Optional<RecipeHolder<TransmutationInWorldRecipe>>::ifPresent)
                 .toList();
 
-        recipes.stream().filter(recipe -> recipe.value().getBlockIngredient() == this.blockState.getBlock()).findFirst().ifPresent(recipe -> {
-            this.recipe = recipe;
-            result.set(true);
-        });
-        recipes.stream().filter(recipe -> recipe.value().isReversible() && recipe.value().getBlockResult() == this.blockState.getBlock()).findFirst().ifPresent(recipe -> {
-            this.reversedRecipe = recipe;
-            result.set(true);
-        });
+        recipes.stream()
+                .filter(recipe -> recipe.value().getBlockIngredient() == this.blockState.getBlock())
+                .findFirst()
+                .ifPresent(recipe -> {
+                    this.recipe = recipe;
+                    result.set(true);
+                });
+        recipes.stream()
+                .filter(recipe -> recipe.value().isReversible() &&
+                        recipe.value().getBlockResult() == this.blockState.getBlock())
+                .findFirst()
+                .ifPresent(recipe -> {
+                    this.reversedRecipe = recipe;
+                    result.set(true);
+                });
         return result.get();
     }
 
     private List<BlockPos> findBlocks(BlockGetter blockGetter) {
 
         List<BlockPos> blocks = new ArrayList<>();
-        BlockPos.breadthFirstTraversal(this.blockPos, this.maxDepth, 1024, (BlockPos pos, Consumer<BlockPos> blockPosConsumer) -> {
-            for (BlockPos side : this.neighborPositions) {
-                blockPosConsumer.accept(pos.offset(side));
-            }
-        }, (BlockPos pos) -> {
-            if (this.isSame(blockGetter, pos)) blocks.add(pos);
-            return true;
-        });
+        BlockPos.breadthFirstTraversal(this.blockPos,
+                this.maxDepth,
+                1024,
+                (BlockPos pos, Consumer<BlockPos> blockPosConsumer) -> {
+                    for (BlockPos side : this.neighborPositions) {
+                        blockPosConsumer.accept(pos.offset(side));
+                    }
+                },
+                (BlockPos pos) -> {
+                    if (this.isSame(blockGetter, pos)) {
+                        blocks.add(pos);
+                    }
+                    return BlockPos.TraversalNodeStatus.ACCEPT;
+                });
 
         return blocks;
     }
@@ -165,7 +202,8 @@ public class BlockWalker {
 
     @Nullable
     public Block getResult(boolean reverse) {
-        return reverse && this.reversedRecipe != null ? this.reversedRecipe.value().getBlockIngredient() : !reverse && this.recipe != null ? this.recipe.value().getBlockResult() : null;
+        return reverse && this.reversedRecipe != null ? this.reversedRecipe.value().getBlockIngredient() :
+                !reverse && this.recipe != null ? this.recipe.value().getBlockResult() : null;
     }
 
     @Nullable

@@ -7,7 +7,7 @@ import fuzs.miniumstone.client.handler.TransmutationResultGuiHandler;
 import fuzs.miniumstone.init.ModRegistry;
 import fuzs.miniumstone.world.item.MiniumStoneItem;
 import fuzs.puzzleslib.api.client.core.v1.ClientModConstructor;
-import fuzs.puzzleslib.api.client.core.v1.context.ItemDecorationContext;
+import fuzs.puzzleslib.api.client.core.v1.context.ItemDecorationsContext;
 import fuzs.puzzleslib.api.client.core.v1.context.KeyMappingsContext;
 import fuzs.puzzleslib.api.client.event.v1.ClientTickEvents;
 import fuzs.puzzleslib.api.client.event.v1.gui.RenderGuiEvents;
@@ -44,7 +44,7 @@ public class MiniumStoneClient implements ClientModConstructor {
     }
 
     @Override
-    public void onRegisterItemDecorations(ItemDecorationContext context) {
+    public void onRegisterItemDecorations(ItemDecorationsContext context) {
         context.registerItemDecorator((GuiGraphics guiGraphics, Font font, ItemStack stack, int itemPosX, int itemPosY) -> {
             int charge = MiniumStoneItem.getCharge(stack) + 1;
             int startX = itemPosX + 2;

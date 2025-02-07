@@ -1,5 +1,7 @@
 package fuzs.miniumstone.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.sugar.Local;
 import fuzs.miniumstone.init.ModRegistry;
 import net.minecraft.core.Holder;
 import net.minecraft.recipebook.ServerPlaceRecipe;
@@ -32,14 +34,13 @@ abstract class ServerPlaceRecipeMixin {
         return itemStack.is(ModRegistry.RECIPES_DO_NOT_CONSUME_ITEM_TAG) ? ItemStack.EMPTY : itemStack;
     }
 
-    @Inject(
-            method = "lambda$placeRecipe$0(Lnet/minecraft/core/Holder;)I", at = @At("HEAD"), cancellable = true
+    @ModifyExpressionValue(
+            method = "clampToMaxStackSize",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/Item;getDefaultMaxStackSize()I")
     )
-    private static void lambda$placeRecipe$0(Holder<Item> holder, CallbackInfoReturnable<Integer> callback) {
+    private static int clampToMaxStackSize(int maxStackSize, @Local Holder<Item> holder) {
         // finds the max stack size for all items part of the recipe, since our item is reused it should not be limited by max stack size
-        if (holder.is(ModRegistry.RECIPES_DO_NOT_CONSUME_ITEM_TAG)) {
-            callback.setReturnValue(Integer.MAX_VALUE);
-        }
+        return holder.is(ModRegistry.RECIPES_DO_NOT_CONSUME_ITEM_TAG) ? Integer.MAX_VALUE : maxStackSize;
     }
 
     @ModifyVariable(method = "calculateAmountToCraft", at = @At("STORE"), ordinal = 0)

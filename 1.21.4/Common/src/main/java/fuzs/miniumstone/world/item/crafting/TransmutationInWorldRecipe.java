@@ -5,7 +5,8 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fuzs.miniumstone.init.ModRegistry;
 import fuzs.miniumstone.world.item.crafting.display.BlockSlotDisplay;
-import fuzs.puzzleslib.api.data.v2.AbstractRegistriesDatapackGenerator;
+import fuzs.puzzleslib.api.init.v3.registry.ResourceKeyHelper;
+import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -23,8 +24,7 @@ import java.util.List;
 import java.util.function.Function;
 
 public final class TransmutationInWorldRecipe extends SingleItemRecipe {
-    public static final Component TRANSMUTATION_IN_WORLD_COMPONENT = AbstractRegistriesDatapackGenerator.getComponent(
-            ModRegistry.TRANSMUTATION_IN_WORLD_RECIPE_TYPE.key());
+    public static final Component TRANSMUTATION_IN_WORLD_COMPONENT = ResourceKeyHelper.getComponent(ModRegistry.TRANSMUTATION_IN_WORLD_RECIPE_TYPE.key());
 
     private final boolean reversible;
 
@@ -87,7 +87,7 @@ public final class TransmutationInWorldRecipe extends SingleItemRecipe {
     }
 
     public Block getBlockIngredient() {
-        return ((BlockItem) this.input().items().getFirst().value()).getBlock();
+        return ((BlockItem) this.input().items().findFirst().map(Holder::value).orElseThrow()).getBlock();
     }
 
     public Block getBlockResult() {

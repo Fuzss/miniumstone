@@ -16,8 +16,8 @@ public class ModItemTagProvider extends AbstractTagProvider<Item> {
 
     @Override
     public void addTags(HolderLookup.Provider registries) {
-        this.add(ItemTags.DURABILITY_ENCHANTABLE).add(ModRegistry.MINIUM_STONE_ITEM);
-        this.add(ModRegistry.RECIPES_IGNORE_COMPONENTS_ITEM_TAG).add(ModRegistry.MINIUM_STONE_ITEM);
-        this.add(ModRegistry.RECIPES_DO_NOT_CONSUME_ITEM_TAG).add(ModRegistry.MINIUM_STONE_ITEM);
+        this.tag(ItemTags.DURABILITY_ENCHANTABLE).add(ModRegistry.MINIUM_STONE_ITEM);
+        this.tag(ModRegistry.RECIPES_IGNORE_COMPONENTS_ITEM_TAG).add(ModRegistry.MINIUM_STONE_ITEM);
+        this.tag(ModRegistry.RECIPES_DO_NOT_CONSUME_ITEM_TAG).add(ModRegistry.MINIUM_STONE_ITEM);
     }
 }
