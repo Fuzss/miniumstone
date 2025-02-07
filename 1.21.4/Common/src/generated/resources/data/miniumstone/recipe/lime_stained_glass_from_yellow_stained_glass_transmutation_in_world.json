@@ -1,0 +1,9 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": "minecraft:yellow_stained_glass",
+  "result": {
+    "count": 1,
+    "id": "minecraft:lime_stained_glass"
+  },
+  "reversible": true
+}

@@ -1,0 +1,11 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:green_stained_glass"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:red_stained_glass"
+  }
+}

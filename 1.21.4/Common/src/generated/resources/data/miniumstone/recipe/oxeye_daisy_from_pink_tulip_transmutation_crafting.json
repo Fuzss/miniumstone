@@ -1,0 +1,11 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:pink_tulip"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:oxeye_daisy"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:red_carpet"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:black_carpet"
+  }
+}

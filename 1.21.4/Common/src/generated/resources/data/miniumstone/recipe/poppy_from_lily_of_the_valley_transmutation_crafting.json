@@ -1,0 +1,11 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:lily_of_the_valley"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:poppy"
+  }
+}

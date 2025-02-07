@@ -1,0 +1,11 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:orange_tulip"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:white_tulip"
+  }
+}

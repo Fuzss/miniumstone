@@ -1,0 +1,9 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": "minecraft:brown_concrete",
+  "result": {
+    "count": 1,
+    "id": "minecraft:green_concrete"
+  },
+  "reversible": true
+}

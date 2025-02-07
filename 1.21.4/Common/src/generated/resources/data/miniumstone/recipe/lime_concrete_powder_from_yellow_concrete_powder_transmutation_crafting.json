@@ -1,0 +1,11 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:yellow_concrete_powder"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:lime_concrete_powder"
+  }
+}

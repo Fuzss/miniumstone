@@ -1,0 +1,11 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:dark_oak_leaves"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:mangrove_leaves"
+  }
+}

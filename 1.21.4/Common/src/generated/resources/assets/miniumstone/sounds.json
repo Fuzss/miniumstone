@@ -1,0 +1,29 @@
+{
+  "item.miniumstone.charge": {
+    "sounds": [
+      {
+        "name": "miniumstone:item/miniumstone/charge",
+        "volume": 0.5
+      }
+    ],
+    "subtitle": "subtitles.item.miniumstone.charge"
+  },
+  "item.miniumstone.transmute": {
+    "sounds": [
+      {
+        "name": "miniumstone:item/miniumstone/transmute",
+        "volume": 0.5
+      }
+    ],
+    "subtitle": "subtitles.item.miniumstone.transmute"
+  },
+  "item.miniumstone.uncharge": {
+    "sounds": [
+      {
+        "name": "miniumstone:item/miniumstone/uncharge",
+        "volume": 0.5
+      }
+    ],
+    "subtitle": "subtitles.item.miniumstone.uncharge"
+  }
+}

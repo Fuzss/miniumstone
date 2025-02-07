@@ -1,0 +1,9 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": "minecraft:red_wool",
+  "result": {
+    "count": 1,
+    "id": "minecraft:black_wool"
+  },
+  "reversible": true
+}

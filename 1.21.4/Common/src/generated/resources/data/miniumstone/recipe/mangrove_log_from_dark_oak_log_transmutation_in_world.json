@@ -1,0 +1,9 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": "minecraft:dark_oak_log",
+  "result": {
+    "count": 1,
+    "id": "minecraft:mangrove_log"
+  },
+  "reversible": true
+}

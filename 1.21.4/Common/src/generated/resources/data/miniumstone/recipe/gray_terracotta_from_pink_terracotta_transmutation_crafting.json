@@ -1,0 +1,11 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:pink_terracotta"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:gray_terracotta"
+  }
+}
