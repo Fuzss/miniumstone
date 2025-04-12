@@ -1,0 +1,11 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:oxeye_daisy"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:cornflower"
+  }
+}

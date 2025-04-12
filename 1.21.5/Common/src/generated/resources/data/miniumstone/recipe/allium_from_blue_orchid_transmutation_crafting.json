@@ -1,0 +1,11 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:blue_orchid"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:allium"
+  }
+}

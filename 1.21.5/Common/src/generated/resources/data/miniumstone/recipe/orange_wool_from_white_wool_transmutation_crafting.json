@@ -1,0 +1,11 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:white_wool"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:orange_wool"
+  }
+}

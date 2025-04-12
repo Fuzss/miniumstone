@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "miniumstone:lime_candle_from_yellow_candle_transmutation_crafting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_yellow_candle": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:yellow_candle"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_yellow_candle"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "miniumstone:lime_candle_from_yellow_candle_transmutation_crafting"
+    ]
+  }
+}

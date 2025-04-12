@@ -1,0 +1,9 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": "minecraft:birch_log",
+  "result": {
+    "count": 1,
+    "id": "minecraft:spruce_log"
+  },
+  "reversible": true
+}

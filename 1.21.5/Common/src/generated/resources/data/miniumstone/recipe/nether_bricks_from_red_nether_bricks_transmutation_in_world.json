@@ -1,0 +1,9 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": "minecraft:red_nether_bricks",
+  "result": {
+    "count": 1,
+    "id": "minecraft:nether_bricks"
+  },
+  "reversible": true
+}

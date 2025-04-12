@@ -1,0 +1,11 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:light_gray_wool"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:cyan_wool"
+  }
+}

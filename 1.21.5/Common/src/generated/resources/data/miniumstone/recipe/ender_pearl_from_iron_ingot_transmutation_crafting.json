@@ -1,0 +1,14 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:iron_ingot",
+    "minecraft:iron_ingot",
+    "minecraft:iron_ingot",
+    "minecraft:iron_ingot"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:ender_pearl"
+  }
+}

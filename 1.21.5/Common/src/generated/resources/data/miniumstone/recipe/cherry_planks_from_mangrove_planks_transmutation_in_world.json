@@ -1,0 +1,9 @@
+{
+  "type": "miniumstone:transmutation_in_world",
+  "ingredient": "minecraft:mangrove_planks",
+  "result": {
+    "count": 1,
+    "id": "minecraft:cherry_planks"
+  },
+  "reversible": true
+}

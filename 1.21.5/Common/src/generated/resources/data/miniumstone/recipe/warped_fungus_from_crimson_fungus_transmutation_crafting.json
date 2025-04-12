@@ -1,0 +1,11 @@
+{
+  "type": "miniumstone:transmutation_crafting",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:crimson_fungus"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:warped_fungus"
+  }
+}
