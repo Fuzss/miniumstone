@@ -1,11 +1,12 @@
 package fuzs.miniumstone.util;
 
-import fuzs.miniumstone.MiniumStone;
 import fuzs.miniumstone.init.ModRegistry;
 import fuzs.miniumstone.network.ClientboundTransmutationParticleMessage;
 import fuzs.miniumstone.world.item.MiniumStoneItem;
 import fuzs.miniumstone.world.item.crafting.PlayerRecipeInput;
 import fuzs.puzzleslib.api.item.v2.ItemHelper;
+import fuzs.puzzleslib.api.network.v4.MessageSender;
+import fuzs.puzzleslib.api.network.v4.PlayerSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.server.level.ServerLevel;
@@ -41,22 +42,21 @@ public class MiniumStoneHelper {
     public static void transmuteBlocks(BlockPos blockPosition, List<BlockPos> blocks, Level level, Block ingredient, Block result, ItemStack itemInHand) {
         int miniumStoneCharge = MiniumStoneItem.getCharge(itemInHand) * 3;
         boolean transformedAny = false;
-        for (BlockPos pos : blocks) {
-            if (blockPosition.distManhattan(pos) <= miniumStoneCharge) {
-                BlockState oldState = level.getBlockState(pos);
+        for (BlockPos blockPos : blocks) {
+            if (blockPosition.distManhattan(blockPos) <= miniumStoneCharge) {
+                BlockState oldState = level.getBlockState(blockPos);
                 if (oldState.is(ingredient)) {
                     BlockState newState = result.defaultBlockState();
                     newState = copyBlockStateValues(oldState, newState);
-                    level.setBlockAndUpdate(pos, newState);
+                    level.setBlockAndUpdate(blockPos, newState);
                     transformedAny = true;
-                    if (!level.isClientSide) {
-                        pos = pos.above();
-                        if (level.getBlockState(pos).isAir()) {
+                    if (level instanceof ServerLevel serverLevel) {
+                        blockPos = blockPos.above();
+                        if (serverLevel.getBlockState(blockPos).isAir()) {
                             for (int i = 0; i < 2; i++) {
-                                if (level.random.nextBoolean()) {
-                                    MiniumStone.NETWORK.sendToAllNear(pos, (ServerLevel) level,
-                                            new ClientboundTransmutationParticleMessage(pos, i == 0)
-                                    );
+                                if (serverLevel.random.nextBoolean()) {
+                                    MessageSender.broadcast(PlayerSet.nearPosition(blockPos, serverLevel),
+                                            new ClientboundTransmutationParticleMessage(blockPos, i == 0));
                                 }
                             }
                         }
@@ -65,9 +65,12 @@ public class MiniumStoneHelper {
             }
         }
         if (transformedAny) {
-            level.playSound(null, blockPosition, ModRegistry.ITEM_MINIUM_STONE_TRANSMUTE_SOUND_EVENT.value(),
-                    SoundSource.BLOCKS, 1.0F, 1.0F
-            );
+            level.playSound(null,
+                    blockPosition,
+                    ModRegistry.ITEM_MINIUM_STONE_TRANSMUTE_SOUND_EVENT.value(),
+                    SoundSource.BLOCKS,
+                    1.0F,
+                    1.0F);
         }
     }
 
@@ -87,9 +90,11 @@ public class MiniumStoneHelper {
                 itemStack = itemStack.copy();
                 Player player = ((PlayerRecipeInput) craftingInput).miniumstone$getPlayer();
                 if (player instanceof ServerPlayer serverPlayer) {
-                    ItemHelper.hurtAndBreak(itemStack, 1, serverPlayer.serverLevel(), serverPlayer,
-                            Function.identity()::apply
-                    );
+                    ItemHelper.hurtAndBreak(itemStack,
+                            1,
+                            serverPlayer.serverLevel(),
+                            serverPlayer,
+                            Function.identity()::apply);
                 } else {
                     hurtAndBreak(itemStack, 1);
                 }

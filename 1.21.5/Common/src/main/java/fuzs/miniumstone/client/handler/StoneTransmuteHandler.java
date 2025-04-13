@@ -1,11 +1,11 @@
 package fuzs.miniumstone.client.handler;
 
-import fuzs.miniumstone.MiniumStone;
 import fuzs.miniumstone.init.ModRegistry;
 import fuzs.miniumstone.network.client.ServerboundStoneTransmutationMessage;
 import fuzs.miniumstone.util.MiniumStoneHelper;
 import fuzs.miniumstone.world.item.crafting.TransmutationInWorldRecipe;
 import fuzs.puzzleslib.api.event.v1.core.EventResultHolder;
+import fuzs.puzzleslib.api.network.v4.MessageSender;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -34,8 +34,8 @@ public class StoneTransmuteHandler {
                     Block ingredient = secondaryUseActive ? recipe.getBlockResult() : recipe.getBlockIngredient();
                     Block result = secondaryUseActive ? recipe.getBlockIngredient() : recipe.getBlockResult();
                     MiniumStoneHelper.transmuteBlocks(blockPos, blocks, level, ingredient, result, itemInHand);
-                    int selectedSlot = player.getInventory().selected;
-                    MiniumStone.NETWORK.sendMessage(new ServerboundStoneTransmutationMessage(selectedSlot,
+                    int selectedSlot = player.getInventory().getSelectedSlot();
+                    MessageSender.broadcast(new ServerboundStoneTransmutationMessage(selectedSlot,
                             interactionHand,
                             blockPos,
                             blocks,

@@ -4,6 +4,7 @@ import fuzs.miniumstone.client.handler.MiniumStoneKeyHandler;
 import fuzs.miniumstone.client.handler.StoneTransmuteHandler;
 import fuzs.miniumstone.client.handler.TransmutateShapeRenderingHandler;
 import fuzs.miniumstone.client.handler.TransmutationResultGuiHandler;
+import fuzs.miniumstone.client.util.MiniumStoneTooltipHelper;
 import fuzs.miniumstone.init.ModRegistry;
 import fuzs.miniumstone.world.item.MiniumStoneItem;
 import fuzs.puzzleslib.api.client.core.v1.ClientModConstructor;
@@ -12,6 +13,7 @@ import fuzs.puzzleslib.api.client.core.v1.context.KeyMappingsContext;
 import fuzs.puzzleslib.api.client.event.v1.ClientTickEvents;
 import fuzs.puzzleslib.api.client.event.v1.gui.RenderGuiEvents;
 import fuzs.puzzleslib.api.client.event.v1.renderer.RenderLevelEvents;
+import fuzs.puzzleslib.api.client.gui.v2.tooltip.ItemTooltipRegistry;
 import fuzs.puzzleslib.api.client.key.v1.KeyActivationContext;
 import fuzs.puzzleslib.api.event.v1.entity.player.PlayerInteractEvents;
 import net.minecraft.ChatFormatting;
@@ -35,6 +37,11 @@ public class MiniumStoneClient implements ClientModConstructor {
         RenderGuiEvents.AFTER.register(TransmutationResultGuiHandler::onAfterRenderGui);
         ClientTickEvents.END.register(TransmutationResultGuiHandler::onEndClientTick);
         PlayerInteractEvents.USE_BLOCK.register(StoneTransmuteHandler::onUseBlock);
+    }
+
+    @Override
+    public void onClientSetup() {
+        ItemTooltipRegistry.registerItemTooltip(MiniumStoneItem.class, MiniumStoneTooltipHelper::appendHoverText);
     }
 
     @Override

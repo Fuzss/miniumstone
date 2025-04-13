@@ -9,12 +9,13 @@ import fuzs.miniumstone.network.client.ServerboundOpenCraftingGridMessage;
 import fuzs.miniumstone.network.client.ServerboundStoneTransmutationMessage;
 import fuzs.puzzleslib.api.config.v3.ConfigHolder;
 import fuzs.puzzleslib.api.core.v1.ModConstructor;
+import fuzs.puzzleslib.api.core.v1.context.PayloadTypesContext;
 import fuzs.puzzleslib.api.core.v1.utility.ResourceLocationHelper;
 import fuzs.puzzleslib.api.event.v1.BuildCreativeModeTabContentsCallback;
 import fuzs.puzzleslib.api.event.v1.server.LootTableLoadCallback;
 import fuzs.puzzleslib.api.event.v1.server.SyncDataPackContentsCallback;
-import fuzs.puzzleslib.api.network.v3.NetworkHandler;
-import fuzs.puzzleslib.api.network.v3.PlayerSet;
+import fuzs.puzzleslib.api.network.v4.MessageSender;
+import fuzs.puzzleslib.api.network.v4.PlayerSet;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -32,14 +33,6 @@ public class MiniumStone implements ModConstructor {
     public static final String MOD_NAME = "Minium Stone";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
 
-    public static final NetworkHandler NETWORK = NetworkHandler.builder(MOD_ID)
-            .registerServerbound(ServerboundChargeStoneMessage.class)
-            .registerServerbound(ServerboundOpenCraftingGridMessage.class)
-            .registerServerbound(ServerboundStoneTransmutationMessage.class)
-            .registerClientbound(ClientboundTransmutationParticleMessage.class)
-            .registerSerializer(ClientboundTransmutationInWorldRecipesMessage.class,
-                    ClientboundTransmutationInWorldRecipesMessage.STREAM_CODEC)
-            .registerClientbound(ClientboundTransmutationInWorldRecipesMessage.class);
     public static final ConfigHolder CONFIG = ConfigHolder.builder(MOD_ID).common(CommonConfig.class);
 
     @Override
@@ -57,7 +50,7 @@ public class MiniumStone implements ModConstructor {
             }
         });
         SyncDataPackContentsCallback.EVENT.register((ServerPlayer serverPlayer, boolean joined) -> {
-            NETWORK.sendMessage(PlayerSet.ofPlayer(serverPlayer),
+            MessageSender.broadcast(PlayerSet.ofPlayer(serverPlayer),
                     new ClientboundTransmutationInWorldRecipesMessage(ClientboundTransmutationInWorldRecipesMessage.transmutationInWorldRecipes));
         });
         BuildCreativeModeTabContentsCallback.buildCreativeModeTabContents(CreativeModeTabs.TOOLS_AND_UTILITIES)
@@ -68,6 +61,18 @@ public class MiniumStone implements ModConstructor {
                 .register((CreativeModeTab creativeModeTab, CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) -> {
                     output.accept(ModRegistry.MINIUM_SHARD_ITEM.value());
                 });
+    }
+
+    @Override
+    public void onRegisterPayloadTypes(PayloadTypesContext context) {
+        context.playToServer(ServerboundChargeStoneMessage.class, ServerboundChargeStoneMessage.STREAM_CODEC);
+        context.playToServer(ServerboundOpenCraftingGridMessage.class, ServerboundOpenCraftingGridMessage.STREAM_CODEC);
+        context.playToServer(ServerboundStoneTransmutationMessage.class,
+                ServerboundStoneTransmutationMessage.STREAM_CODEC);
+        context.playToClient(ClientboundTransmutationParticleMessage.class,
+                ClientboundTransmutationParticleMessage.STREAM_CODEC);
+        context.playToClient(ClientboundTransmutationInWorldRecipesMessage.class,
+                ClientboundTransmutationInWorldRecipesMessage.STREAM_CODEC);
     }
 
     public static ResourceLocation id(String path) {

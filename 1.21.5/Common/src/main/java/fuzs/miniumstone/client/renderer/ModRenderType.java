@@ -1,22 +1,36 @@
 package fuzs.miniumstone.client.renderer;
 
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.blaze3d.pipeline.RenderPipeline;
+import com.mojang.blaze3d.platform.DepthTestFunction;
+import fuzs.miniumstone.MiniumStone;
+import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 
-public abstract class ModRenderType extends RenderType {
-    public static final RenderType LINES_SEE_THROUGH = create("lines_see_through", DefaultVertexFormat.POSITION_COLOR_NORMAL, VertexFormat.Mode.LINES, 256, false, false, RenderType.CompositeState.builder()
-            .setShaderState(RENDERTYPE_LINES_SHADER)
-            .setLayeringState(VIEW_OFFSET_Z_LAYERING)
-            .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
-            .setOutputState(ITEM_ENTITY_TARGET)
-            .setWriteMaskState(COLOR_DEPTH_WRITE)
-            .setCullState(NO_CULL)
-            .setDepthTestState(NO_DEPTH_TEST)
-            .createCompositeState(false)
-    );
+import java.util.OptionalDouble;
 
-    public ModRenderType(String string, VertexFormat vertexFormat, VertexFormat.Mode mode, int i, boolean bl, boolean bl2, Runnable runnable, Runnable runnable2) {
-        super(string, vertexFormat, mode, i, bl, bl2, runnable, runnable2);
+public abstract class ModRenderType extends RenderType {
+    /**
+     * @see RenderPipelines#LINES
+     */
+    public static final RenderPipeline LINES_SEE_THROUGH_RENDER_PIPELINE = RenderPipelines.register(RenderPipeline.builder(
+                    RenderPipelines.LINES_SNIPPET)
+            .withLocation("pipeline/lines")
+            .withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST)
+            .build());
+    /**
+     * @see RenderType#LINES
+     */
+    public static final RenderType LINES_SEE_THROUGH = create(MiniumStone.id("lines_see_through").toString(),
+            1536,
+            LINES_SEE_THROUGH_RENDER_PIPELINE,
+            RenderType.CompositeState.builder()
+                    .setLineState(new RenderStateShard.LineStateShard(OptionalDouble.empty()))
+                    .setLayeringState(VIEW_OFFSET_Z_LAYERING)
+                    .setOutputState(ITEM_ENTITY_TARGET)
+                    .createCompositeState(false));
+
+    private ModRenderType(String string, int i, boolean bl, boolean bl2, Runnable runnable, Runnable runnable2) {
+        super(string, i, bl, bl2, runnable, runnable2);
     }
 }

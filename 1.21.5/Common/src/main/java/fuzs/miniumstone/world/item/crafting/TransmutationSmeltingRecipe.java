@@ -2,7 +2,7 @@ package fuzs.miniumstone.world.item.crafting;
 
 import fuzs.miniumstone.init.ModRegistry;
 import fuzs.miniumstone.util.MiniumStoneHelper;
-import fuzs.puzzleslib.api.core.v1.CommonAbstractions;
+import fuzs.puzzleslib.impl.core.proxy.ProxyImpl;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -62,7 +62,8 @@ public class TransmutationSmeltingRecipe extends CustomRecipe {
         ItemStack toSmelt = ItemStack.EMPTY;
         for (int i = 0; i < container.size(); i++) {
             ItemStack itemStack = container.getItem(i);
-            if (!itemStack.isEmpty() && !this.miniumStone.test(itemStack) && !getFuelIngredient(registries).test(itemStack)) {
+            if (!itemStack.isEmpty() && !this.miniumStone.test(itemStack) &&
+                    !getFuelIngredient(registries).test(itemStack)) {
                 if (toSmelt == ItemStack.EMPTY) {
                     toSmelt = itemStack.copyWithCount(1);
                 } else if (ItemStack.isSameItem(toSmelt, itemStack)) {
@@ -80,7 +81,7 @@ public class TransmutationSmeltingRecipe extends CustomRecipe {
         ItemStack itemStack = this.findAllMatchingItem(container, registryAccess);
         if (itemStack != ItemStack.EMPTY) {
             SingleRecipeInput recipeContainer = new SingleRecipeInput(itemStack);
-            MinecraftServer minecraftServer = CommonAbstractions.INSTANCE.getMinecraftServer();
+            MinecraftServer minecraftServer = ProxyImpl.get().getMinecraftServer();
             Level level = minecraftServer.getAllLevels().iterator().next();
             ItemStack resultStack = minecraftServer.getRecipeManager()
                     .getRecipeFor(RecipeType.SMELTING, recipeContainer, level)

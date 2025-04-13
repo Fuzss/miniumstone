@@ -1,14 +1,12 @@
 package fuzs.miniumstone.world.item;
 
 import fuzs.miniumstone.init.ModRegistry;
-import fuzs.puzzleslib.api.core.v1.Proxy;
+import fuzs.puzzleslib.api.network.v4.codec.ExtraStreamCodecs;
 import fuzs.puzzleslib.api.util.v1.InteractionResultHelper;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.util.ByIdMap;
 import net.minecraft.util.Mth;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
@@ -16,13 +14,10 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 
-import java.util.List;
 import java.util.Locale;
-import java.util.function.IntFunction;
 
 public class MiniumStoneItem extends Item {
 
@@ -50,7 +45,7 @@ public class MiniumStoneItem extends Item {
             ItemStack itemInHand = player.getItemInHand(usedHand);
             if (!level.isClientSide) {
                 cycleSelectionMode(itemInHand);
-                player.displayClientMessage(Component.translatable(this.getDescriptionId() + ".changedSelection",
+                player.displayClientMessage(Component.translatable(this.getChangedSelectionTranslationKey(),
                         getSelectionMode(itemInHand).getComponent()), true);
             }
             return InteractionResultHelper.sidedSuccess(itemInHand, level.isClientSide);
@@ -59,35 +54,13 @@ public class MiniumStoneItem extends Item {
         }
     }
 
-    @Override
-    public boolean isBarVisible(ItemStack stack) {
-        return true;
+    public String getChangedSelectionTranslationKey() {
+        return this.getDescriptionId() + ".tooltip.changed_selection";
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        if (context != TooltipContext.EMPTY) {
-            tooltipComponents.add(Component.translatable(this.getDescriptionId() + ".selection",
-                    getSelectionMode(stack).getComponent()).withStyle(ChatFormatting.GRAY));
-            if (!Proxy.INSTANCE.hasShiftDown()) {
-                tooltipComponents.add(Component.translatable(this.getDescriptionId() + ".more",
-                                Component.translatable(this.getDescriptionId() + ".shift").withStyle(ChatFormatting.YELLOW))
-                        .withStyle(ChatFormatting.GRAY));
-            } else {
-                Component sneak = Component.keybind("key.sneak").withStyle(ChatFormatting.LIGHT_PURPLE);
-                Component use = Component.keybind("key.use").withStyle(ChatFormatting.LIGHT_PURPLE);
-                tooltipComponents.add(Component.translatable(this.getDescriptionId() + ".changeSelection", sneak, use)
-                        .withStyle(ChatFormatting.GRAY));
-                Component chargeMiniumStone = Component.keybind("key.charge_minium_stone")
-                        .withStyle(ChatFormatting.LIGHT_PURPLE);
-                tooltipComponents.add(Component.translatable(this.getDescriptionId() + ".charge", chargeMiniumStone)
-                        .withStyle(ChatFormatting.GRAY));
-                Component openCraftingGrid = Component.keybind("key.open_crafting_grid")
-                        .withStyle(ChatFormatting.LIGHT_PURPLE);
-                tooltipComponents.add(Component.translatable(this.getDescriptionId() + ".crafting", openCraftingGrid)
-                        .withStyle(ChatFormatting.GRAY));
-            }
-        }
+    public boolean isBarVisible(ItemStack stack) {
+        return true;
     }
 
     public static void cycleSelectionMode(ItemStack itemStack) {
@@ -129,14 +102,7 @@ public class MiniumStoneItem extends Item {
         private static final SelectionMode[] VALUES = SelectionMode.values();
         public static final StringRepresentable.StringRepresentableCodec<SelectionMode> CODEC = StringRepresentable.fromEnum(
                 SelectionMode::values);
-        public static final StreamCodec<ByteBuf, SelectionMode> STREAM_CODEC = fromEnum(SelectionMode.class);
-
-        static <E extends Enum<E>> StreamCodec<ByteBuf, E> fromEnum(Class<E> clazz) {
-            IntFunction<E> idMapper = ByIdMap.continuous(E::ordinal,
-                    clazz.getEnumConstants(),
-                    ByIdMap.OutOfBoundsStrategy.ZERO);
-            return ByteBufCodecs.idMapper(idMapper, E::ordinal);
-        }
+        public static final StreamCodec<ByteBuf, SelectionMode> STREAM_CODEC = ExtraStreamCodecs.fromEnum(SelectionMode.class);
 
         public Component getComponent() {
             String translationKey =

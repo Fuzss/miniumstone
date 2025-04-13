@@ -2,28 +2,39 @@ package fuzs.miniumstone.network.client;
 
 import fuzs.miniumstone.init.ModRegistry;
 import fuzs.miniumstone.world.item.MiniumStoneItem;
-import fuzs.puzzleslib.api.network.v3.ServerMessageListener;
-import fuzs.puzzleslib.api.network.v3.ServerboundMessage;
+import fuzs.puzzleslib.api.network.v4.codec.ExtraStreamCodecs;
+import fuzs.puzzleslib.api.network.v4.message.MessageListener;
+import fuzs.puzzleslib.api.network.v4.message.play.ServerboundPlayMessage;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.game.ServerboundSetCarriedItemPacket;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 
-public record ServerboundChargeStoneMessage(int carriedItem, InteractionHand interactionHand, boolean increaseCharge) implements ServerboundMessage<ServerboundChargeStoneMessage> {
+public record ServerboundChargeStoneMessage(int carriedItemStack,
+                                            InteractionHand interactionHand,
+                                            boolean increaseCharge) implements ServerboundPlayMessage {
+    public static final StreamCodec<ByteBuf, ServerboundChargeStoneMessage> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.SHORT.map(Short::intValue, Integer::shortValue),
+            ServerboundChargeStoneMessage::carriedItemStack,
+            ExtraStreamCodecs.fromEnum(InteractionHand.class),
+            ServerboundChargeStoneMessage::interactionHand,
+            ByteBufCodecs.BOOL,
+            ServerboundChargeStoneMessage::increaseCharge,
+            ServerboundChargeStoneMessage::new);
 
     @Override
-    public ServerMessageListener<ServerboundChargeStoneMessage> getHandler() {
-        return new ServerMessageListener<>() {
-
+    public MessageListener<Context> getListener() {
+        return new MessageListener<Context>() {
             @Override
-            public void handle(ServerboundChargeStoneMessage message, MinecraftServer server, ServerGamePacketListenerImpl handler, ServerPlayer player, ServerLevel level) {
-                handler.handleSetCarriedItem(new ServerboundSetCarriedItemPacket(message.carriedItem));
-                ItemStack itemInHand = player.getItemInHand(message.interactionHand);
+            public void accept(Context context) {
+                context.packetListener()
+                        .handleSetCarriedItem(new ServerboundSetCarriedItemPacket(ServerboundChargeStoneMessage.this.carriedItemStack));
+                ItemStack itemInHand = context.player()
+                        .getItemInHand(ServerboundChargeStoneMessage.this.interactionHand);
                 if (itemInHand.is(ModRegistry.MINIUM_STONE_ITEM.value())) {
-                    if (message.increaseCharge) {
+                    if (ServerboundChargeStoneMessage.this.increaseCharge) {
                         MiniumStoneItem.increaseCharge(itemInHand);
                     } else {
                         MiniumStoneItem.decreaseCharge(itemInHand);
