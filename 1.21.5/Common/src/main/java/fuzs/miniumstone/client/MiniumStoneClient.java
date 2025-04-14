@@ -4,12 +4,14 @@ import fuzs.miniumstone.client.handler.MiniumStoneKeyHandler;
 import fuzs.miniumstone.client.handler.StoneTransmuteHandler;
 import fuzs.miniumstone.client.handler.TransmutateShapeRenderingHandler;
 import fuzs.miniumstone.client.handler.TransmutationResultGuiHandler;
+import fuzs.miniumstone.client.renderer.ModRenderType;
 import fuzs.miniumstone.client.util.MiniumStoneTooltipHelper;
 import fuzs.miniumstone.init.ModRegistry;
 import fuzs.miniumstone.world.item.MiniumStoneItem;
 import fuzs.puzzleslib.api.client.core.v1.ClientModConstructor;
 import fuzs.puzzleslib.api.client.core.v1.context.ItemDecorationsContext;
 import fuzs.puzzleslib.api.client.core.v1.context.KeyMappingsContext;
+import fuzs.puzzleslib.api.client.core.v1.context.RenderPipelinesContext;
 import fuzs.puzzleslib.api.client.event.v1.ClientTickEvents;
 import fuzs.puzzleslib.api.client.event.v1.gui.RenderGuiEvents;
 import fuzs.puzzleslib.api.client.event.v1.renderer.RenderLevelEvents;
@@ -69,5 +71,10 @@ public class MiniumStoneClient implements ClientModConstructor {
             guiGraphics.pose().popPose();
             return true;
         }, ModRegistry.MINIUM_STONE_ITEM.value());
+    }
+
+    @Override
+    public void onRegisterRenderPipelines(RenderPipelinesContext context) {
+        context.registerRenderPipeline(ModRenderType.LINES_SEE_THROUGH_RENDER_PIPELINE);
     }
 }

@@ -11,13 +11,14 @@ import java.util.OptionalDouble;
 
 public abstract class ModRenderType extends RenderType {
     /**
+     * Disable depth test for rendering through blocks.
+     *
      * @see RenderPipelines#LINES
      */
-    public static final RenderPipeline LINES_SEE_THROUGH_RENDER_PIPELINE = RenderPipelines.register(RenderPipeline.builder(
-                    RenderPipelines.LINES_SNIPPET)
-            .withLocation("pipeline/lines")
+    public static final RenderPipeline LINES_SEE_THROUGH_RENDER_PIPELINE = RenderPipeline.builder(RenderPipelines.LINES_SNIPPET)
+            .withLocation(MiniumStone.id("pipeline/lines_see_through"))
             .withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST)
-            .build());
+            .build();
     /**
      * @see RenderType#LINES
      */
